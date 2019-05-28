@@ -1,0 +1,39 @@
+<div class="body">
+    <mat-toolbar class="toolbar">
+        <mat-toolbar-row>
+          <span>
+            <button class="btn btn-sm" mat-raised-button color="primary">TORAPOS</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">Produits</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">epuises</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">Ventes</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">complets</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">incomplets</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">A Credit</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">Clients</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">redevables</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">Rapports</button>
+            <button class="btn btn-sm" mat-stroked-button color="primary">Activites</button>
+            <button class="btn btn-sm" mat-raised-button color="primary">Deconnecter</button>
+          
+          
+          
+          
+          
+          </span>
+       
+          </mat-toolbar-row>
+      
+      </mat-toolbar>
+      <mat-drawer-container class="example-container">
+        <mat-drawer class="drawer" mode="side" opened>
+        
+            
+      
+        
+        </mat-drawer>
+        <mat-drawer-content>
+      
+          <router-outlet></router-outlet>
+        </mat-drawer-content>
+      </mat-drawer-container>
+</div>

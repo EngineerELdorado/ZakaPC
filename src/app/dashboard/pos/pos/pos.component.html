@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-8" style="border-radius: 25px;">
+    <input style="margin: 10px;" type="text" placeholder="Chercher" class="form-control">
+    <mat-grid-list style="margin: 5px;" cols="4" rowHeight="2:1">
+         <mat-grid-tile class="rounded" *ngFor="let product of products">{{product.name}} <br><span class="badge"> ({{product.price}} {{currency}})</span></mat-grid-tile>
+      
+  </mat-grid-list>
+</div>
+
+  <div class="col-md-4" >
+
+      <mat-card class="card">Facture en cours
+          <div style="font-size: 25px" class="text-center">
+              15000 FC
+            </div>
+            <div>
+                <button style="float: left" mat-raised-button>Effacer la facture</button>
+                <button style="float: right" mat-raised-button>Regler la facture</button>
+            </div>
+      </mat-card>
+
+  </div>
+</div>

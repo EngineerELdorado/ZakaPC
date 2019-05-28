@@ -1,0 +1,29 @@
+mat-grid-tile {
+    background: white;
+    color: #2E2868
+  }
+
+  .example-container {
+  width: 400px;
+  height: 200px;
+  margin: 10px;
+  position:absolute; 
+    width: 100%;
+    box-sizing: border-box;
+    min-height:100%;
+}
+.toolbar{
+  background: whitesmoke;
+  color: #2E2868
+}
+
+.drawer{
+  margin-top: 10px;
+  color: white
+}
+.body{
+  background: white;
+}
+.btn{
+  margin-right: 10px;
+}

@@ -1,0 +1,32 @@
+<block-ui>
+    <!-- Your app markup here -->
+  </block-ui>
+<div style="" class="row ">
+  <div class="col">
+    <!-- <button routerLink="/register" mat-raised-button color="primary">Creer compte</button> -->
+  </div>
+  <div class="col registerForm">
+      <a  style="" mat-stroked-button routerLink="/login">Me connecter</a>
+    
+      <div class="text-center">
+          <img style="margin:10px" width="120" height="120" class="img rounded-circle" src="../../../assets/logo.jpg" alt="">
+      <h2 style="color: #2E2868" class="text-center">ToraPos</h2>
+      </div>
+    <form [formGroup]="myForm" (ngSubmit)="post(myForm)" class="example-form">
+        <!-- <input style="opacity: 0;position: absolute;">
+        <input type="password" style="opacity: 0;position: absolute;"> -->
+        <div  class="form-group"><input formControlName="name" class="form-control"  placeholder="Nom de l'etablissement"></div>
+        <div  class="form-group"><input formControlName="phone" class="form-control"  placeholder="Num Tel (avec code du pays eg: +243...)"></div>
+        <!-- <div style="display: none"  class="form-group"><input formControlName="fullname" class="form-control"  placeholder=""></div> -->
+        <div   class="form-group"><input formControlName="address" class="form-control"  placeholder="Ville"></div>
+        <div   class="form-group"><input maxlength="4" type="password" formControlName="pin" class="form-control"  placeholder="Pin (4 chiffres)" ></div>
+    
+      <div>
+
+      <button style="float: right" type="submit" mat-raised-button color="primary">Creer compte</button>
+      
+    </div>
+    </form>
+  </div>
+  <div class="col"></div>
+</div>
