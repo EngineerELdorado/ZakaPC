@@ -14,4 +14,9 @@ export class ProductService {
     public getProductsByBranch(branchId){
       return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/products/getByBranch/"+branchId, {observe:"response"});
     }
+
+    public getProductsByName(branchId, name){
+
+      return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/products/getByName/?branchId="+branchId+"&name="+name, {observe:"response"});
+    }
 }

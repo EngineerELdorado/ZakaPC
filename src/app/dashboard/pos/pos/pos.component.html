@@ -1,23 +1,42 @@
 <div class="row">
-  <div class="col-md-8" style="border-radius: 25px;">
-    <input style="margin: 10px;" type="text" placeholder="Chercher" class="form-control">
-    <mat-grid-list style="margin: 5px;" cols="4" rowHeight="2:1">
-         <mat-grid-tile class="rounded" *ngFor="let product of products">{{product.name}} <br><span class="badge"> ({{product.price}} {{currency}})</span></mat-grid-tile>
-      
-  </mat-grid-list>
+  <div class="col-md-8 container" style="border-radius: 25px;">
+    <input #box (keyup)="getProductsByName(box.value)" style="margin: 10px;" type="text" placeholder="Trier" class="form-control">
+    <div style="margin-left: 15px" class="row container">
+      <mat-card  class="card col-md-2 item text-center" *ngFor="let product of products" (click)="addProduct(product)">
+            {{product.name|substringName}}
+            <div class="text-center">
+              <br>
+                <span class="badge badge-pill badge-success">{{product?.price}} {{currency}}</span>
+                <br>
+                <label style="font-size: 12px; color: gray;">{{product.quantity}} en stock</label>
+            </div>
+      </mat-card>
+
+     
+
+    </div>
 </div>
 
   <div class="col-md-4" >
 
       <mat-card class="card">Facture en cours
           <div style="font-size: 25px" class="text-center">
-              15000 FC
+              {{price}} {{currency}}
             </div>
             <div>
-                <button style="float: left" mat-raised-button>Effacer la facture</button>
+                <button (click)="clearBill()" style="float: left" mat-raised-button>Effacer la facture</button>
                 <button style="float: right" mat-raised-button>Regler la facture</button>
             </div>
       </mat-card>
-
+      <span style="margin-top:10px;" class="badge badge-primary badge-pill"> Contenu de la facture</span>
+      <ul style="margin-right:45px; margin-top:10px" class="list-group">
+          
+        <li *ngFor="let o of order"  class=" row list-group-item d-flex justify-content-between align-items-center ">
+            <span style="color: #3D3780" class="col-md-3   ">{{o.name|lowercase}}</span>
+            <span style="color: #3D3780"  style="margin-right: 10px" class="col-md-3  ">{{o.price}} {{currency}}</span>
+            <span class="col-md-1 badge badge-primary badge-pill">X 1</span>
+          </li>
+          
+        </ul>
   </div>
 </div>
