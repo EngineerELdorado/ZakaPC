@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SaleService } from 'src/app/services/sale.service';
 import { GlobalVariablesService } from 'src/app/global-variables.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-pay-bill',
   templateUrl: './pay-bill.component.html',
@@ -17,7 +18,10 @@ export class PayBillComponent implements OnInit {
   servedBy;
   total;
   @BlockUI() blockUI: NgBlockUI;
-  constructor(private saleService: SaleService, private globalService: GlobalVariablesService) { }
+  constructor(private saleService: SaleService,
+    //private _snackBar: MatSnackBar,
+    private globalService: GlobalVariablesService) {
+     }
 
   ngOnInit() {
     this.servedBy = localStorage.getItem("zakaUsername");
@@ -108,6 +112,7 @@ submit(form:FormGroup){
     console.log(res);
     
     if(res.body.responseCode==="00"){
+      //this.toastr.success('Vente enregistree', 'Success!');
       this.blockUI.stop();
       localStorage.setItem("BILL_PRICE","0");
       localStorage.setItem("PURCHASE_COST","0");
@@ -115,10 +120,14 @@ submit(form:FormGroup){
       this.globalService.updateCleaBill(true);
     }else{
       this.blockUI.stop();
-      alert(res.body.responseMessage)
+      //this.toastr.error(res.body.responseMessage, 'Oops!');
+      // this._snackBar.open("Vente enregistree","", {
+      //   duration: 2000,
+      // });
     }
   },err=>{
     console.log(err);
+    //this.toastr.error(err, 'Oops!');
     this.blockUI.stop();
   });
 }
