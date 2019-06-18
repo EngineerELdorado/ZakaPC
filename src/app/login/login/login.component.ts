@@ -32,14 +32,17 @@ export class LoginComponent implements OnInit {
         this.blockUI.stop(); // Stop blocking
        // console.log(res)
         if(res.body.responseCode==="00"){
-          console.log("login successful");
+          console.log(res);
           localStorage.setItem("zakaLoggedIn","true")
           localStorage.setItem("zakaUserId", res.body.data.id)
           localStorage.setItem("zakaBusinessId", res.body.data.business.id)
           localStorage.setItem("zakaBranchId", res.body.data.branch.id)
+          localStorage.setItem("zakaBusinessName", res.body.data.business.name)
+          localStorage.setItem("zakaBranchName", res.body.data.branch.name)
           localStorage.setItem("zakaBranchCurrency", res.body.data.branch.currency)
           localStorage.setItem("zakaUsername", res.body.data.name)
           localStorage.setItem("zakaUserType", res.body.data.type)
+          localStorage.setItem("zakaExpirationDate", res.body.data.branch.expirationDate)
            this.router.navigate(['/dashboard/pos'])
         }else{
           console.log("login failed");

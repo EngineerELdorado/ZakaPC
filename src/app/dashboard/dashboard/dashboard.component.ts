@@ -8,9 +8,14 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  businessName;
+  expirationDate;
   constructor(private router:Router) { }
 
   ngOnInit() {
+
+    this.expirationDate = localStorage.getItem("zakaExpirationDate");
+    this.businessName = localStorage.getItem("zakaBusinessName")+" "+localStorage.getItem("zakaBranchName")
     console.log("Dashboard component loaded");
 
     if(localStorage.getItem("zakaLoggedIn")==="true"){

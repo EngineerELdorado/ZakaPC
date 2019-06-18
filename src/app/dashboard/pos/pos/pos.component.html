@@ -25,7 +25,7 @@
             </div>
             <div>
                 <button (click)="clearBill()" style="float: left" mat-raised-button>Effacer la facture</button>
-                <button style="float: right" mat-raised-button>Regler la facture</button>
+                <button (click)="openBill()" mat-raised-button  style="float: right" mat-raised-button>Regler la facture</button>
             </div>
       </mat-card>
       <span style="margin-top:10px;" class="badge badge-primary badge-pill"> Contenu de la facture</span>
@@ -34,9 +34,33 @@
         <li *ngFor="let o of order"  class=" row list-group-item d-flex justify-content-between align-items-center ">
             <span style="color: #3D3780" class="col-md-3   ">{{o.name|lowercase}}</span>
             <span style="color: #3D3780"  style="margin-right: 10px" class="col-md-3  ">{{o.price}} {{currency}}</span>
-            <span class="col-md-1 badge badge-primary badge-pill">X 1</span>
+            <!-- <span class="col-md-1 badge badge-primary badge-pill">X 1</span> -->
+            <button (click)="remove(o)" class="col-md-4 btn btn-sm btn-danger">enlever</button>
           </li>
           
         </ul>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>

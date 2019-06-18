@@ -1,0 +1,101 @@
+
+  <block-ui>
+      <!-- Your app markup here -->
+    </block-ui>
+<div>
+  <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+      <div style="margin-bottom: 5px" class="text-center">
+
+          <button style="margin-bottom: 20px" color="primary" mat-raised-button>{{currentBillAmount}} {{currency}}</button>
+          <input style="display: none"  formControlName="total" class="form-control"  placeholder="total">
+               
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="discount">Recuction</label>
+                    <input id="discount" (keyup)="applyDiscount($event)" formControlName="discount" class="form-control"  placeholder="Reduction">
+               
+                  </div>
+            </div>
+            <div class="col"></div>
+          </div>
+        </div>
+    <div class="row">
+<div class="col">
+<div  class="form-group">
+  <label for="paid">Montant recu</label>
+    <input (keyup)="onPaid($event)" id="paid" formControlName="paid" class="form-control"  placeholder="Montant recu">
+  </div>
+  <label for="">Enregister</label>
+          <button type="submit"[disabled]="myForm.invalid" color="primary" mat-raised-button class="btn btn-block">Enregistrer</button>
+     
+</div>
+<div class="col">
+
+  <div  class="form-group">
+      <label for="toPay">Montant A Payer</label>
+    <input readonly id="toPay" formControlName="toPay" class="form-control"  placeholder="Montant A payer">
+  </div>
+
+  <div  class="form-group">
+      <label for="balance">Balance</label>
+    <input readonly id="balance" formControlName="balance" class="form-control"  placeholder="Balance">
+  </div>
+</div>
+<div class="col">
+
+  <div  class="form-group">
+      <label for="servedBy">Servi par</label>
+    <input readonly id="servedBy" formControlName="servedBy" class="form-control"  placeholder="Servi par">
+  </div>
+
+  <div  class="form-group">
+      <label for="purchaseCost">Cout d'achat</label>
+      <input readonly id="purchaseCost" formControlName="purchaseCost" class="form-control"  placeholder="Cout d'achat">
+    </div>
+
+</div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col">
+        
+        </div>
+      <div class="col">
+          <div style="display: none"  class="form-group">
+              <label for="cleClient">Cle</label>
+              <input readonly id="cleClient" formControlName="offlineIdentifier" class="form-control"  placeholder="cle de vente">
+            </div>
+      </div>
+      <div class="col">
+          <div  style="display: none"  class="form-group">
+              <label for="saleNumber">Numero De Vente</label>
+              <input readonly id="saleNumber" formControlName="saleNumber" class="form-control"  placeholder="numero de vente">
+            </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+          
+        </div>
+      <div class="col">
+          <label style="display: none" for="discount">Cle</label>
+        <input readonly style="display: none" formControlName="customerOfflineIdentifier" placeholder="cle du client" class="form-control">
+
+      </div>
+      <div class="col">
+          <div style="display: none"  class="form-group">
+              <label for="status">Status du paiement</label>
+              <input readonly id="status" formControlName="status" class="form-control"  placeholder="status">
+            </div>
+      </div>
+      
+    </div>
+  
+    
+  </form>
+</div>

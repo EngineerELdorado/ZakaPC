@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Item } from '../item';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { PayBillComponent } from '../pay-bill/pay-bill.component';
+import { GlobalVariablesService } from 'src/app/global-variables.service';
 @Component({
   selector: 'app-pos',
   templateUrl: './pos.component.html',
@@ -13,16 +16,29 @@ export class PosComponent implements OnInit {
   ];
   order:any[];
   products:any[];
+  cost:number =Number(localStorage.getItem("PURCHASE_COST"));
   price:number =Number(localStorage.getItem("BILL_PRICE"));
   currency=localStorage.getItem("zakaBranchCurrency");
   branchId= localStorage.getItem("zakaBranchId");
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    private globalService: GlobalVariablesService,
+    private dialog: MatDialog) { }
  
   ngOnInit() {
 
     this.getProducts();
-    this.order = JSON.parse(localStorage.getItem("ITEMS"))
+    this.order = JSON.parse(localStorage.getItem("ITEMS"));
+
+    this.globalService.clearBillObs.subscribe(res=>{
+      if(res){
+        console.log(res);
+        this.clearBill();
+        this.dialog.closeAll()
+      }
+    })
   }
+
+  
 
 
   getProducts(){
@@ -32,7 +48,7 @@ export class PosComponent implements OnInit {
     });
   }
 
-
+  
   getProductsByName(name){
 
     this.productService.getProductsByName(localStorage.getItem("zakaBranchId"), name).subscribe(res=>{
@@ -54,6 +70,7 @@ export class PosComponent implements OnInit {
       localStorage.setItem("ITEMS", JSON.stringify(this.ITEMS));
       this.order = JSON.parse(localStorage.getItem("ITEMS"))
       localStorage.setItem(product.name, product.price)
+      localStorage.setItem("PURCHASE_COST", +localStorage.getItem("PURCHASE_COST")  +product.purchaseCost)
       localStorage.setItem("BILL_PRICE", +localStorage.getItem("BILL_PRICE")  +product.price) 
       this.price = Number(localStorage.getItem("BILL_PRICE"));
   }
@@ -64,5 +81,27 @@ export class PosComponent implements OnInit {
     localStorage.removeItem("ITEMS");
     this.order = JSON.parse(localStorage.getItem("ITEMS"))
     this.ITEMS =[];
+  }
+
+  remove(o){
+    this.order = JSON.parse(localStorage.getItem("ITEMS"));
+    var removeIndex = this.order.map(function(item) { return item.id; }).indexOf(o.id);
+    this.order.splice(removeIndex, 1);
+    this.ITEMS.splice(removeIndex,1);
+    localStorage.setItem("ITEMS", JSON.stringify(this.ITEMS));
+    var s = +localStorage.getItem("BILL_PRICE") - o.price;
+    localStorage.setItem("BILL_PRICE", s.toString()) 
+    this.price = Number(localStorage.getItem("BILL_PRICE"));
+
+    var z = +localStorage.getItem("PURCHASE_COST") - o.purchaseCost;
+    localStorage.setItem("PURCHASE_COST", z.toString()) 
+  }
+
+
+  openBill(){
+    this.dialog.open(PayBillComponent, {
+      height: '400px',
+      width: '900px',
+    });
   }
 }
