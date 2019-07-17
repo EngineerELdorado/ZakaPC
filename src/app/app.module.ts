@@ -8,13 +8,17 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { LimitNamePipe } from './limit-name.pipe';
+import { SubstringNamePipe } from './substring-name.pipe';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LimitNamePipe
+    LimitNamePipe,
+    SubstringNamePipe
   ],
   imports: [
+    ToastrModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -22,7 +26,7 @@ import { LimitNamePipe } from './limit-name.pipe';
     NgbModule,
     MatToolbarModule,
     HttpClientModule,
-
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

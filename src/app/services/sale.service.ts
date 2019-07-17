@@ -15,4 +15,13 @@ export class SaleService {
       
      return this.httpClient.post<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/add?branchId="+branchId+"&sellerId="+userId, sale,{observe:'response'})
     }
+
+    public postSaleItem(item, branchId){
+      
+      return this.httpClient.post<ApiResponse>(this.globalVariables.BACKEND_URL+"/sale_items/save?branchId="+branchId,item,{observe:'response'})
+     }
+
+     public getByBranch(branchId, status){
+       return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/getByBranch/"+branchId+"?status="+status);
+     }
 }

@@ -10,10 +10,12 @@ export class DashboardComponent implements OnInit {
 
   businessName;
   expirationDate;
+  connected:boolean=true;
   constructor(private router:Router) { }
 
   ngOnInit() {
-
+    console.log(window.navigator.onLine)
+    this.connected = window.navigator.onLine;
     this.expirationDate = localStorage.getItem("zakaExpirationDate");
     this.businessName = localStorage.getItem("zakaBusinessName")+" "+localStorage.getItem("zakaBranchName")
     console.log("Dashboard component loaded");
@@ -23,11 +25,16 @@ export class DashboardComponent implements OnInit {
     }else{
       this.router.navigate(["/login"])
     }
+
   }
 
   logout(){
     localStorage.clear();
     this.router.navigate(["/login"])
+  }
+
+  comingSoon(){
+    alert("CETTE OPTION ARRIVE BIENTOT. \n POUR LE MOMENT VOUS POUVEZ JUSTE EFFECTUER LES VENTES")
   }
 
 }

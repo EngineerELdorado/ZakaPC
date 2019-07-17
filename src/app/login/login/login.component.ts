@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("zakaUsername", res.body.data.name)
           localStorage.setItem("zakaUserType", res.body.data.type)
           localStorage.setItem("zakaExpirationDate", res.body.data.branch.expirationDate)
-           this.router.navigate(['/dashboard/pos'])
+           this.router.navigate(['/dashboard'])
         }else{
           console.log("login failed");
           alert(res.body.responseMessage)

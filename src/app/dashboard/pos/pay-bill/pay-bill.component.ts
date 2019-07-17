@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { SaleService } from 'src/app/services/sale.service';
 import { GlobalVariablesService } from 'src/app/global-variables.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { ProductService } from 'src/app/services/product.service';
+import { CustomerService } from 'src/app/services/customer.service';
+
 @Component({
   selector: 'app-pay-bill',
   templateUrl: './pay-bill.component.html',
@@ -17,13 +20,32 @@ export class PayBillComponent implements OnInit {
   currency;
   servedBy;
   total;
+  order:any[];
+  branchId;
+  sellerId;
+  saleOfflineIdentifier;
+  customerFullName="Passant";
+  customerPhone;
+  customerOfflineIdentifier;
+  customers: any[] = [];
+  @ViewChild('customerName')
+  customerNameRef:ElementRef
+  @ViewChild('customerNumber')
+  customerNumberRef;
+  showBtn=true;
+  showList:boolean=false;
+
   @BlockUI() blockUI: NgBlockUI;
   constructor(private saleService: SaleService,
-    //private _snackBar: MatSnackBar,
+    private productService:ProductService,
+    private customerService: CustomerService,
     private globalService: GlobalVariablesService) {
      }
 
   ngOnInit() {
+    this.getProducts();
+    this.branchId = localStorage.getItem("zakaBranchId");
+    this.sellerId = localStorage.getItem("zakaUserId");
     this.servedBy = localStorage.getItem("zakaUsername");
     this.currentBillAmount = localStorage.getItem("BILL_PRICE");
     this.purchaseCost = localStorage.getItem("PURCHASE_COST");
@@ -39,7 +61,8 @@ export class PayBillComponent implements OnInit {
       offlineIdentifier : new FormControl ('', Validators.required),
       saleNumber : new FormControl ('', Validators.required),
       status : new FormControl ('', Validators.required),
-      total: new FormControl('', Validators.required)
+      total: new FormControl('', Validators.required),
+      creationDate: new FormControl('')
     });
 
     this.myForm.patchValue({
@@ -100,19 +123,40 @@ export class PayBillComponent implements OnInit {
   for ( var i = 0; i < length; i++ ) {
      result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
+  //this.saleOfflineIdentifier = result;
   return result;
 }
 
 submit(form:FormGroup){
+  this.myForm.patchValue({
+    creationDate: Date.now()
+  })
   this.blockUI.start('Operation en cours...');
   let branchId = localStorage.getItem("zakaBranchId");
   let userId = localStorage.getItem("zakaUserId");
 
   this.saleService.postSale(form.value, branchId, userId).subscribe(res=>{
-    console.log(res);
-    
+    console.log(res.body.data);
+    this.saleOfflineIdentifier=res.body.data.offlineIdentifier;
     if(res.body.responseCode==="00"){
       //this.toastr.success('Vente enregistree', 'Success!');
+      this.globalService.showSuccessMessage("VENTE ENREGISTREE AVEC SUCCESS")
+      for(var i =0; i<this.order.length; i++){
+        console.log(this.order[i]);
+        let item = {
+          'name':this.order[i].name,
+          'quantity':1,
+          'price':this.order[i].price,
+          'productOfflineIdentifier':this.order[i].offlineIdentifier,
+          'saleOfflineIdentifier':this.saleOfflineIdentifier,
+          'offlineIdentifier':this.generateOfflineIdentifier(100)
+        }
+        console.log(item);
+        this.saleService.postSaleItem(item, this.branchId).subscribe(res=>{
+             console.log(res)
+        });
+      }
+
       this.blockUI.stop();
       localStorage.setItem("BILL_PRICE","0");
       localStorage.setItem("PURCHASE_COST","0");
@@ -131,4 +175,79 @@ submit(form:FormGroup){
     this.blockUI.stop();
   });
 }
+
+getProducts(){
+  this.order = JSON.parse(localStorage.getItem("ITEMS"));
+}
+
+
+saveCustomer(){
+  console.log(this.customerNameRef)
+  
+  this.customerFullName = this.customerNameRef.nativeElement.value;
+  this.customerPhone = this.customerNumberRef.nativeElement.value;
+  if(this.customerFullName==="" || this.customerFullName==="Passant"){
+    this.customerFullName="Passant";
+    alert("Veillez entrer le nom du client")
+  }else if(this.customerPhone==="" || !this.customerPhone.startsWith("+")){
+    alert("Veillez entrer le numero de telephone du client commencant par le code du pays")
+  }else{
+
+    this.blockUI.start("Enregistrement du en cours");
+    this.customerOfflineIdentifier = this.generateOfflineIdentifier(100);
+    
+    let customer = {
+      name: this.customerFullName,
+      phone: this.customerPhone,
+      offlineIdentifier:this.customerOfflineIdentifier,
+    }
+  
+    this.customerService.postCustomer(customer, this.branchId, this.sellerId).subscribe(res=>{
+        if(res.body.responseCode==="00"){
+          this.blockUI.stop();
+          this.globalService.showSuccessMessage(this.customerFullName+" vient d'etre enregistrE comme client de votre business")
+          
+
+        }else{
+          this.blockUI.stop();
+          this.globalService.showErrorMessage("une erreur s'est produite")
+        }
+    },err=>{
+      this.blockUI.stop();
+      console.log(err)
+    })
+    
+    this.myForm.patchValue({
+      customerOfflineIdentifier:this.customerOfflineIdentifier
+    })
+  }  
+}
+
+onNameTyped(e){
+  this.showBtn=true;
+  if(e.target.value.length>0){
+    this.customerService.getByNameAndBranch(e.target.value, this.branchId).subscribe(res=>{
+    
+      this.customers = res.body.data;
+      this.showList=true;
+  
+    });
+  }else{
+    this.showList=false;
+  }
+  
+}
+
+setItem(i){
+  this.customerNameRef.nativeElement.value=i.name;
+  this.customerNumberRef.nativeElement.value=i.phone;
+  this.customerOfflineIdentifier=i.offlineIdentifier;
+  this.showBtn=false;
+  this.showList=false;
+  this.customerFullName=i.name;
+  this.myForm.patchValue({
+    customerOfflineIdentifier: this.customerOfflineIdentifier
+  })
+}
+
 }

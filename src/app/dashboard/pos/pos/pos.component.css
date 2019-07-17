@@ -2,7 +2,20 @@ mat-grid-tile {
     background:#3D3780;
     color: white
   }
+  
 
+  .roundInput{
+    border-radius: 25px;
+    border: 2px solid #2E2868;
+    padding: 20px; 
+    width: 200px;
+    height: 15px;  
+  }
+  input{
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    }
 .rounded{
     border-radius: 50px;
     margin: 10px
@@ -32,3 +45,7 @@ mat-grid-tile {
   .item{
     margin:10px
   }
+  .cdk-overlay-container{
+    position: fixed;
+    z-index: 1000;
+}

@@ -1,0 +1,58 @@
+.customerDiv{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #0B3C5D;
+}
+.blue{
+    background-color: #3F51B5;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .gray{
+    
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+.paid{
+    border-style: solid;
+    border-width: 1px;
+    border-color: red;
+}
+.filter-select {
+    background-color: #0B3C5D;
+    width: 90%;
+    list-style: none;
+    font-size: 1.1em;
+    color: rgb(105, 105, 105);
+    border: 1px solid #ccc;
+    border-top: none;
+    position: absolute;
+    top: calc(50% + 25px);
+    max-height: calc(50% - 15px);
+    overflow-y: auto;
+    background: #fff
+  }
+  .cdk-overlay-container{
+    position: fixed;
+    z-index: 1000;
+}

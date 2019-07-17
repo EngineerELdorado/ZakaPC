@@ -42,7 +42,7 @@ export class PosComponent implements OnInit {
 
 
   getProducts(){
-    this.productService.getProductsByBranch(this.branchId).subscribe(res=>{
+    this.productService.getProductsByBranch(this.branchId,"name").subscribe(res=>{
       this.products = res.body.data;
       console.log(this.products)
     });
@@ -63,7 +63,8 @@ export class PosComponent implements OnInit {
       id: product.id,
       name:product.name,
       price: product.price,
-      quantity:product.quantity
+      quantity:product.quantity,
+      offlineIdentifier:product.offlineIdentifier
     });
 
 
@@ -99,9 +100,14 @@ export class PosComponent implements OnInit {
 
 
   openBill(){
-    this.dialog.open(PayBillComponent, {
-      height: '400px',
-      width: '900px',
-    });
+    if(this.price>0){
+      this.dialog.open(PayBillComponent, {
+        height: '400px',
+        width: '900px',
+      });
+    }else{
+      alert("La facture est vide")
+    }
+    
   }
 }

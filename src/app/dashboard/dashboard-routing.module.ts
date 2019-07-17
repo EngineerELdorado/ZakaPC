@@ -13,7 +13,15 @@ const routes: Routes = [
           path:'pos',
           loadChildren:'./pos/pos.module#PosModule'
         
-      }
+      },{
+        path:'products',
+        loadChildren:'./product/product.module#ProductModule'
+      
+    },{
+      path:'sales/:name',
+      loadChildren:'./sales/sales.module#SalesModule'
+    
+  }
     ]
   },
   

@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~ngx-toastr/toastr-bs4-alert';
 body{
     background-color: whitesmoke
+}
+input{
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    }
+.cdk-overlay-container{
+    position: fixed;
+    z-index: 1000;
 }

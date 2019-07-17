@@ -12,13 +12,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { PayBillComponent } from './pay-bill/pay-bill.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BlockUIModule } from 'ng-block-ui';
 @NgModule({
   declarations: [PosComponent, SubstringNamePipe, PayBillComponent],
   entryComponents:[PayBillComponent],
   imports: [
     CommonModule,
+    FormsModule,
     PosRoutingModule,
     MatGridListModule,
     ReactiveFormsModule,

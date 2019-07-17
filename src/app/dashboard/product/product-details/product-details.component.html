@@ -1,0 +1,133 @@
+
+  <block-ui>
+      <!-- Your app markup here -->
+    </block-ui>
+    <div class="text-center" class="t-head">Details Du Produit</div>
+    <div class="text-center">
+
+      <img width="100px" height="100px" src="../../../../assets/upload.png" alt="">
+    </div>
+<div class="row">
+ <div class="col-md-8">
+    <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+     
+      <div class="row">
+        <div  class="col"> <div  class="form-group">
+            <label for="name">Nom</label>
+            <input   id="name" formControlName="name" class="form-control paid"  placeholder="Nom du produit">
+          </div></div>
+        <div class="col"> <div  class="form-group">
+            <label for="barcode">Barcode (si necessaire)</label>
+          <input   id="barcode" formControlName="barcode" class="form-control"  placeholder="Barcode(Si necessaire)">
+        </div></div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+            <div  class="form-group">
+                <label for="purchaseCost">Cout d'achat</label>
+              <input   id="purchaseCost" formControlName="purchaseCost" class="form-control paid"  placeholder="Cout d'achat">
+            </div>
+        </div>
+        <div class="col"><div class="form-group">
+            <label for="price">Prix de vente</label>
+            <input id="price"  formControlName="price" class="form-control paid"  placeholder="Prix de vente">
+       
+          </div></div>
+      </div>
+
+      <div class="row">
+        <div class="col"><div  class="form-group">
+            <label for="quantity">Quantite en stock(si necessaire)</label>
+              <input  id="quantity" formControlName="quantity" class=" form-control-warning form-control"  placeholder="Quantite (Si necessaire)">
+            </div></div>
+        <div class="col"><div  class="form-group">
+            <label for="location">Emplacement(si necessaire)</label>
+          <input  id="location" formControlName="location" class="form-control"  placeholder="Emplacement (Si necessaire)">
+        </div></div>
+      </div>
+      <div class="row">
+          <div class="col">
+          
+            <!-- <label for="">Enregister</label> -->
+                    <button style="height: 38px" type="submit"[disabled]="myForm.invalid" color="primary" mat-raised-button class="btn btn-block btnBlue">Enregistrer</button>
+               
+          </div>
+              </div>
+      
+      
+    
+
+
+    <div class="row">
+      <div class="col">
+          <div style="display: none"  class="form-group">
+              <label for="offlineIdentifier">Cle</label>
+              <input readonly id="offlineIdentifier" formControlName="offlineIdentifier" class="form-control"  placeholder="cle de vente">
+            </div>
+      </div>
+      <div class="col">
+          <div  style="display: none"  class="form-group">
+              <label for="saleNumber">Numero De Vente</label>
+              <input readonly id="createdBy" formControlName="createdBy" class="form-control"  placeholder="numero de vente">
+            </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+          
+        </div>
+      <div class="col">
+          <label style="display: none" for="discount">Cle</label>
+        <input readonly style="display: none" formControlName="modifiedBy" placeholder="cle du client" class="form-control">
+
+      </div>
+      <div class="col">
+          <div style="display: none"  class="form-group">
+              <label for="status">Status du paiement</label>
+              <input readonly id="status" formControlName="creationDate" class="form-control"  placeholder="status">
+            </div>
+      </div>
+      <div class="col">
+          <div style="display: none"  class="form-group">
+              <label for="status">Status du paiement</label>
+              <input readonly id="status" formControlName="modificationDate" class="form-control"  placeholder="status">
+            </div>
+      </div>
+      <div class="col">
+          <div style="display: none"  class="form-group">
+              <label for="status">Status du paiement</label>
+              <input readonly id="status" formControlName="imagepath" class="form-control"  placeholder="status">
+            </div>
+      </div>
+    <div class="col">
+          <div style="display: none"  class="form-group">
+              <label for="status">Status du paiement</label>
+              <input readonly id="status" formControlName="modifiedBy" class="form-control"  placeholder="status">
+            </div>
+      </div>
+    </div>
+  
+    
+  </form>
+ </div>
+ <div class="col-md-4 modifierDiv">
+    
+        <div   class="form-group">
+            <label for="status">Derniere modification faite par</label>
+            <input readonly id="status" value="{{modifiedBy}}"  class="form-control"  placeholder="">
+          </div>
+          <div   class="form-group">
+              <label for="status">Derniere modification faite le</label>
+              <input readonly id="status" value="{{modifiedOn|date:'full'}}"  class="form-control"  placeholder="">
+            </div>
+
+            <div   class="form-group">
+                <label for="status">Derniere modification faite le</label>
+                <textarea rows="20" cols="50" readonly id="status"  class="form-control"  placeholder="">
+              {{modificationNote}}
+                </textarea>
+                </div>
+ </div>
+</div>

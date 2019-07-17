@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-8 container" style="border-radius: 25px;">
-    <input #box (keyup)="getProductsByName(box.value)" style="margin: 10px;" type="text" placeholder="Trier" class="form-control">
+    <input class="roundInput" #box (keyup)="getProductsByName(box.value)" style="margin: 10px;" type="text" placeholder="Trier" class="form-control">
+    
     <div style="margin-left: 15px" class="row container">
       <mat-card  class="card col-md-2 item text-center" *ngFor="let product of products" (click)="addProduct(product)">
             {{product.name|substringName}}
@@ -19,13 +20,13 @@
 
   <div class="col-md-4" >
 
-      <mat-card class="card">Facture en cours
+      <mat-card class="card blue">Facture en cours
           <div style="font-size: 25px" class="text-center">
               {{price}} {{currency}}
             </div>
             <div>
-                <button (click)="clearBill()" style="float: left" mat-raised-button>Effacer la facture</button>
-                <button (click)="openBill()" mat-raised-button  style="float: right" mat-raised-button>Regler la facture</button>
+                <button  (click)="clearBill()" style="float: left" mat-raised-button>Effacer la facture</button>
+                <button  (click)="openBill()" mat-raised-button  style="float: right" mat-raised-button>Regler la facture</button>
             </div>
       </mat-card>
       <span style="margin-top:10px;" class="badge badge-primary badge-pill"> Contenu de la facture</span>

@@ -1,0 +1,92 @@
+<block-ui>
+  <!-- Your app markup here -->
+</block-ui>
+
+<div class="row container text-center" style="justify-content: center; margin-left: 50px">
+<div class="col-md-4" >
+    <input class="roundInput" [(ngModel)]="searchKey" #box (keyup)="applyFilter()" style="margin-bottom: 10px; " type="text" placeholder="Trier" class="form-control">
+</div>
+<div class="col-md-4" >
+  <button routerLink="/dashboard/pos" style="margin-bottom: 10px; height: 38px; " class=" btn-block btn-large btn btn-primary btnBlue">Effectuer une vente</button>
+</div>
+<div class="col-md-4" >
+  <label class="d-block text-center" style="margin-bottom: 10px; height: 38px; width: 100%; justify-content: center; padding-top: 12px; margin-bottom: 10px" for="file" class="btnGreen">Importer les ventes</label>
+    <input  id="file" type="file" accept=".xls,.xlsx" (change)="choseFile($event.target.files[0])" style="margin-bottom: 10px; height: 38px; display: none" class="btn-block btn-large btn btn-primary btnGreen" value="Importer Les Produits">
+  </div>
+</div>
+
+<div class="mat-elevation-z8 container table">
+<mat-table [dataSource]="data" matSort >
+  <ng-container matColumnDef="saleNumber">
+    <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>NO</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.saleNumber}}</mat-cell>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="barcode">
+      <mat-header-cell *matHeaderCellDef>Barcode</mat-header-cell>
+      <mat-cell *matCellDef="let element" *ngIf="element.barcode==null">{{element.barcode}}</mat-cell>
+    </ng-container> -->
+
+  
+
+        <ng-container matColumnDef="customer">
+            <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>CLIENT</mat-header-cell>
+            <mat-cell *matCellDef="let element" ><span >{{element.customerName}}</span></mat-cell>
+          </ng-container>
+
+            <!-- <ng-container matColumnDef="loading">
+              <mat-footer-cell class="t-head" *matFooterCellDef mat-sort-header>Loading Data</mat-footer-cell>
+             
+            </ng-container> -->
+            <ng-container matColumnDef="toPay">
+                <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>MONTANT en {{currency}}</mat-header-cell>
+                <mat-cell  *matCellDef="let element">{{element.toPay}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="paid">
+                <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>PAYE en {{currency}}</mat-header-cell>
+                <mat-cell  *matCellDef="let element">{{element.paid}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="balance">
+                <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>BALANCE en {{currency}}</mat-header-cell>
+                <mat-cell  *matCellDef="let element">{{element.balance}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="creationDate">
+                <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>DATE</mat-header-cell>
+                <mat-cell  *matCellDef="let element">{{element.creationDate |date:'short'}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <mat-header-cell class="t-head" *matHeaderCellDef>
+                  <img (click)="getSales()" style="margin-left:100px" width="30px" height="30px" src="../../../../assets/refresh.png" alt="">
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  <button (click)="openEditDialog(element.id)" style="margin-right: 10px" class="btnBlue" mat-icon-button> Details </button>
+                  
+                  <!-- <button (click)="openAddQuantityDialog(element)" class="btnGreen" mat-icon-button color="warn"> Stocker </button> -->
+                  <!-- <button class="btnRed" mat-icon-button color="warn"> Effacer </button> -->
+                  
+                </mat-cell>
+              </ng-container>
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+<!-- <mat-footer-row  style="justify-content: center" *matFooterRowDef="['loading']" ngClass="{'hide':data!=null}">
+
+</mat-footer-row> -->
+<mat-progress-bar
+ngClass="{'hide':data!=null}"
+class="app-product-list"
+[color]="color"
+[mode]="mode"
+[value]="value"
+[bufferValue]="bufferValue">
+</mat-progress-bar>
+</mat-table>
+
+<mat-paginator [length]="100"
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
+</div>
