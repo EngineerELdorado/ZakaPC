@@ -14,9 +14,10 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { PayBillComponent } from './pay-bill/pay-bill.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BlockUIModule } from 'ng-block-ui';
+import { ConfirmPrintInvoiceComponent } from './confirm-print-invoice/confirm-print-invoice.component';
 @NgModule({
-  declarations: [PosComponent, SubstringNamePipe, PayBillComponent],
-  entryComponents:[PayBillComponent],
+  declarations: [PosComponent, SubstringNamePipe, PayBillComponent, ConfirmPrintInvoiceComponent],
+  entryComponents:[PayBillComponent,ConfirmPrintInvoiceComponent],
   imports: [
     CommonModule,
     FormsModule,

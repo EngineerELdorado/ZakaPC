@@ -50,4 +50,23 @@ showContent:boolean=false;
     });  
     //this.showContent=false;
   }
+
+   printInvoice()
+{
+  var getpanel = document.getElementById("contentToConvert");
+  var MainWindow = window.open('', '', 'height=500,width=800');
+  MainWindow.document.write('<html><head><title></title>');
+  MainWindow.document.write("<link rel=\"stylesheet\" href=\"styles/Print.css\" type=\"text/css\"/>");
+  MainWindow.document.write('</head><body onload="window.print();window.close()">');
+  MainWindow.document.write(getpanel.innerHTML);
+  MainWindow.document.write('</body></html>');
+  MainWindow.document.close();
+  setTimeout(function () {
+      MainWindow.print();
+  }, 500)
+  return false;
+}
+sendMail(){
+
+}
 }

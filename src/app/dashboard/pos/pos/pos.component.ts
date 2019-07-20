@@ -5,6 +5,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import { PayBillComponent } from '../pay-bill/pay-bill.component';
 import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { ConfirmPrintInvoiceComponent } from '../confirm-print-invoice/confirm-print-invoice.component';
 @Component({
   selector: 'app-pos',
   templateUrl: './pos.component.html',
@@ -41,7 +42,6 @@ export class PosComponent implements OnInit {
       if(res){
         console.log(res);
         this.clearBill();
-        this.dialog.closeAll()
       }
     })
   }
@@ -121,7 +121,6 @@ export class PosComponent implements OnInit {
     localStorage.setItem("PURCHASE_COST", z.toString()) 
   }
 
-
   openBill(){
     if(this.price>0){
       this.dialog.open(PayBillComponent, {
@@ -131,6 +130,7 @@ export class PosComponent implements OnInit {
     }else{
       alert("La facture est vide")
     }
-    
   }
+
+  
 }

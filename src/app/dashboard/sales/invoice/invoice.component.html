@@ -6,13 +6,13 @@
   <strong>{{sale?.saleNumber}} </strong> 
   <label for="" style="margin-left: 60px">{{sale.creationDate|date:'dd/MM/yyyy, h:mm a'}}</label>
   <div  id="contentToHide" style="float: right">
-      <button  mat-icon-button aria-label="Example icon-button with a heart icon">
+      <!-- <button (click)="sendMail()"  mat-icon-button aria-label="Example icon-button with a heart icon">
           <mat-icon>email</mat-icon>
         </button>
       <button (click)="savePdf()"  mat-icon-button aria-label="Example icon-button with a heart icon">
           <mat-icon>save_alt</mat-icon>
-        </button>
-        <button mat-icon-button aria-label="Example icon-button with a heart icon">
+        </button> -->
+        <button (click)="savePdf()" mat-icon-button aria-label="Example icon-button with a heart icon">
             <mat-icon>print</mat-icon>
           </button>
   </div>
@@ -146,17 +146,17 @@
     <div style="background-color: #3D3780; color:white" class="card-header">
     Facture no: 
     <strong>{{sale?.saleNumber}}  </strong> 
-    <div   style="float: right">
+    <div class="saleDate"  style="float: right">
         {{sale.creationDate|date:'dd/MM/yyyy, h:mm a'}}
     </div>
      
     </div>
     <div class="card-body">
     <div class="row mb-4">
-        <div style="color: gray" class="col-sm-6">
+        <div class="gray" style="color: gray" class="col-sm-6">
             <h6 class="mb-3">Servi par:</h6>
             <div>
-            <strong style="color:#3D3780">{{sale.servedBy}}</strong>
+            <strong class="servedBy" style="color:#3D3780">{{sale.servedBy}}</strong>
             </div>
             <div>{{sale.createdBy.phone}}</div>
             <div>Addresse: Goma</div>
@@ -172,7 +172,7 @@
         <div>{{sale.customer.phone}}</div>
     </div>
     <span class=""> Paiement:  
-      <label  *ngIf="sale.status=='credit'" for="" style="color: red; font-weight: bold; font-size:18px">{{sale?.status}}</label>
+      <label  *ngIf="sale.status=='credit'" for="" class="status" style="color: red; font-weight: bold; font-size:18px">{{sale?.status}}</label>
       <label  *ngIf="sale.status=='incomplet'" for="" style="color: orange; font-weight: bold;font-size:18px">{{sale?.status}}</label>
       <label  *ngIf="sale.status=='complet'" for="" style="color: green; font-weight: bold;font-size:18px">{{sale?.status}}</label>
       
@@ -186,7 +186,7 @@
     
     <div class="table-responsive-sm">
     <table class="table table-striped">
-    <thead style="background-color: #3D3780; color:white">
+    <thead class="card-header" style="background-color: #3D3780; color:white">
     <tr>
     <th class="center">#</th>
     <th>Item</th>
@@ -262,10 +262,10 @@
     
     </div>
     <div class="text-center">
-        <label for="" style="font-weight: bold; font-size:20px">Powered By</label><br>
+        <label for="" class="font-20" style="font-weight: bold; font-size:20px">Powered By</label><br>
         <img width="120" height="120" class="img rounded-circle" src="../../../../assets/logo.jpg" alt="">
         <br>
-        <label for="" style="font-weight: bold; font-size:40px; color: #3D3780">ToraPos</label><br>
+        <label for="" class="font-40" style="font-weight: bold; font-size:40px; color: #3D3780">ToraPos</label><br>
       </div>
     </div>
     

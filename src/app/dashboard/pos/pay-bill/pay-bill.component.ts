@@ -6,6 +6,9 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ProductService } from 'src/app/services/product.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { InvoiceComponent } from '../../sales/invoice/invoice.component';
+import { ConfirmPrintInvoiceComponent } from '../confirm-print-invoice/confirm-print-invoice.component';
 
 @Component({
   selector: 'app-pay-bill',
@@ -34,15 +37,19 @@ export class PayBillComponent implements OnInit {
   customerNumberRef;
   showBtn=true;
   showList:boolean=false;
+  sale;
 
   @BlockUI() blockUI: NgBlockUI;
   constructor(private saleService: SaleService,
     private productService:ProductService,
     private customerService: CustomerService,
+    private dialog: MatDialog,
+    public dialogRef: MatDialogRef<PayBillComponent>,
     private globalService: GlobalVariablesService) {
      }
 
   ngOnInit() {
+    
     this.getProducts();
     this.branchId = localStorage.getItem("zakaBranchId");
     this.sellerId = localStorage.getItem("zakaUserId");
@@ -131,16 +138,21 @@ submit(form:FormGroup){
   this.myForm.patchValue({
     creationDate: Date.now()
   })
-  this.blockUI.start('Operation en cours...');
+  this.globalService.showLoading('Operation en cours... veillez patienter');
   let branchId = localStorage.getItem("zakaBranchId");
   let userId = localStorage.getItem("zakaUserId");
 
   this.saleService.postSale(form.value, branchId, userId).subscribe(res=>{
     console.log(res.body.data);
     this.saleOfflineIdentifier=res.body.data.offlineIdentifier;
+    this.globalService.stopLoading();
     if(res.body.responseCode==="00"){
+      this.sale = res.body.data;
+      this.confirmPrint();
+      this.dialogRef.close();
       //this.toastr.success('Vente enregistree', 'Success!');
-      this.globalService.showSuccessMessage("VENTE ENREGISTREE AVEC SUCCESS")
+      this.globalService.showSuccessMessage("VENTE ENREGISTREE AVEC SUCCESS.");
+      
       for(var i =0; i<this.order.length; i++){
         console.log(this.order[i]);
         let item = {
@@ -172,7 +184,7 @@ submit(form:FormGroup){
   },err=>{
     console.log(err);
     //this.toastr.error(err, 'Oops!');
-    this.blockUI.stop();
+    this.globalService.stopLoading();
   });
 }
 
@@ -238,6 +250,15 @@ onNameTyped(e){
   
 }
 
+openInvoice(e){
+  console.log(e)
+  this.dialog.open(InvoiceComponent, {
+    height: '600px',
+    width: '900px',
+    data: e
+  }); 
+}
+
 setItem(i){
   this.customerNameRef.nativeElement.value=i.name;
   this.customerNumberRef.nativeElement.value=i.phone;
@@ -248,6 +269,16 @@ setItem(i){
   this.myForm.patchValue({
     customerOfflineIdentifier: this.customerOfflineIdentifier
   })
+}
+
+confirmPrint(){
+    
+  this.dialog.open(ConfirmPrintInvoiceComponent, {
+    height: '200px',
+    width: '400px',
+    data:this.sale
+  });
+
 }
 
 }
