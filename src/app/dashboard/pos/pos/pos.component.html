@@ -13,7 +13,10 @@
             </div>
       </mat-card>
 
-     
+      <div  class="text-center container" style="justify-content: center">
+          <button (click)="loadMore()" *ngIf="!isLast && products" mat-raised-button>Voir Plus</button>
+          <!-- <label for="" *ngIf="isLast" class="alert-danger" style="padding: 5px; width: 100px; color: black">FIN</label> -->
+        </div>
 
     </div>
 </div>
@@ -40,6 +43,7 @@
           </li>
           
         </ul>
+        
   </div>
 </div>
 

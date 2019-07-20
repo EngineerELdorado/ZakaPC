@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
   }
 
   comingSoon(){
-    alert("CETTE OPTION ARRIVE BIENTOT. \n POUR LE MOMENT VOUS POUVEZ JUSTE EFFECTUER LES VENTES")
+    alert("CETTE OPTION ARRIVE BIENTOT")
   }
 
 }

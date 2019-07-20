@@ -8,6 +8,7 @@ import { AddQuantityComponent } from '../add-quantity/add-quantity.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ActivatedRoute } from '@angular/router'
+import { ExcelService } from 'src/app/excel.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -19,6 +20,10 @@ export class ProductListComponent implements OnInit {
   branchId;
   currency;
   noData:boolean=true;
+  page;
+  size;
+  status;
+  pageSize;
   @ViewChild('dataTable') table;
   @ViewChild(MatSort)matSort:MatSort;
   @ViewChild(MatPaginator)paginator:MatPaginator;
@@ -28,24 +33,35 @@ export class ProductListComponent implements OnInit {
   mode = 'indeterminate';
   value = 50;
   bufferValue = 75;
+  totalPages;
+  totalElements;
   
-  displayedColumns: string []=["name","purchaseCost","price","quantity","actions"]
+  displayedColumns: string []=["index","name","purchaseCost","price","quantity","actions"]
   constructor(private productService: ProductService,
     private global:GlobalVariablesService,
     private route: ActivatedRoute,
+    private excelService:ExcelService,
     private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.status = params['status'];
+      this.getPagedProducts();
+      });
+
+      this.global.data.subscribe(res=>{
+        if(res){
+          this.getPagedProducts();
+        }
+      })
+      
+    this.page=0;
+    this.size=5;
+    
     
     this.branchId= localStorage.getItem("zakaBranchId");
     this.currency=localStorage.getItem("zakaBranchCurrency");
-    this.getProducts("name");
-    this.global.data.subscribe(res=>{
-      if(res){
-        this.getProducts("name");
-      }
-    })
-    console.log(this.data)
+    this.getPagedProducts()
     
   }
 
@@ -60,16 +76,67 @@ export class ProductListComponent implements OnInit {
     });
   }
   getProducts(filter){
+
+    console.log(this.status);
+
     this.productService.getProductsByBranch(this.branchId,filter).subscribe(res=>{
       this.products = res.body.data;
-      console.log(this.products);
+      
       this.data = new MatTableDataSource(this.products);
       this.noData=false;
       this.data.sort = this.matSort;
       this.data.paginator=this.paginator;
+      
     });
   }
 
+  getPagedProducts(){
+    this.productService.getPagedProductsByBranch(this.branchId,this.page,this.size,this.status).subscribe(res=>{
+      this.products = res.body.data.content;
+      
+      console.log(res.body.data);
+      this.data = new MatTableDataSource(this.products);
+      this.noData=false;
+      this.data.sort = this.matSort;
+      this.totalPages=res.body.data.totalPages;
+      this.totalElements=res.body.data.totalElements;
+      this.pageSize=res.body.data.size;
+      this.data.paginator=this.paginator;
+      
+      
+    });
+  }
+
+  onPageChanged(e){
+    console.log(e)
+    this.productService.getPagedProductsByBranch(this.branchId,e.pageIndex,e.pageSize,this.status).subscribe(res=>{
+      this.products = res.body.data.content;
+      
+      console.log(res.body.data);
+      this.data = new MatTableDataSource(this.products);
+      
+    });  
+  }
+
+  onStatusChanged(e){
+    this.status=e;
+    this.productService.getPagedProductsByBranch(this.branchId,0,5,this.status).subscribe(res=>{
+      this.products = res.body.data.content;
+      
+      console.log(res.body.data);
+      this.data = new MatTableDataSource(this.products);
+      
+    });  
+  }
+  onPageRefresh(){
+    this.productService.getPagedProductsByBranch(this.branchId,0,5,this.status).subscribe(res=>{
+      this.products = res.body.data.content;
+      
+      console.log(res.body.data);
+      this.data = new MatTableDataSource(this.products);
+      
+    });
+  }
 
   openDialog(){
     
@@ -120,4 +187,9 @@ openAddQuantityDialog(product){
     }
     )
   }
+
+  exportAsXLSX():void {
+    
+    this.excelService.exportAsExcelFile(this.products, 'Rapport des Produits '+"("+this.status+")");
+ }
 }

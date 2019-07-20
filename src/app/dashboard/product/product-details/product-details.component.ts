@@ -19,6 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   modifiedBy;
   modifiedOn;
   modificationNote:string;
+  modificationDate;
   @BlockUI() blockUI: NgBlockUI;
   constructor(private productService: ProductService,
     private toastr:ToastrService,
@@ -56,6 +57,7 @@ this.branchId = localStorage.getItem("zakaBranchId");
       this.modifiedBy=this.product.modifiedBy;
       this.modifiedOn=this.product.updatedOn;
       this.modificationNote=this.product.modificationNote;
+      this.modificationDate = this.product.modificationDate;
       console.log("DATA")
       console.log(res.body.data)
       this.myForm.patchValue({
@@ -66,6 +68,7 @@ this.branchId = localStorage.getItem("zakaBranchId");
         quantity:this.product.quantity,
         location:this.product.location,
         offlineIdentifier:res.body.data.offlineIdentifier,
+        modificationDate:this.modificationDate,
         modifiedBy:localStorage.getItem("zakaUsername")
       })
     })

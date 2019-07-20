@@ -8,15 +8,15 @@
         <mat-toolbar-row>
           <span>
             <button routerLink="/dashboard/pos" class="btn btn-sm blue" mat-raised-button color="primary">TORAPOS</button>
-            <button routerLink="/dashboard/products" class="btn btn-sm gray" mat-stroked-button color="primary">Produits</button>
-            <!-- <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">epuises</button> -->
-            <button [routerLink]="['/dashboard/sales','null']" class="btn btn-sm gray" mat-stroked-button color="primary">Ventes</button>
-            <button [routerLink]="['/dashboard/sales','complet']" class="btn btn-sm gray" mat-stroked-button color="primary">complets</button>
-            <button [routerLink]="['/dashboard/sales','incomplet']" class="btn btn-sm gray" mat-stroked-button color="primary">incomplets</button>
-            <button [routerLink]="['/dashboard/sales','credit']" class="btn btn-sm gray" mat-stroked-button color="primary">A Credit</button>
-            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Clients</button>
-            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">redevables</button>
-            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Rapports</button>
+            <button routerLink="/dashboard/products/all" class="btn btn-sm gray" mat-stroked-button color="primary">Produits</button>
+            <button routerLink="/dashboard/sales/all" class="btn btn-sm gray" mat-stroked-button color="primary">Ventes</button>
+            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">clients</button>
+            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">depenses</button>
+            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">employes</button>
+            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Branches</button>
+            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Contactez nous</button>
+            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Reabonnement</button>
+            <!-- <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Rapports</button> -->
             <!-- <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Activites</button> -->
             <button (click)="logout()" class="btn btn-sm blue" mat-raised-button color="primary">Deconnecter</button>
             <img *ngIf="!connected" width="50px" height="50px" src="../../../assets/not_connected.png" alt="">

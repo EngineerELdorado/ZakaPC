@@ -15,6 +15,10 @@ export class ProductService {
       return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/products/getByBranch/"+branchId+"?filter="+filter, {observe:"response"});
     }
 
+    public getPagedProductsByBranch(branchId, page,size,status){
+      return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/products/page/"+branchId+"?page="+page+"&size="+size+"&status="+status, {observe:"response"});
+    }
+
     public addQuantity(productId, addedQuantity){
       return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/products/addQuantity/?productId="+productId+"&addedQuantity="+addedQuantity+"&modifiedBy="+localStorage.getItem("zakaUsername"),{observe:'response'})
     }

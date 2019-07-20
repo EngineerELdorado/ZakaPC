@@ -1,0 +1,116 @@
+
+  <block-ui>
+    <!-- Your app markup here -->
+  </block-ui>
+  <!-- <div><button style="float: right; height: 38px; margin-right: 50px" class="btnBlue">Generer une facture</button></div> -->
+  <div class="row">
+      <div class="col">
+        <!-- <button style="margin-bottom: 20px" color="primary" mat-raised-button>{{currentBillAmount}} {{currency}}</button> -->
+        Client: <span class="badge badge-primary">{{client}}</span>
+      </div>
+    </div>
+    <br><br>
+<div class="row container">
+<div class="col-md-8">
+  <form  [formGroup]="myForm" >
+      <fieldset disabled="disabled">
+    <div class="row">
+      <div style="display: none" class="col-md-12"> <div  class="form-group">
+          <label for="purchaseCost">Cout d'achat</label>
+          <input  readonly id="purchaseCost" formControlName="purchaseCost" class="form-control"  placeholder="Cout d'achat">
+        </div></div>
+      <div class="col-md-12"> <div style="display: none"  class="form-group">
+          <label for="servedBy">Servi par</label>
+        <input  readonly id="servedBy" formControlName="servedBy" class="form-control"  placeholder="Servi par">
+      </div></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div  style=""  class="form-group">
+                <label for="saleNumber">Numero de la facture</label>
+                <input readonly id="saleNumber" formControlName="saleNumber" class="form-control"  placeholder="numero de vente">
+              </div>
+        </div>
+        <div class="col-md-12">
+            <label for="">Prix original</label>
+            <input style=""  formControlName="total" class="form-control"  placeholder="total">
+          </div>
+          <div class="col-md-12"><div class="form-group">
+              <label for="discount">Reduction</label>
+              <input id="discount"  formControlName="discount" class="form-control"  placeholder="Reduction">
+         
+            </div></div>
+      <div class="col-md-12">
+          <div  class="form-group">
+              <label for="toPay">Montant A Payer</label>
+            <input  readonly id="toPay" formControlName="toPay" class="form-control"  placeholder="Montant A payer">
+          </div>
+      </div>
+      
+        
+     
+    </div>
+
+    <div class="row">
+      <div class="col-md-12"><div  class="form-group">
+          <label for="paid">Montant recu</label>
+            <input autofocus   id="paid" formControlName="paid" class=" form-control-warning form-control"  placeholder="Montant recu">
+          </div></div>
+      <div class="col-md-12"><div  class="form-group">
+          <label for="balance">Balance</label>
+        <input readonly id="balance" formControlName="balance" class="form-control"  placeholder="Balance">
+      </div></div>
+    </div>
+    
+   
+  
+
+
+  <div class="row">
+    <div class="col-md-12">
+        <div style="display: none"  class="form-group">
+            <label for="cleClient">Cle</label>
+            <input readonly id="cleClient" formControlName="offlineIdentifier" class="form-control"  placeholder="cle de vente">
+          </div>
+    </div>
+    
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+        
+      </div>
+    <div class="col-md-12">
+        <label style="display: none" for="discount">Cle</label>
+      <input readonly style="display: none" formControlName="customerOfflineIdentifier" placeholder="cle du client" class="form-control">
+
+    </div>
+    <div class="col-md-12">
+        <div style=""  class="form-group">
+            <label for="status">Status du paiement</label>
+            <input readonly id="status" formControlName="status" class="form-control"  placeholder="status">
+          </div>
+    </div>
+    <div class="col-md-12">
+      <div style=""  class="form-group">
+          <label for="status">Date de la vente</label>
+          <input readonly id="status" formControlName="creationDate" class="form-control"  placeholder="status">
+        </div>
+  </div>
+    
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+      
+        <!-- <label for="">Enregister</label> -->
+                <!-- <button style="height: 38px" type="submit"[disabled]="myForm.invalid" color="primary" mat-raised-button class="btn btn-block btnBlue">Enregistrer</button> -->
+           
+      </div>
+          </div>
+      </fieldset>
+</form>
+</div>
+
+</div>

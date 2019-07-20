@@ -3,7 +3,22 @@ mat-grid-tile {
     color: white
   }
   
-
+  .btnGreen{
+    
+    background-color: #81c784;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
   .roundInput{
     border-radius: 25px;
     border: 2px solid #2E2868;

@@ -14,11 +14,11 @@ const routes: Routes = [
           loadChildren:'./pos/pos.module#PosModule'
         
       },{
-        path:'products',
+        path:'products/:status',
         loadChildren:'./product/product.module#ProductModule'
       
     },{
-      path:'sales/:name',
+      path:'sales/:status',
       loadChildren:'./sales/sales.module#SalesModule'
     
   }

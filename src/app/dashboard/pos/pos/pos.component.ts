@@ -16,6 +16,11 @@ export class PosComponent implements OnInit {
   ];
   order:any[];
   products:any[];
+  page;
+  size;
+  status;
+  numberOfPages;
+  isLast; 
   cost:number =Number(localStorage.getItem("PURCHASE_COST"));
   price:number =Number(localStorage.getItem("BILL_PRICE"));
   currency=localStorage.getItem("zakaBranchCurrency");
@@ -25,7 +30,10 @@ export class PosComponent implements OnInit {
     private dialog: MatDialog) { }
  
   ngOnInit() {
-
+    this.page=0;
+    this.size=15;
+    this.status="all";
+    this.isLast = false;
     this.getProducts();
     this.order = JSON.parse(localStorage.getItem("ITEMS"));
 
@@ -42,19 +50,34 @@ export class PosComponent implements OnInit {
 
 
   getProducts(){
-    this.productService.getProductsByBranch(this.branchId,"name").subscribe(res=>{
-      this.products = res.body.data;
-      console.log(this.products)
+    this.productService.getPagedProductsByBranch(this.branchId,this.page,this.size,this.status).subscribe(res=>{
+      this.products = res.body.data.content;
+      this.isLast = res.body.data.last;
+      console.log(res.body.data)
+    });
+  }
+
+  loadMore(){
+     this.size=this.size+this.size;
+    this.productService.getPagedProductsByBranch(this.branchId,this.page,this.size,this.status).subscribe(res=>{
+      this.products = res.body.data.content;
+      this.isLast = res.body.data.last;
+      console.log(res.body.data)
     });
   }
 
   
   getProductsByName(name){
 
-    this.productService.getProductsByName(localStorage.getItem("zakaBranchId"), name).subscribe(res=>{
-      this.products = res.body.data;
-      console.log(this.products)
-    });
+    if(name===""){
+      this.getProducts();
+    }else{
+      this.productService.getProductsByName(localStorage.getItem("zakaBranchId"), name).subscribe(res=>{
+        this.products = res.body.data;
+        this.isLast=true;
+        console.log(this.products)
+      });
+    }
   }
 
   addProduct(product)

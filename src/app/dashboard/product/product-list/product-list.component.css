@@ -6,7 +6,7 @@ mat-grid-tile {
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     border-radius: 50px;
-    /* margin-right: 50px */
+    margin-top: 2px
     }
 .add {
     background:#3D3780;

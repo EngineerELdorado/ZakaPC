@@ -1,0 +1,35 @@
+
+  <block-ui>
+    <!-- Your app markup here -->
+  </block-ui>
+  <div class="text-center" class="t-head">Ajouter un paiemtent fait pa {{customerName}}</div>
+  <div class="text-center" class="t-head-green">facture no {{saleNumber}} balance: {{balance}} {{currency}}</div>
+  
+  <div class="text-center">
+
+    <!-- <img width="100px" height="100px" src="../../../../assets/upload.png" alt=""> -->
+  </div>
+<div class="row">
+<div class="col-md-12">
+  <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+   
+    <div class="row">
+      <div  class="col"> <div  class="form-group">
+          <!-- <label for="name">Nom</label> -->
+          <input   id="amount" formControlName="amount" class="form-control paid"  placeholder="MONTANT APPORTE">
+        </div></div>
+      
+    </div>
+
+   
+    <div class="row">
+        <div class="col">
+        
+                  <button style="height: 38px" type="submit"[disabled]="myForm.invalid" color="primary" mat-raised-button class="btn btn-block btnBlue">Enregistrer</button>
+             
+        </div>
+            </div>
+  
+</form>
+</div>
+</div>
