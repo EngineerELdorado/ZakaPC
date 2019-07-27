@@ -16,6 +16,11 @@ export class SaleService {
      return this.httpClient.post<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/add?branchId="+branchId+"&sellerId="+userId, sale,{observe:'response'})
     }
 
+    public delete(offlineIdentifier,userId){
+
+       return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/delete/"+offlineIdentifier+"/"+userId);
+    }
+
     public postSaleItem(item, branchId){
       
       return this.httpClient.post<ApiResponse>(this.globalVariables.BACKEND_URL+"/sale_items/save?branchId="+branchId,item,{observe:'response'})
@@ -24,6 +29,14 @@ export class SaleService {
      public getByBranch(branchId, status){
        return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/getByBranch/"+branchId+"?status="+status);
      }
+
+     public getByCustomer(customerId, page,size){
+      return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/findByCustomer/"+customerId+"?page="+page+"&size="+size);
+    }
+
+    public getByCustomerAndStatus(customerId, page,size, status){
+      return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/findByCustomerAndStatus/"+customerId+"?page="+page+"&size="+size+"&status="+status);
+    }
 
      public findById(id){
       return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/findById/"+id);
@@ -39,5 +52,9 @@ export class SaleService {
 
     public getPagedByFilterindDates(branchId, page,date1, date2, status){
       return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/sales/filter/dates/page/"+branchId+"?page="+page+"&date1="+date1+"&date2="+date2+"&status="+status);
+    }
+
+    public findSaleItems(offlineIdentifier){
+      return this.httpClient.get<ApiResponse>(this.globalVariables.BACKEND_URL+"/sale_items/sale/"+offlineIdentifier, {observe:'response'});
     }
 }

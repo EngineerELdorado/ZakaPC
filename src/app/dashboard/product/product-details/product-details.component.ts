@@ -76,7 +76,7 @@ this.branchId = localStorage.getItem("zakaBranchId");
 
   submit(data:FormGroup){
     console.log(data.value)
-    this.blockUI.start("Operation en cours... veillez patienter.");
+    this.gloabal.showLoading("Operation en cours... veillez patienter.");
     this.productService.create(data.value, this.userId, this.branchId).subscribe(res=>{
       this.blockUI.stop();
       if(res.body.responseCode==="00"){
@@ -84,10 +84,11 @@ this.branchId = localStorage.getItem("zakaBranchId");
         this.gloabal.updatedCanReload(true);
         this.dialogRef.close();
       }else{
-      alert()
+        this.gloabal.stopLoading();
         this.gloabal.showErrorMessage(res.body.responseMessage)
       }
     }, err=>{
+      this.gloabal.stopLoading();
       this.gloabal.showErrorMessage(err)
     })
   }

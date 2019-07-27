@@ -8,6 +8,7 @@ import { ExcelService } from 'src/app/excel.service';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { SaleDetailsComponent } from '../sale-details/sale-details.component';
 import { InvoiceComponent } from '../invoice/invoice.component';
+import { ConfirmDeleteSaleComponent } from '../confirm-delete-sale/confirm-delete-sale.component';
 
 @Component({
   selector: 'app-sales-list',
@@ -40,6 +41,7 @@ export class SalesListComponent implements OnInit {
   date1;
   date2;
   displayedColumns: string []=["saleNumber","customerName","toPay","paid","balance","status","servedBy","actions"]
+  
   constructor(private global:GlobalVariablesService,
     private saleService:SaleService,
     private route:ActivatedRoute,
@@ -169,6 +171,14 @@ export class SalesListComponent implements OnInit {
   openAddPayment(e){
     this.dialog.open(AddPaymentComponent, {
       height: '300px',
+      width: '500px',
+      data: e
+    }); 
+  }
+
+  confirmDeleteSale(e){
+    this.dialog.open(ConfirmDeleteSaleComponent, {
+      height: '200px',
       width: '500px',
       data: e
     }); 

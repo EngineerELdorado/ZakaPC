@@ -18,6 +18,7 @@ sale;
 currency;
 hideActions:boolean=false;
 showContent:boolean=false;
+items;
   constructor(private saleService: SaleService,
     private datePipe: DatePipe,
     public dialogRef: MatDialogRef<InvoiceComponent>,
@@ -28,6 +29,10 @@ showContent:boolean=false;
     this.currency = localStorage.getItem("zakaBranchCurrency")
     this.sale=this.data;
     console.log(this.sale)
+    this.saleService.findSaleItems(this.sale.offlineIdentifier).subscribe(res=>{
+      this.items=res.body.data
+      console.log(res)
+    })
       
   }
 

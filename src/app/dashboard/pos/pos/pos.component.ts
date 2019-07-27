@@ -43,6 +43,11 @@ export class PosComponent implements OnInit {
         console.log(res);
         this.clearBill();
       }
+    });
+    this.globalService.data.subscribe(res=>{
+      if(res){
+        this.getProducts()
+      }
     })
   }
 

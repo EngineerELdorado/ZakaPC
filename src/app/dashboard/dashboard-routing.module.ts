@@ -21,7 +21,11 @@ const routes: Routes = [
       path:'sales/:status',
       loadChildren:'./sales/sales.module#SalesModule'
     
-  }
+  },{
+    path:'customers/:status',
+    loadChildren:'./customers/customers.module#CustomersModule'
+  
+}
     ]
   },
   

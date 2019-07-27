@@ -100,12 +100,13 @@ export class PayBillComponent implements OnInit {
     if(bal===0){
       status ="complet"
     }
-    else if (e.target.value===0){
-      status = "credit"
-    }
-    else if (e.target.value!==0 && this.currentBillAmount>e.target.value){
+    if (e.target.value!==0 && this.currentBillAmount>e.target.value){
       status="incomplet"
     }
+    if (+bal===+this.currentBillAmount){
+      status = "credit"
+    }
+   
     this.myForm.patchValue({
       balance: bal,
       status: status 
@@ -152,7 +153,7 @@ submit(form:FormGroup){
       this.dialogRef.close();
       //this.toastr.success('Vente enregistree', 'Success!');
       this.globalService.showSuccessMessage("VENTE ENREGISTREE AVEC SUCCESS.");
-      
+      this.globalService.updatedCanReload(true)
       for(var i =0; i<this.order.length; i++){
         console.log(this.order[i]);
         let item = {

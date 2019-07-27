@@ -96,7 +96,7 @@
                   <!-- <button (click)="openDetailsDialog(element.id)" mat-menu-item> Edit </button> -->
                   <button *ngIf="element.balance>0" (click)="openAddPayment(element)" mat-menu-item>  payer </button>
                   <button  (click)="openInvoice(element)" mat-menu-item>  Facture </button>
-                  <button  (click)="delete(element)" mat-menu-item>  Effacer </button>
+                  <button  (click)="confirmDeleteSale(element)" mat-menu-item>  Effacer </button>
                   <!-- <button class="btnRed" mat-icon-button color="warn"> Effacer </button> -->
                 </mat-menu>
                 </mat-cell>

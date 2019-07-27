@@ -4,7 +4,7 @@ import { FlexmonsterPivotModule } from 'ng-flexmonster';
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-  MatSortModule, MatTableModule, MatCardModule,MatIconModule } from "@angular/material";
+  MatSortModule, MatTableModule, MatCardModule,MatIconModule, MatMenuModule, MatButtonModule } from "@angular/material";
 import { SubStPipe } from './sub-st.pipe';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -14,6 +14,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddQuantityComponent } from './add-quantity/add-quantity.component';
+import { MatElementsModule } from 'src/app/mat-elements/mat-elements.module';
 // import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [ProductListComponent, SubStPipe, AddProductComponent, ProductDetailsComponent, AddQuantityComponent],
@@ -22,17 +23,7 @@ import { AddQuantityComponent } from './add-quantity/add-quantity.component';
     // ToastrModule.forRoot(),
     CommonModule,
     ProductRoutingModule,
-    MatInputModule,
-    MatDialogModule,
-        MatTableModule,
-        MatProgressBarModule,
-        MatBadgeModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatIconModule,
-        MatProgressSpinnerModule,
-        FlexmonsterPivotModule,
-        MatCardModule,
+    MatElementsModule,
         BlockUIModule.forRoot(),
         FormsModule,
         ReactiveFormsModule

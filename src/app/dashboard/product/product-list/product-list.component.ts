@@ -20,8 +20,8 @@ export class ProductListComponent implements OnInit {
   branchId;
   currency;
   noData:boolean=true;
-  page;
-  size;
+  page=0;
+  size=5;
   status;
   pageSize;
   @ViewChild('dataTable') table;
@@ -44,6 +44,8 @@ export class ProductListComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.branchId= localStorage.getItem("zakaBranchId");
+    this.currency=localStorage.getItem("zakaBranchCurrency");
     this.route.params.subscribe(params => {
       this.status = params['status'];
       this.getPagedProducts();
@@ -51,17 +53,10 @@ export class ProductListComponent implements OnInit {
 
       this.global.data.subscribe(res=>{
         if(res){
-          this.getPagedProducts();
+          this.onPageRefresh();
         }
       })
       
-    this.page=0;
-    this.size=5;
-    
-    
-    this.branchId= localStorage.getItem("zakaBranchId");
-    this.currency=localStorage.getItem("zakaBranchCurrency");
-    this.getPagedProducts()
     
   }
 
@@ -96,9 +91,7 @@ export class ProductListComponent implements OnInit {
       
       console.log(res.body.data);
       this.data = new MatTableDataSource(this.products);
-      this.noData=false;
       this.data.sort = this.matSort;
-      this.totalPages=res.body.data.totalPages;
       this.totalElements=res.body.data.totalElements;
       this.pageSize=res.body.data.size;
       this.data.paginator=this.paginator;
@@ -111,9 +104,10 @@ export class ProductListComponent implements OnInit {
     console.log(e)
     this.productService.getPagedProductsByBranch(this.branchId,e.pageIndex,e.pageSize,this.status).subscribe(res=>{
       this.products = res.body.data.content;
-      
+      this.totalElements=res.body.data.totalElements;
       console.log(res.body.data);
       this.data = new MatTableDataSource(this.products);
+      this.size = e.pageSize
       
     });  
   }
@@ -122,7 +116,7 @@ export class ProductListComponent implements OnInit {
     this.status=e;
     this.productService.getPagedProductsByBranch(this.branchId,0,5,this.status).subscribe(res=>{
       this.products = res.body.data.content;
-      
+      this.totalElements=res.body.data.totalElements;
       console.log(res.body.data);
       this.data = new MatTableDataSource(this.products);
       
@@ -131,7 +125,7 @@ export class ProductListComponent implements OnInit {
   onPageRefresh(){
     this.productService.getPagedProductsByBranch(this.branchId,0,5,this.status).subscribe(res=>{
       this.products = res.body.data.content;
-      
+      this.totalElements=res.body.data.totalElements;
       console.log(res.body.data);
       this.data = new MatTableDataSource(this.products);
       

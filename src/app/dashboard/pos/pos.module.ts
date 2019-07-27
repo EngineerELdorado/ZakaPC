@@ -15,6 +15,7 @@ import { PayBillComponent } from './pay-bill/pay-bill.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BlockUIModule } from 'ng-block-ui';
 import { ConfirmPrintInvoiceComponent } from './confirm-print-invoice/confirm-print-invoice.component';
+import { MatElementsModule } from 'src/app/mat-elements/mat-elements.module';
 @NgModule({
   declarations: [PosComponent, SubstringNamePipe, PayBillComponent, ConfirmPrintInvoiceComponent],
   entryComponents:[PayBillComponent,ConfirmPrintInvoiceComponent],
@@ -22,15 +23,8 @@ import { ConfirmPrintInvoiceComponent } from './confirm-print-invoice/confirm-pr
     CommonModule,
     FormsModule,
     PosRoutingModule,
-    MatGridListModule,
+    MatElementsModule,
     ReactiveFormsModule,
-    MatBadgeModule,
-    MatCardModule,
-    MatButtonModule,
-    MatListModule,
-    MatIconModule,
-    MatDialogModule,
-    MatBottomSheetModule,
     BlockUIModule.forRoot()
   ]
 })

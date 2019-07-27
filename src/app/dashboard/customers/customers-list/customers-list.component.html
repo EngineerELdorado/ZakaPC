@@ -3,17 +3,17 @@
   </block-ui>
 
 <div class="row container text-center" style="justify-content: center; margin-left: 50px">
-  <div class="col-md-3"><mat-form-field>
-      <mat-label>Status du stock</mat-label>
+  <div class="col-md-3">
+    <mat-form-field>
+      <mat-label>Status du client</mat-label>
   <select (change)="onStatusChanged($event.target.value)"  matNativeControl required>
-      <option value="all">Toutes les produits</option>
-      <!-- <option value="complet"></option> fabile stock</option> -->
-      <option value="out"> finis en stock</option>
-      <!-- <option value="credit">Ventes a credit</option> -->
+      <option value="all">Toutes les clients</option>
+      <option value="debtors"> Clients redevables</option>
     </select>
-  </mat-form-field></div>
+  </mat-form-field>
+</div>
   <div class="col-md-3" >
-      <input class="roundInput" #box (keyup)="getProductsByName(box.value)" style="margin-bottom: 10px; " type="text" placeholder="Trier" class="form-control">
+      <input class="roundInput" #box (keyup)="filter(box.value)" style="margin-bottom: 10px; " type="text" placeholder="Trier" class="form-control">
   </div>
   <div class="col-md-2" >
     <button (click)="openDialog()" style="margin-bottom: 10px; height: 38px; " class=" btn-block btn-large btn btn-primary btnBlue">Ajouter</button>
@@ -36,7 +36,7 @@
         </ng-container>
     <ng-container matColumnDef="name">
       <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.name|lowercase}}</mat-cell>
     </ng-container>
 
     <!-- <ng-container matColumnDef="barcode">
@@ -46,38 +46,29 @@
 
     
 
-          <ng-container matColumnDef="purchaseCost">
-              <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Cout</mat-header-cell>
-              <mat-cell *matCellDef="let element">{{element.purchaseCost}} {{currency}}</mat-cell>
+          <ng-container matColumnDef="phone">
+              <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Num Tel</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.phone}}</mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="price">
-                <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header mat-sort-header>Prix</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.price}} {{currency}}</mat-cell>
+            <ng-container matColumnDef="createdBy">
+                <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Cree par</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element?.createdBy?.name}}</mat-cell>
               </ng-container>
-              <!-- <ng-container matColumnDef="loading">
-                <mat-footer-cell class="t-head" *matFooterCellDef mat-sort-header>Loading Data</mat-footer-cell>
-               
-              </ng-container> -->
-              <ng-container matColumnDef="quantity">
-                  <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Quantite</mat-header-cell>
-                  <mat-cell  *matCellDef="let element">{{element.quantity}}</mat-cell>
+              <ng-container matColumnDef="creationDate">
+                  <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Cree le</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element?.creationDate|date:'dd/MM/yyyy HH:mm:ss'}}</mat-cell>
                 </ng-container>
-
                 <ng-container matColumnDef="actions">
                   <mat-header-cell class="t-head" *matHeaderCellDef>
                     <img (click)="onPageRefresh()" style="margin-left:140px" width="30px" height="30px" src="../../../../assets/refresh.png" alt="">
                   </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-
-                      <button mat-stroked-button color [matMenuTriggerFor]="menu">Actions</button>
-                    <mat-menu #menu="matMenu">
-                  <!-- <button (click)="openDetailsDialog(element.id)" mat-menu-item> Edit </button> -->
-                  <button *ngIf="element.balance>0" (click)="openAddPayment(element)" mat-menu-item>  payer </button>
-                  <button  (click)="openEditDialog(element.id)" mat-menu-item>  Details </button>
-                  <button  (click)="openAddQuantityDialog(element)" mat-menu-item>  Stocker </button>
-                  <!-- <button class="btnRed" mat-icon-button color="warn"> Effacer </button> -->
-                </mat-menu>
+                    <button (click)="openEditDialog(element)" style="margin-right: 10px" class="btnBlue"> Modifier </button>
+                    
+                    <button [routerLink]="['/dashboard/customers/', element.id, 'sales']" class="btnGreen"> Factures </button>
+                    <!-- <button class="btnRed" mat-icon-button color="warn"> Effacer </button> -->
+                    
                   </mat-cell>
                 </ng-container>
 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -99,7 +90,7 @@ class="app-product-list"
   (page)="onPageChanged($event)"
   showFirstLastButtons
   [(length)]="totalElements"
-              [pageSize]="5"
+              [pageSize]="size"
               [pageSizeOptions]="[10,25,50, 100,200,500,1000,5000,10000,50000,100000,1000000]">
 </mat-paginator>
 </div>

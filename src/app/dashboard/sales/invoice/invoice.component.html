@@ -33,7 +33,7 @@
   <div class="col-sm-6">
   <h6 class="mb-3">Client:</h6>
   <div>
-  <strong>{{sale.customerName}}</strong>
+  <strong style="color:#3D3780">{{sale.customerName}}</strong>
   </div>
   <div *ngIf="sale.customer!=null">
       <div>{{sale.customer.phone}}</div>
@@ -64,14 +64,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-  <td class="center">1</td>
-  <td class="left strong">Jus de Maracuja</td>
+  <tr *ngFor="let item of items; let i=index">
+  <td class="center">{{i+1}}</td>
+  <td class="left strong">{{item.name|lowercase}}</td>
   <td class="left"></td>
   
   
-    <td class="center">1</td>
-  <td class="right">80 USD</td>
+    <td class="center">{{item.quantity}}</td>
+  <td class="right">{{item.price}} {{currency}}</td>
   </tr>
   
   </tbody>
@@ -166,7 +166,7 @@
     <div class="col-sm-6">
     <h6 class="mb-3">Client:</h6>
     <div>
-    <strong>{{sale.customerName}}</strong>
+    <strong style="color:#3D3780">{{sale.customerName}}</strong>
     </div>
     <div *ngIf="sale.customer!=null">
         <div>{{sale.customer.phone}}</div>
@@ -197,15 +197,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-    <td class="center">1</td>
-    <td class="left strong">Jus de Maracuja</td>
-    <td class="left"></td>
-    
-    
-      <td class="center">1</td>
-    <td class="right">80 USD</td>
-    </tr>
+        <tr *ngFor="let item of items; let i=index">
+            <td class="center">{{i+1}}</td>
+            <td class="left strong">{{item.name|lowercase}}</td>
+            <td class="left"></td>
+            
+            
+              <td class="center">{{item.quantity}}</td>
+            <td class="right">{{item.price}} {{currency}}</td>
+            </tr>
     
     </tbody>
     </table>

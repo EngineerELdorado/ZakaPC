@@ -3,7 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 
 import { SalesRoutingModule } from './sales-routing.module';
 import { SalesListComponent } from './sales-list/sales-list.component';
-import { BlockUIModule } from 'ng-block-ui';
+// import { BlockUIModule } from 'ng-block-ui';
 import { MatInputModule, MatDialogModule, MatTableModule, MatProgressBarModule, MatBadgeModule, MatPaginatorModule, MatSortModule, MatIconModule, MatProgressSpinnerModule, MatCardModule, MatNativeDateModule, MAT_DATE_LOCALE, MatButtonModule, MAT_DIALOG_DATA } from '@angular/material';
 import { FlexmonsterPivotModule } from 'ng-flexmonster';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,10 +15,12 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { ConfirmDeleteSaleComponent } from './confirm-delete-sale/confirm-delete-sale.component';
+import { BlockUIModule } from 'ng-block-ui';
 registerLocaleData(localeFr, 'fr');
 @NgModule({
-  declarations: [SalesListComponent, AddPaymentComponent, SaleDetailsComponent],
-  entryComponents:[AddPaymentComponent,SaleDetailsComponent],
+  declarations: [SalesListComponent],
+  entryComponents:[],
   providers:[MatDatepickerModule,DatePipe,
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     
@@ -27,7 +29,6 @@ registerLocaleData(localeFr, 'fr');
     CommonModule,
     SalesRoutingModule,
     
-    BlockUIModule.forRoot(),
     MatInputModule,
     MatDialogModule,
         MatTableModule,
@@ -45,7 +46,8 @@ registerLocaleData(localeFr, 'fr');
         MatCardModule,
         FormsModule,
         ReactiveFormsModule,
-        MatMenuModule
+        MatMenuModule,
+        BlockUIModule.forRoot()
   ]
 })
 export class SalesModule { }

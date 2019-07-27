@@ -13,17 +13,18 @@ import { ToastrModule } from 'ngx-toastr';
 import { InvoiceComponent } from './dashboard/sales/invoice/invoice.component';
 import { MatIconModule, MAT_DIALOG_DATA } from '@angular/material';
 import { DatePipe, CommonModule } from '@angular/common';
-
+import { BlockUIModule } from 'ng-block-ui';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 @NgModule({
   declarations: [
     AppComponent,
     LimitNamePipe,
     SubstringNamePipe,
-    InvoiceComponent,
+    
     
     
   ],
-  entryComponents:[InvoiceComponent],
+  entryComponents:[],
   imports: [
     ToastrModule.forRoot(),
     BrowserModule,
@@ -33,7 +34,9 @@ import { DatePipe, CommonModule } from '@angular/common';
     MatButtonModule,
     NgbModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    BlockUIModule.forRoot(),
+    DeviceDetectorModule.forRoot()
     
   ],
   providers: [DatePipe,

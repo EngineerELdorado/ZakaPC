@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col-md-3" style="text-align: center">
+    <img width="100px" height="100px" style="border-radius: 50%; margin-top: 20px" src="../../../../assets/avatar.jpg" alt="">
+   <br> <br> <label style="padding: 5px; " class="btnGreen" for="">{{customer?.name}}</label>
+    <br> <label style="padding: 5px" class="btnOrange" for="">{{customer?.phone}}</label>
+  </div>
+
+  <div class="col-md-9">
+
+    <block-ui>
+      <!-- Your app markup here -->
+    </block-ui>
+    
+    <div class="row  text-center" style="justify-content: center; margin-left: 10px">
+      <!-- <div class="col-md-5">
+          <input class="roundInput"  #box (keyup)="applyFilter($event)" style="margin-bottom: 10px; " type="text" placeholder="Trier" class="form-control"> 
+      </div> -->
+    <div class="col-md-12" >
+        <mat-form-field>
+            <mat-label>Status de paiement</mat-label>
+        <select (change)="onStatusChanged($event.target.value)"  matNativeControl required>
+            <option value="all">Toutes les ventes</option>
+            <option value="complet">paiments complets</option>
+            <option value="incomplet">paiements incomplets</option>
+            <option value="credit">Ventes a credit</option>
+          </select>
+        </mat-form-field>
+    </div>
+    </div>
+    
+    <div class="mat-elevation-z8 container table">
+    <mat-table [dataSource]="data" matSort >
+      <ng-container matColumnDef="saleNumber">
+        <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>NO</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.saleNumber}}</mat-cell>
+      </ng-container>
+    
+      <!-- <ng-container matColumnDef="barcode">
+          <mat-header-cell *matHeaderCellDef>Barcode</mat-header-cell>
+          <mat-cell *matCellDef="let element" *ngIf="element.barcode==null">{{element.barcode}}</mat-cell>
+        </ng-container> -->
+    
+      
+    
+                <!-- <ng-container matColumnDef="loading">
+                  <mat-footer-cell class="t-head" *matFooterCellDef mat-sort-header>Loading Data</mat-footer-cell>
+                 
+                </ng-container> -->
+                <ng-container matColumnDef="toPay">
+                    <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>MONTANT</mat-header-cell>
+                    <mat-cell  *matCellDef="let element">{{element.toPay}} {{currency}}</mat-cell>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="paid">
+                    <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>PAYE </mat-header-cell>
+                    <mat-cell  *matCellDef="let element">{{element.paid}} {{currency}}</mat-cell>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="balance">
+                    <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>BALANCE </mat-header-cell>
+                    <mat-cell  *matCellDef="let element">{{element.balance}} {{currency}}</mat-cell>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Paiement</mat-header-cell>
+                    <mat-cell  *matCellDef="let element">
+                      <button *ngIf="element.status=='complet'"   class="btnGreen" > {{element.status}} </button>
+                      <button *ngIf="element.status=='incomplet'"   class="btnOrange" > {{element.status}} </button>
+                      <button *ngIf="element.status=='credit'"  class="btnRed" > {{element.status}} </button>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="servedBy">
+                    <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Servi Par</mat-header-cell>
+                    <mat-cell  *matCellDef="let element">{{element.servedBy}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell class="t-head" *matHeaderCellDef>
+                      <img (click)="onRefresh()" style="margin-left:100px" width="30px" height="30px" src="../../../../assets/refresh.png" alt="">
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                          <button mat-stroked-button color [matMenuTriggerFor]="menu">Actions</button>
+                        <mat-menu #menu="matMenu">
+                      <!-- <button (click)="openDetailsDialog(element.id)" mat-menu-item> Edit </button> -->
+                      <button *ngIf="element.balance>0" (click)="openAddPayment(element)" mat-menu-item>  payer </button>
+                      <button  (click)="openInvoice(element)" mat-menu-item>  Facture </button>
+                      <button  (click)="confirmDeleteSale(element)" mat-menu-item>  Effacer </button>
+                      <!-- <button class="btnRed" mat-icon-button color="warn"> Effacer </button> -->
+                    </mat-menu>
+                    </mat-cell>
+                  </ng-container>
+                  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <!-- <mat-footer-row  style="justify-content: center" *matFooterRowDef="['loading']" ngClass="{'hide':data!=null}">
+    
+    </mat-footer-row> -->
+    
+    </mat-table>
+    
+    <mat-paginator
+    (page)="onPageChanged($event)"
+      showFirstLastButtons
+      [(length)]="totalElements"
+                  [pageSize]="5"
+                  [pageSizeOptions]="[25,50, 100,200,500,1000,5000,10000]">
+    </mat-paginator>
+    </div>
+
+  </div>
+</div>
