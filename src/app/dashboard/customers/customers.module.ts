@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerSalesComponent } from './customer-sales/customer-sales.component';
 
 import { DashboardModule } from '../dashboard.module';
+import { MatElementsModule } from 'src/app/mat-elements/mat-elements.module';
 
 @NgModule({
   declarations: [CustomersListComponent,
@@ -23,20 +24,7 @@ import { DashboardModule } from '../dashboard.module';
   imports: [
     CommonModule,
     CustomersRoutingModule,
-    CustomersRoutingModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatMenuModule,
-    MatDialogModule,
-    MatButtonModule,
-        MatTableModule,
-        MatProgressBarModule,
-        MatBadgeModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatIconModule,
-        MatProgressSpinnerModule,
-        MatCardModule,
+    MatElementsModule,
         BlockUIModule.forRoot(),
         FormsModule,
         ReactiveFormsModule,

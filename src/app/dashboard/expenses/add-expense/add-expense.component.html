@@ -1,0 +1,43 @@
+
+  <block-ui>
+      <!-- Your app markup here -->
+    </block-ui>
+    <div class="text-center" class="t-head">Ajouter Une Depense</div>
+    <div class="text-center">
+
+      <img width="100px" height="100px" src="../../../../assets/upload.png" alt="">
+    </div>
+<div class="row">
+ <div class="col-md-12">
+    <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
+     
+      <div class="row">
+        <div  class="col-md-12"> <div  class="form-group">
+            <!-- <label for="name">Nom</label> -->
+            <input   id="name" formControlName="name" class="form-control paid"  placeholder="Nom ou libele de la depense">
+          </div></div>
+        <div class="col-md-12"> <div  class="form-group">
+            <!-- <label for="barcode">Barcode (si necessaire)</label> -->
+          <input   id="barcode" formControlName="description" class="form-control"  placeholder="Description de la depense">
+        </div></div>
+        <div class="col-md-12"> <div  class="form-group">
+            <!-- <label for="barcode">Barcode (si necessaire)</label> -->
+          <input   id="barcode" formControlName="amount" class="form-control"  placeholder="Montant de la depense">
+        </div></div>
+
+        <div class="col" style="display: none"> <div  class="form-group">
+            <!-- <label for="barcode">Barcode (si necessaire)</label> -->
+          <input   id="barcode" formControlName="offlineIdentifier" class="form-control"  placeholder="montant">
+        </div></div>
+      </div>  
+      <div class="row">
+          <div class="col">
+          
+            <!-- <label for="">Enregister</label> -->
+                    <button style="height: 38px" type="submit"[disabled]="myForm.invalid" color="primary" mat-raised-button class="btn btn-block btnBlue">Enregistrer</button>
+               
+          </div>
+              </div>
+  </form>
+ </div>
+</div>

@@ -64,11 +64,14 @@
                     <img (click)="onPageRefresh()" style="margin-left:140px" width="30px" height="30px" src="../../../../assets/refresh.png" alt="">
                   </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <button (click)="openEditDialog(element)" style="margin-right: 10px" class="btnBlue"> Modifier </button>
-                    
-                    <button [routerLink]="['/dashboard/customers/', element.id, 'sales']" class="btnGreen"> Factures </button>
-                    <!-- <button class="btnRed" mat-icon-button color="warn"> Effacer </button> -->
-                    
+
+                      <button mat-stroked-button color [matMenuTriggerFor]="menu">Actions</button>
+                    <mat-menu #menu="matMenu">
+                  <button  (click)="openEditDialog(element)" mat-menu-item>  Modifier </button>
+                  <button  [routerLink]="['/dashboard/customers/', element.id, 'sales']" mat-menu-item>  Factures </button>
+                  <!-- <button class="btnRed" mat-icon-button color="warn"> Effacer </button> -->
+                </mat-menu>
+
                   </mat-cell>
                 </ng-container>
 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
