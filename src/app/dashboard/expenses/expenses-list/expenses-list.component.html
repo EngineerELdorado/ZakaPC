@@ -4,7 +4,7 @@
 
 <div class="row container text-center" style="justify-content: center; margin-left: 50px">
   <div class="col-md-3" >
-      <input class="roundInput" #box (keyup)="getProductsByName(box.value)" style="margin-bottom: 10px; " type="text" placeholder="Trier" class="form-control">
+      <input class="roundInput" #box (keyup)="filter(box.value)" style="margin-bottom: 10px; " type="text" placeholder="Trier" class="form-control">
   </div>
   <div class="col-md-2" >
     <button (click)="openDialog()" style="margin-bottom: 10px; height: 38px; " class=" btn-block btn-large btn btn-primary btnBlue">Ajouter</button>
@@ -65,17 +65,7 @@
                 </ng-container>
 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 <mat-row *matRowDef="let row; columns: displayedColumns; let i = index"></mat-row>
-<!-- <mat-footer-row  style="justify-content: center" *matFooterRowDef="['loading']" ngClass="{'hide':data!=null}">
-  
-</mat-footer-row> -->
-<mat-progress-bar
-ngClass="{'hide':data!=null}"
-class="app-product-list"
-[color]="color"
-[mode]="mode"
-[value]="value"
-[bufferValue]="bufferValue">
-</mat-progress-bar>
+
   </mat-table>
 
   <mat-paginator

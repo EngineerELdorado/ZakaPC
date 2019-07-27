@@ -112,6 +112,14 @@ openDialog(){
   }); 
 }
 
+filter(e){
+  this.expensesService.filter(this.branchId,e, 0,5).subscribe(res=>{
+    this.expenses = res.data.content;
+    this.data = new MatTableDataSource(this.expenses);
+    this.totalElements=res.data.content.totalElements;
+  })
+}
+
 openEditDialog(e){
   this.dialog.open(ExpenseDetailsComponent, {
     height: '500px',

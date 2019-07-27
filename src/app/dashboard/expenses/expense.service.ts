@@ -16,6 +16,11 @@ export class ExpenseService {
 
   }
 
+  filter(branchId, filter, page, size){
+    return this.http.get<ApiResponse>(this.globalService.BACKEND_URL+"/expenses/page/filter/"+branchId+"?page="+page+"&size="+size+"&filter="+filter);
+
+  }
+
   public postExcel(formData){
 
     return this.http.post<ApiResponse>(this.globalService.BACKEND_URL+"/expenses/importFromExcel", formData,{observe:'response'})
