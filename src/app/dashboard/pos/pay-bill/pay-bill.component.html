@@ -12,7 +12,7 @@
 <div class="row">
  <div class="col-md-8">
     <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
-     
+
       <div class="row">
         <div style="display: none" class="col"> <div  class="form-group">
             <label for="purchaseCost">Cout d'achat</label>
@@ -34,7 +34,7 @@
         <div class="col"><div class="form-group">
             <label for="discount">Reduction</label>
             <input id="discount" (keyup)="applyDiscount($event)" formControlName="discount" class="form-control"  placeholder="Reduction">
-       
+
           </div></div>
       </div>
 
@@ -50,18 +50,18 @@
       </div>
       <div class="row">
           <div class="col">
-          
+
             <!-- <label for="">Enregister</label> -->
                     <button type="submit"[disabled]="myForm.invalid" color="primary" mat-raised-button class="btn btn-block">Enregistrer</button>
-               
+
           </div>
               </div>
       <div class="row">
         <div class="col"><input style="display: none"  formControlName="total" class="form-control"  placeholder="total">
         </div>
       </div>
-      
-    
+
+
 
 
     <div class="row">
@@ -81,7 +81,7 @@
 
     <div class="row">
       <div class="col">
-          
+
         </div>
       <div class="col">
           <label style="display: none" for="discount">Cle</label>
@@ -100,35 +100,35 @@
             <input readonly id="status" formControlName="creationDate" class="form-control"  placeholder="status">
           </div>
     </div>
-      
+
     </div>
-  
-    
+
+
   </form>
  </div>
 
  <div class="col-md-4 customerDiv">
-    
-        <div class="text-center"> 
+
+        <div class="text-center">
           <label for="">Lier un client a la facture </label>
         </div>
          <div class="form-group">
-             <input (keyup)="onNameTyped($event)" #customerName class="form-control" placeholder="Nom du client">
-           
-             <ul *ngIf="showList" class="filter-select">
-              <li *ngFor="let i of customers" class="filter-select-list">
-                <button (click)="setItem(i)" style="border: none; background-color:white">{{i.name}}</button>
-                </li>
-             </ul>
-           
+             <input [matAutocomplete]="auto" (keyup)="onNameTyped($event)" #customerName class="form-control" placeholder="Nom du client">
+
+             <mat-autocomplete #auto="matAutocomplete" >
+              <mat-option *ngFor="let i of customers">
+                <span (click)="setItem(i)">{{i.name}}</span>
+              </mat-option>
+            </mat-autocomplete>
+
             </div>
-   
+
            <div class="form-group">
                <input #customerNumber (keyup)="onNameTyped($event)" class="form-control" placeholder="Numero du client">
              </div>
              <div *ngIf="showBtn">
                <button (click)="saveCustomer()" class="btn btn-block btn-info">Lier</button>
              </div>
-     
+
  </div>
 </div>

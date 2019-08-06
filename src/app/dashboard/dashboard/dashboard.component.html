@@ -3,7 +3,7 @@
         <span class="badge badge-light"> {{businessName}} Date d'expiration: {{expirationDate|date}}
         </span>
         </div>
-          
+
     <mat-toolbar class="toolbar">
         <mat-toolbar-row>
           <span>
@@ -12,7 +12,7 @@
             <button routerLink="/dashboard/sales/all" class="btn btn-sm gray" mat-stroked-button color="primary">Ventes</button>
             <button routerLink="/dashboard/customers/all" class="btn btn-sm gray" mat-stroked-button color="primary">clients</button>
             <button routerLink="/dashboard/expenses" class="btn btn-sm gray" mat-stroked-button color="primary">depenses</button>
-            <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">employes</button>
+            <button routerLink="/dashboard/employees" class="btn btn-sm gray" mat-stroked-button color="primary">employes</button>
             <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Branches</button>
             <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Contactez nous</button>
             <button (click)="comingSoon()" class="btn btn-sm gray" mat-stroked-button color="primary">Reabonnement</button>
@@ -21,28 +21,28 @@
             <button (click)="logout()" class="btn btn-sm blue" mat-raised-button color="primary">Deconnecter</button>
             <img *ngIf="!connected" width="50px" height="50px" src="../../../assets/not_connected.png" alt="">
             <img *ngIf="connected" width="50px" height="30px" src="../../../assets/connected.jpg" alt="">
-          
-          
-          
-          
-          </span>
-          
-          </mat-toolbar-row>
-          
 
-            
-            
-      
+
+
+
+          </span>
+
+          </mat-toolbar-row>
+
+
+
+
+
       </mat-toolbar>
       <mat-drawer-container class="example-container">
         <mat-drawer class="drawer" mode="side" opened>
-        
-            
-      
-        
+
+
+
+
         </mat-drawer>
         <mat-drawer-content>
-      
+
           <router-outlet></router-outlet>
         </mat-drawer-content>
       </mat-drawer-container>

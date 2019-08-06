@@ -49,7 +49,7 @@ export class PayBillComponent implements OnInit {
      }
 
   ngOnInit() {
-    
+
     this.getProducts();
     this.branchId = localStorage.getItem("zakaBranchId");
     this.sellerId = localStorage.getItem("zakaUserId");
@@ -82,7 +82,7 @@ export class PayBillComponent implements OnInit {
       discount:0,
       total: localStorage.getItem("BILL_PRICE")
     })
-    
+
   }
 
   applyDiscount(e){
@@ -106,10 +106,10 @@ export class PayBillComponent implements OnInit {
     if (+bal===+this.currentBillAmount){
       status = "credit"
     }
-   
+
     this.myForm.patchValue({
       balance: bal,
-      status: status 
+      status: status
     })
   }
 
@@ -196,7 +196,7 @@ getProducts(){
 
 saveCustomer(){
   console.log(this.customerNameRef)
-  
+
   this.customerFullName = this.customerNameRef.nativeElement.value;
   this.customerPhone = this.customerNumberRef.nativeElement.value;
   if(this.customerFullName==="" || this.customerFullName==="Passant"){
@@ -208,18 +208,18 @@ saveCustomer(){
 
     this.blockUI.start("Enregistrement du en cours");
     this.customerOfflineIdentifier = this.generateOfflineIdentifier(100);
-    
+
     let customer = {
       name: this.customerFullName,
       phone: this.customerPhone,
       offlineIdentifier:this.customerOfflineIdentifier,
     }
-  
+
     this.customerService.postCustomer(customer, this.branchId, this.sellerId).subscribe(res=>{
         if(res.body.responseCode==="00"){
           this.blockUI.stop();
           this.globalService.showSuccessMessage(this.customerFullName+" vient d'etre enregistrE comme client de votre business")
-          
+
 
         }else{
           this.blockUI.stop();
@@ -229,26 +229,26 @@ saveCustomer(){
       this.blockUI.stop();
       console.log(err)
     })
-    
+
     this.myForm.patchValue({
       customerOfflineIdentifier:this.customerOfflineIdentifier
     })
-  }  
+  }
 }
 
 onNameTyped(e){
   this.showBtn=true;
   if(e.target.value.length>0){
     this.customerService.getByNameAndBranch(e.target.value, this.branchId).subscribe(res=>{
-    
+
       this.customers = res.body.data;
       this.showList=true;
-  
+
     });
   }else{
     this.showList=false;
   }
-  
+
 }
 
 openInvoice(e){
@@ -257,10 +257,11 @@ openInvoice(e){
     height: '600px',
     width: '900px',
     data: e
-  }); 
+  });
 }
 
 setItem(i){
+  console.log(i)
   this.customerNameRef.nativeElement.value=i.name;
   this.customerNumberRef.nativeElement.value=i.phone;
   this.customerOfflineIdentifier=i.offlineIdentifier;
@@ -273,7 +274,7 @@ setItem(i){
 }
 
 confirmPrint(){
-    
+
   this.dialog.open(ConfirmPrintInvoiceComponent, {
     height: '200px',
     width: '400px',

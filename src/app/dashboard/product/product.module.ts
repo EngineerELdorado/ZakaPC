@@ -4,7 +4,7 @@ import { FlexmonsterPivotModule } from 'ng-flexmonster';
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-  MatSortModule, MatTableModule, MatCardModule,MatIconModule, MatMenuModule, MatButtonModule } from "@angular/material";
+  MatSortModule, MatTableModule, MatCardModule,MatIconModule, MatMenuModule, MatButtonModule, MatAutocomplete } from "@angular/material";
 import { SubStPipe } from './sub-st.pipe';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressBarModule} from '@angular/material/progress-bar';

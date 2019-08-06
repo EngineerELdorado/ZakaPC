@@ -12,27 +12,31 @@ const routes: Routes = [
       {
           path:'pos',
           loadChildren:'./pos/pos.module#PosModule'
-        
+
       },{
         path:'products/:status',
         loadChildren:'./product/product.module#ProductModule'
-      
+
     },{
       path:'sales/:status',
       loadChildren:'./sales/sales.module#SalesModule'
-    
+
   },{
     path:'customers/:status',
     loadChildren:'./customers/customers.module#CustomersModule'
-  
+
 },{
   path:'expenses',
   loadChildren:'./expenses/expenses.module#ExpensesModule'
 
+},{
+  path:'employees',
+  loadChildren:'./employees/employees.module#EmployeesModule'
+
 }
     ]
   },
-  
+
 ];
 
 @NgModule({
