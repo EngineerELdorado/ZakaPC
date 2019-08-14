@@ -15,8 +15,9 @@ import { ConfirmDeleteSaleComponent } from './sales/confirm-delete-sale/confirm-
 import { BlockUIModule } from 'ng-block-ui';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatElementsModule } from '../mat-elements/mat-elements.module';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 @NgModule({
-  declarations: [DashboardComponent, InvoiceComponent, AddPaymentComponent, SaleDetailsComponent,ConfirmDeleteSaleComponent],
+  declarations: [DashboardComponent, InvoiceComponent, AddPaymentComponent, SaleDetailsComponent,ConfirmDeleteSaleComponent, ContactUsComponent],
   entryComponents:[AddPaymentComponent,SaleDetailsComponent,ConfirmDeleteSaleComponent,InvoiceComponent],
   imports: [
     CommonModule,
