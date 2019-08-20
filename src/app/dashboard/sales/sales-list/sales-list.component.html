@@ -3,37 +3,53 @@
 </block-ui>
 
 <div class="row  text-center" style="justify-content: center; margin-left: 10px">
-  <div class="col-md-3">
-      <input class="roundInput"  #box (keyup)="applyFilter($event)" style="margin-bottom: 10px; " type="text" placeholder="Trier" class="form-control"> 
+  <div class="col-md-2">
+      <input class="roundInput"  #box (keyup)="applyFilter($event)" style="margin-top: 15px; " type="text" placeholder="Chercher" class="form-control">
   </div>
-<div class="col-md-2" >
-    <mat-form-field>
-        <mat-label>Status de paiement</mat-label>
+<div class="col-md-1" >
+    <mat-form-field style="width: 150px">
+        <!-- <mat-label>Status de paiement</mat-label> -->
     <select (change)="onStatusChanged($event.target.value)"  matNativeControl required>
         <option value="all">Toutes les ventes</option>
         <option value="complet">paiments complets</option>
-        <option value="incomplet">paiements incomplets</option>
-        <option value="credit">Ventes a credit</option>
+        <option value="incomplet">paiments incomplets</option>
+        <option value="credit">ventes a credit</option>
       </select>
     </mat-form-field>
 </div>
-<div class="col-md-2" >
+<div style="margin-top: 15px" *ngIf="!showRanges" class="col-md-8">
+  <button (click)="setAllTime()" style=" height: 30px;margin-right: 5px" class="btnGray btn">Toutes</button>
+  <button (click)="setToday()" style=" height: 30px;margin-right: 5px" class="btnGray btn">Aujourd'hui</button>
+  <button (click)="setYesterday()" style=" height: 30px; margin-right: 5px" class="btnGray btn">Hier</button>
+  <button (click)="setThisWeek()" style=" height: 30px; margin-right: 5px" class="btnGray btn">La Semaine</button>
+  <button (click)="setThisMonth()" style=" height: 30px; margin-right: 5px" class="btnGray btn">Le Mois</button>
+  <button (click)="setThisYear()" style=" height: 30px; margin-right: 5px" class="btnGray btn">L'annee</button>
+  <button (click)="onShowRanges()" style=" height: 30px; margin-right: 0px" class="btnRed btn">Intervalle</button>
+
+</div>
+<div  *ngIf="showRanges" class="col-md-7 row">
+  <div class="col-md-4">
+      <button (click)="onShowRanges()" style=" height: 30px; margin-top: 15px" class="btnRed btn bn-block">Triage</button>
+
+  </div>
+  <div class="col-md-4" >
     <mat-form-field color="primary">
         <input [max]="maxDate" (dateInput)="onDate1($event)" matInput [matDatepicker]="picker" placeholder="Choisissez une date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 </div>
-<div class="col-md-2" >
+ <div class="col-md-4" >
     <mat-form-field color="primary">
         <input [min]="minDate" [disabled]="!date1" (dateInput)="onDate2($event)" matInput [matDatepicker]="picker2" placeholder="Jusqu'au">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
   </div>
-  <div style="margin-left: 20px; margin-top:10px" class="col-md-2">
+</div>
+  <!-- <div style="margin-left: 20px; margin-top:10px" class="col-md-2">
       <button (click)="exportAsXLSX()" style="margin-bottom: 10px; height: 38px; " class="btnRed btn-block btn-large btn">Exporter</button>
-          </div>
+          </div> -->
 </div>
 
 <div class="mat-elevation-z8 container table">
@@ -48,7 +64,7 @@
       <mat-cell *matCellDef="let element" *ngIf="element.barcode==null">{{element.barcode}}</mat-cell>
     </ng-container> -->
 
-  
+
 
         <ng-container matColumnDef="customerName">
             <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>CLIENT</mat-header-cell>
@@ -57,7 +73,7 @@
 
             <!-- <ng-container matColumnDef="loading">
               <mat-footer-cell class="t-head" *matFooterCellDef mat-sort-header>Loading Data</mat-footer-cell>
-             
+
             </ng-container> -->
             <ng-container matColumnDef="toPay">
                 <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>MONTANT</mat-header-cell>

@@ -72,6 +72,20 @@ mat-grid-tile {
     outline: none;
   }
 
+  .btnGray{
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+
 
   .btnOrange{
     background-color: #ff6e40;
@@ -90,7 +104,7 @@ mat-grid-tile {
   }
 
   .btnRed{
-    
+
     background-color: #e57373;
     color: white;
     font-family: 'Roboto', sans-serif;
@@ -107,7 +121,7 @@ mat-grid-tile {
   }
 
   .btnGreen{
-    
+
     background-color: #81c784;
     color: white;
     font-family: 'Roboto', sans-serif;
@@ -137,12 +151,12 @@ mat-grid-tile {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold
   }
-  
+
   .hide{
     display: none;
   }
   .gray{
-    
+
     font-family: 'Roboto', sans-serif;
     font-size: 11px;
     text-transform: uppercase;

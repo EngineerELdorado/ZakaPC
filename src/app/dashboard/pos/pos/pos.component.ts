@@ -13,7 +13,7 @@ import { ConfirmPrintInvoiceComponent } from '../confirm-print-invoice/confirm-p
 })
 export class PosComponent implements OnInit {
     ITEMS: Item[] = [
-    
+
   ];
   order:any[];
   products:any[];
@@ -21,7 +21,7 @@ export class PosComponent implements OnInit {
   size;
   status;
   numberOfPages;
-  isLast; 
+  isLast;
   cost:number =Number(localStorage.getItem("PURCHASE_COST"));
   price:number =Number(localStorage.getItem("BILL_PRICE"));
   currency=localStorage.getItem("zakaBranchCurrency");
@@ -29,7 +29,7 @@ export class PosComponent implements OnInit {
   constructor(private productService: ProductService,
     private globalService: GlobalVariablesService,
     private dialog: MatDialog) { }
- 
+
   ngOnInit() {
     this.page=0;
     this.size=15;
@@ -40,7 +40,7 @@ export class PosComponent implements OnInit {
 
     this.globalService.clearBillObs.subscribe(res=>{
       if(res){
-        console.log(res);
+        //console.log(res);
         this.clearBill();
       }
     });
@@ -51,14 +51,14 @@ export class PosComponent implements OnInit {
     })
   }
 
-  
+
 
 
   getProducts(){
     this.productService.getPagedProductsByBranch(this.branchId,this.page,this.size,this.status).subscribe(res=>{
       this.products = res.body.data.content;
       this.isLast = res.body.data.last;
-      console.log(res.body.data)
+      //console.log(res.body.data)
     });
   }
 
@@ -71,7 +71,7 @@ export class PosComponent implements OnInit {
     });
   }
 
-  
+
   getProductsByName(name){
 
     if(name===""){
@@ -100,7 +100,7 @@ export class PosComponent implements OnInit {
       this.order = JSON.parse(localStorage.getItem("ITEMS"))
       localStorage.setItem(product.name, product.price)
       localStorage.setItem("PURCHASE_COST", +localStorage.getItem("PURCHASE_COST")  +product.purchaseCost)
-      localStorage.setItem("BILL_PRICE", +localStorage.getItem("BILL_PRICE")  +product.price) 
+      localStorage.setItem("BILL_PRICE", +localStorage.getItem("BILL_PRICE")  +product.price)
       this.price = Number(localStorage.getItem("BILL_PRICE"));
   }
 
@@ -119,11 +119,11 @@ export class PosComponent implements OnInit {
     this.ITEMS.splice(removeIndex,1);
     localStorage.setItem("ITEMS", JSON.stringify(this.ITEMS));
     var s = +localStorage.getItem("BILL_PRICE") - o.price;
-    localStorage.setItem("BILL_PRICE", s.toString()) 
+    localStorage.setItem("BILL_PRICE", s.toString())
     this.price = Number(localStorage.getItem("BILL_PRICE"));
 
     var z = +localStorage.getItem("PURCHASE_COST") - o.purchaseCost;
-    localStorage.setItem("PURCHASE_COST", z.toString()) 
+    localStorage.setItem("PURCHASE_COST", z.toString())
   }
 
   openBill(){
@@ -137,5 +137,5 @@ export class PosComponent implements OnInit {
     }
   }
 
-  
+
 }

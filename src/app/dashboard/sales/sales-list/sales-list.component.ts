@@ -40,6 +40,7 @@ export class SalesListComponent implements OnInit {
   size;
   date1;
   date2;
+  showRanges:boolean=false;
   displayedColumns: string []=["saleNumber","customerName","toPay","paid","balance","status","servedBy","actions"]
   constructor(private global:GlobalVariablesService,
     private saleService:SaleService,
@@ -59,8 +60,8 @@ export class SalesListComponent implements OnInit {
       });
 
       console.log(this.status)
-    
-    
+
+
     this.global.data.subscribe(res=>{
       if(res){
         this.onRefresh();
@@ -98,14 +99,11 @@ export class SalesListComponent implements OnInit {
     if(!this.date1){
       this.global.showErrorMessage("Veillez selectionner la date de depart")
     }else{
-      this.saleService.getPagedByFilterindDates(this.branchId,0,this.date1,this.date2,this.status).subscribe(res=>{
-        console.log(res)
-        this.data = new MatTableDataSource(res.data.content);
-      console.log(res.data.totalElements)
-      this.totalElements=res.data.totalElements
-      })
+      this.getSalesByDates();
     }
   }
+
+
 
   getSales(){
 
@@ -122,7 +120,16 @@ export class SalesListComponent implements OnInit {
       console.log(err)
     })
   }
-  
+
+  getSalesByDates(){
+    this.saleService.getPagedByFilterindDates(this.branchId,0,this.date1,this.date2,this.status).subscribe(res=>{
+      console.log(res)
+      this.data = new MatTableDataSource(res.data.content);
+    console.log(res.data.totalElements)
+    this.totalElements=res.data.totalElements
+    })
+  }
+
   onPageChanged(e){
     if(this.date1 && this.date2){
       this.saleService.getPagedByFilterindDates(this.branchId,e.pageIndex,this.date1,this.date2,this.status).subscribe(res=>{
@@ -137,22 +144,22 @@ export class SalesListComponent implements OnInit {
         console.log(res)
         this.sales = res.data.content;
         this.data = new MatTableDataSource(res.data.content);
-       
+
       },err=>{
         console.log(err)
       })
     }
-    
+
   }
 
   onRefresh(){
-    
+
     this.saleService.getPagedByBranch(this.branchId,0,5, this.status).subscribe(res=>{
       console.log(res)
       this.sales = res.data.content;
       this.data = new MatTableDataSource(res.data.content);
       this.totalElements=res.data.totalElements
-     
+
     },err=>{
       console.log(err)
     })
@@ -165,14 +172,14 @@ export class SalesListComponent implements OnInit {
   }
 
   openEditDialog(e){
-    
+
   }
   openAddPayment(e){
     this.dialog.open(AddPaymentComponent, {
       height: '300px',
       width: '500px',
       data: e
-    }); 
+    });
   }
 
   confirmDeleteSale(e){
@@ -180,7 +187,7 @@ export class SalesListComponent implements OnInit {
       height: '200px',
       width: '500px',
       data: e
-    }); 
+    });
   }
 
   openInvoice(e){
@@ -189,23 +196,109 @@ export class SalesListComponent implements OnInit {
       height: '600px',
       width: '900px',
       data: e
-    }); 
+    });
   }
   delete(e){
 
   }
 
   openDetailsDialog(id){
-    
+
     this.dialog.open(SaleDetailsComponent, {
       height: '600px',
       width: '900px',
       data: {id: id}
-    });  
+    });
 }
-  
+
   exportAsXLSX():void {
-    
+
     this.excelService.exportAsExcelFile(this.sales, 'Rapport des Ventes '+"("+this.status+")");
  }
+
+ setAllTime(){
+
+  let date1 = new Date(0).getTime()
+  let date2 = new Date().getTime();
+  this.date1 = date1;
+  this.date2 = date2;
+  this.getSalesByDates()
+}
+setToday(){
+
+  let date1 = new Date().setHours(0,0,0,0)
+  let date2 = new Date().getTime()
+  this.date1 = date1;
+  this.date2 = date2;
+  this.getSalesByDates()
+}
+
+setYesterday(){
+  let date1 = new Date().setHours(-24,0,0,0)
+  let date2 = new Date().setHours(0,0,0,0)
+  this.date1 = date1;
+  this.date2 = date2;
+  this.getSalesByDates()
+}
+
+setThisWeek(){
+  let date1 = this.getMonday(new Date()).getTime()
+  let date2 = new Date().getTime()
+  this.date1 = date1;
+  this.date2 = date2;
+  this.getSalesByDates()
+}
+
+setThisMonth(){
+  var date = new Date();
+  let date1 = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
+  let date2 = new Date().getTime()
+
+  this.date1 = date1;
+  this.date2 = date2;
+  this.getSalesByDates()
+}
+
+setThisYear(){
+
+  let date1 = new Date(new Date().getFullYear(), 0, 1).getTime();
+  let date2 = new Date().getTime()
+  this.date1 = date1;
+  this.date2 = date2;
+  this.getSales()
+}
+
+
+getMonday(d) {
+  d = new Date(d);
+  var day = d.getDay(),
+    diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+  return new Date(d.setDate(diff));
+  }
+
+
+
+
+  stringToDate(_date,_format,_delimiter)
+{
+          var formatLowerCase=_format.toLowerCase();
+          var formatItems=formatLowerCase.split(_delimiter);
+          var dateItems=_date.split(_delimiter);
+          var monthIndex=formatItems.indexOf("mm");
+          var dayIndex=formatItems.indexOf("dd");
+          var yearIndex=formatItems.indexOf("yyyy");
+          var month=parseInt(dateItems[monthIndex]);
+          month-=1;
+          var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+          return formatedDate;
+}
+
+onShowRanges(){
+  if(this.showRanges){
+    this.showRanges=false
+  }else{
+    this.showRanges=true
+  }
+}
+
 }

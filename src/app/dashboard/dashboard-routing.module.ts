@@ -11,19 +11,23 @@ const routes: Routes = [
     children:[
       {
           path:'pos',
-          loadChildren:'./pos/pos.module#PosModule'
+          loadChildren:'./pos/pos.module#PosModule',
+          data: { preload: true, delay:1000}
 
       },{
         path:'products/:status',
-        loadChildren:'./product/product.module#ProductModule'
+        loadChildren:'./product/product.module#ProductModule',
+        data: { preload: true, delay:1000}
 
     },{
       path:'sales/:status',
-      loadChildren:'./sales/sales.module#SalesModule'
+      loadChildren:'./sales/sales.module#SalesModule',
+      data: { preload: true, delay:1000}
 
   },{
     path:'customers/:status',
-    loadChildren:'./customers/customers.module#CustomersModule'
+    loadChildren:'./customers/customers.module#CustomersModule',
+    data: { preload: true, delay:1000}
 
 },{
   path:'expenses',

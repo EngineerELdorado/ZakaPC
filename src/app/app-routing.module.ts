@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { CustomPreloader } from './CustomerPreloader';
 
 const routes: Routes = [
   {
     path:'',
-    loadChildren:'./dashboard/dashboard.module#DashboardModule'
+    loadChildren:'./dashboard/dashboard.module#DashboardModule',
+
   },
   {
     path:'dashboard',
@@ -13,16 +15,18 @@ const routes: Routes = [
   },
   {
     path:'login',
-    loadChildren:'./login/login.module#LoginModule' 
+    loadChildren:'./login/login.module#LoginModule'
   },
   {
     path:'register',
-    loadChildren:'./register/register.module#RegisterModule' 
+    loadChildren:'./register/register.module#RegisterModule'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: CustomPreloader
+    })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

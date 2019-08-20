@@ -15,19 +15,21 @@ import { MatIconModule, MAT_DIALOG_DATA } from '@angular/material';
 import { DatePipe, CommonModule } from '@angular/common';
 import { BlockUIModule } from 'ng-block-ui';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { environment } from '../environments/environment';
+import { CustomPreloader } from './CustomerPreloader';
 @NgModule({
   declarations: [
     AppComponent,
     LimitNamePipe,
     SubstringNamePipe,
-    
-    
-    
+
+
+
   ],
   entryComponents:[],
   imports: [
     ToastrModule.forRoot(),
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     MatIconModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -36,10 +38,11 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     MatToolbarModule,
     HttpClientModule,
     BlockUIModule.forRoot(),
-    DeviceDetectorModule.forRoot()
-    
+    DeviceDetectorModule.forRoot(),
+
   ],
   providers: [DatePipe,
+    CustomPreloader,
     { provide: MAT_DIALOG_DATA, useValue: {} },],
   bootstrap: [AppComponent]
 })
