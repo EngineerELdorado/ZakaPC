@@ -15,10 +15,10 @@
     "serve:ssr": "node dist/server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
     "build:client-and-server-bundles": "ng build --prod && ng run web:server:production",
-
+    "start:heroku": "node dist/server",
+    "postinstall": "npm run build:ssr"
   },
-  "start:heroku": "node dist/server",
-  "postinstall": "npm run build:ssr",
+
   "private": true,
   "dependencies": {
     "@angular/animations": "7.2.15",
