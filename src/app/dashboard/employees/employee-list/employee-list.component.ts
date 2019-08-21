@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatPaginator, MatDialog, MatTableDataSource } from '@angular/material';
 import { EmployeesService } from '../employees.service';
-import { ExcelService } from 'src/app/excel.service';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { ExcelService } from '../../../excel.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 import { ConfirmDeleteEmployeeComponent } from '../confirm-delete-employee/confirm-delete-employee.component';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { EmployeeDetailsComponent } from '../employee-details/employee-details.component';

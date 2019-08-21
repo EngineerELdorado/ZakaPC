@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewContainerRef, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { SaleService } from 'src/app/services/sale.service';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { SaleService } from '../../../services/sale.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { ProductService } from 'src/app/services/product.service';
-import { CustomerService } from 'src/app/services/customer.service';
+import { ProductService } from '../../../services/product.service';
+import { CustomerService } from '../../../services/customer.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { InvoiceComponent } from '../../sales/invoice/invoice.component';
 import { ConfirmPrintInvoiceComponent } from '../confirm-print-invoice/confirm-print-invoice.component';

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { InvoiceComponent } from '../../sales/invoice/invoice.component';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 import { PayBillComponent } from '../pay-bill/pay-bill.component';
 
 @Component({

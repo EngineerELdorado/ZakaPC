@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExpenseService } from '../expense.service';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ExcelService } from 'src/app/excel.service';
+import { ExcelService } from '../../../excel.service';
 import { ConfirmDeleteExpenseComponent } from '../confirm-delete-expense/confirm-delete-expense.component';
 import { AddExpenseComponent } from '../add-expense/add-expense.component';
 import { ExpenseDetailsComponent } from '../expense-details/expense-details.component';

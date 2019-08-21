@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 // import { HttpClient } from 'selenium-webdriver/http';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../global-variables.service';
 import { HttpClient } from '@angular/common/http';
-import { ApiResponse } from 'src/app/api-response';
+import { ApiResponse } from '../../api-response';
 
 @Injectable({
   providedIn: 'root'

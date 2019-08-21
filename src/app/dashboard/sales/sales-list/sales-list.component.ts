@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
-import { SaleService } from 'src/app/services/sale.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
+import { SaleService } from '../../../services/sale.service';
 import { ActivatedRoute } from '@angular/router';
-import { ExcelService } from 'src/app/excel.service';
+import { ExcelService } from '../../../excel.service';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { SaleDetailsComponent } from '../sale-details/sale-details.component';
 import { InvoiceComponent } from '../invoice/invoice.component';

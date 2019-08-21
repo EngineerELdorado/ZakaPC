@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { SaleService } from 'src/app/services/sale.service';
 import { InvoiceComponent } from '../invoice/invoice.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
+import { SaleService } from '../../../services/sale.service';
 
 @Component({
   selector: 'app-confirm-delete-sale',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ApiResponse } from 'src/app/api-response';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { ApiResponse } from '../../api-response';
+import { GlobalVariablesService } from '../../global-variables.service';
 
 @Injectable({
   providedIn: 'root'

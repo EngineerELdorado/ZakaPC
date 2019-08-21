@@ -10,7 +10,7 @@
 <div class="row">
  <div class="col-md-12">
     <form [formGroup]="myForm" (ngSubmit)="submit(myForm)">
-     
+
       <div class="row">
         <div  class="col-md-12"> <div  class="form-group">
             <!-- <label for="name">Nom</label> -->
@@ -29,13 +29,17 @@
             <!-- <label for="barcode">Barcode (si necessaire)</label> -->
           <input   id="barcode" formControlName="offlineIdentifier" class="form-control"  placeholder="montant">
         </div></div>
-      </div>  
+        <div class="col" style="display: none"> <div  class="form-group">
+            <!-- <label for="barcode">Barcode (si necessaire)</label> -->
+          <input   id="barcode" formControlName="creationDate" class="form-control"  placeholder="montant">
+        </div></div>
+      </div>
       <div class="row">
           <div class="col">
-          
+
             <!-- <label for="">Enregister</label> -->
                     <button style="height: 38px" type="submit"[disabled]="myForm.invalid" color="primary" mat-raised-button class="btn btn-block btnBlue">Enregistrer</button>
-               
+
           </div>
               </div>
   </form>

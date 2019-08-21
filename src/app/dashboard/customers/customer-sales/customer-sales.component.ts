@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SaleService } from 'src/app/services/sale.service';
+// import { SaleService } from '../../services/sale.service';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
-import { CustomerService } from 'src/app/services/customer.service';
-import { CustomersService } from 'src/app/services/customers.service';
+
+import { CustomersService } from '../../../services/customers.service';
 import { InvoiceComponent } from '../../sales/invoice/invoice.component';
 import { SaleDetailsComponent } from '../../sales/sale-details/sale-details.component';
 import { ConfirmDeleteSaleComponent } from '../../sales/confirm-delete-sale/confirm-delete-sale.component';
 import { AddPaymentComponent } from '../../sales/add-payment/add-payment.component';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+// import { GlobalVariablesService } from '../../global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
+import { SaleService } from '../../../services/sale.service';
 
 @Component({
   selector: 'app-customer-sales',
@@ -32,7 +34,7 @@ export class CustomerSalesComponent implements OnInit {
     private dialog:MatDialog,
               private saleService:SaleService) { }
               displayedColumns: string []=["saleNumber","toPay","paid","balance","status","servedBy","actions"]
-  
+
   ngOnInit() {
     this.currency = localStorage.getItem("zakaBranchCurrency")
     this.activatedRoute.params.subscribe(params => {
@@ -42,7 +44,7 @@ export class CustomerSalesComponent implements OnInit {
        this.customerService.getById(this.id).subscribe(res=>{
          this.customer = res.body.data;
        });
-        
+
        this.global.data.subscribe(res=>{
          if(res){
           this.saleService.getByCustomerAndStatus(id, 0,5,this.status).subscribe(res=>{
@@ -55,7 +57,7 @@ export class CustomerSalesComponent implements OnInit {
          }
 
        })
-       
+
        this.saleService.getByCustomerAndStatus(id, 0,5,this.status).subscribe(res=>{
          this.sales = res.data.content;
          this.data= new MatTableDataSource(this.sales);
@@ -73,7 +75,7 @@ export class CustomerSalesComponent implements OnInit {
       this.data= new MatTableDataSource(this.sales);
       this.totalElements=res.data.totalElements
     })
-    
+
   }
 
   openAddPayment(e){
@@ -81,7 +83,7 @@ export class CustomerSalesComponent implements OnInit {
       height: '300px',
       width: '500px',
       data: e
-    }); 
+    });
   }
 
 
@@ -90,7 +92,7 @@ export class CustomerSalesComponent implements OnInit {
       height: '200px',
       width: '500px',
       data: e
-    }); 
+    });
   }
 
   openInvoice(e){
@@ -99,19 +101,19 @@ export class CustomerSalesComponent implements OnInit {
       height: '600px',
       width: '900px',
       data: e
-    }); 
+    });
   }
   delete(e){
 
   }
 
   openDetailsDialog(id){
-    
+
     this.dialog.open(SaleDetailsComponent, {
       height: '600px',
       width: '900px',
       data: {id: id}
-    });  
+    });
 }
 
 applyFilter(e){

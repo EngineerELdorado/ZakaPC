@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ExpenseService } from '../../expenses/expense.service';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 import { EmployeesService } from '../employees.service';
 
 @Component({

@@ -6,7 +6,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { ConfirmDeleteEmployeeComponent } from './confirm-delete-employee/confirm-delete-employee.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
-import { MatElementsModule } from 'src/app/mat-elements/mat-elements.module';
+import { MatElementsModule } from '../../mat-elements/mat-elements.module';
 import { BlockUI, BlockUIModule } from 'ng-block-ui';
 import { ReactiveFormsModule } from '@angular/forms';
 

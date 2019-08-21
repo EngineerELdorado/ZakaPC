@@ -17,7 +17,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { ConfirmDeleteSaleComponent } from './confirm-delete-sale/confirm-delete-sale.component';
 import { BlockUIModule } from 'ng-block-ui';
-import { MatElementsModule } from 'src/app/mat-elements/mat-elements.module';
+import { MatElementsModule } from '../../mat-elements/mat-elements.module';
 registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [SalesListComponent],

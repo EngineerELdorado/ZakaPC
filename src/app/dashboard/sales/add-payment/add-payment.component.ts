@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { SaleService } from 'src/app/services/sale.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
+import { SaleService } from '../../../services/sale.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./add-payment.component.css']
 })
 export class AddPaymentComponent implements OnInit {
-  
+
   saleNumber;
   customerName;
   balance;
@@ -37,7 +37,7 @@ export class AddPaymentComponent implements OnInit {
         amount: new FormControl('', Validators.required)
       })
     }
-  
+
     submit(form:FormGroup){
       console.log(form.value)
       this.global.showLoading("Operation en cours... veillez patienter")
@@ -86,6 +86,5 @@ export class AddPaymentComponent implements OnInit {
         this.global.showErrorMessage(err.message)
       })
     }
-  
+
   }
-  

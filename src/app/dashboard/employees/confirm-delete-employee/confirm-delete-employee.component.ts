@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { EmployeesService } from '../employees.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 
 @Component({
   selector: 'app-confirm-delete-employee',

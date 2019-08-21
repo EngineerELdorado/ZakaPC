@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from '../../../services/product.service';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { ProductDetailsComponent } from '../product-details/product-details.component';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 import { AddQuantityComponent } from '../add-quantity/add-quantity.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ActivatedRoute } from '@angular/router'
-import { ExcelService } from 'src/app/excel.service';
+import { ExcelService } from '../../../excel.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',

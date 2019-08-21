@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CustomerService } from 'src/app/services/customer.service';
-import { CustomersService } from 'src/app/services/customers.service';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
+import { CustomersService } from '../../../services/customers.service';
 
 @Component({
   selector: 'app-add-customer',
@@ -45,10 +44,10 @@ export class AddCustomerComponent implements OnInit {
 
   setInitialValues(){
     this.generateOfflineIdentifier(200);
-  
-  } 
 
-  
+  }
+
+
   generateOfflineIdentifier(length) {
     var offlineIdentifier           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

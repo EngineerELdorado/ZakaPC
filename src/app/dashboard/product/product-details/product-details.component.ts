@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from '../../../services/product.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

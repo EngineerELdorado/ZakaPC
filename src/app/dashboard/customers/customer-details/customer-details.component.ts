@@ -1,9 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+// import { GlobalVariablesService } from '../../global-variables.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CustomerService } from 'src/app/services/customer.service';
+// import { CustomerService } from '../../services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { GlobalVariablesService } from '../../../global-variables.service';
+import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-customer-details',

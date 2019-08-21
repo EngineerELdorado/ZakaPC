@@ -37,6 +37,10 @@ const routes: Routes = [
   path:'employees',
   loadChildren:'./employees/employees.module#EmployeesModule'
 
+},{
+  path:'reports',
+  loadChildren:'./reports/reports.module#ReportsModule',
+  data: { preload: true, delay:1000}
 }
     ]
   },

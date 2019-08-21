@@ -8,7 +8,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddQuantityComponent } from './add-quantity/add-quantity.component';
-import { MatElementsModule } from 'src/app/mat-elements/mat-elements.module';
+import { MatElementsModule } from '../../mat-elements/mat-elements.module';
 // import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [ProductListComponent, SubStPipe, AddProductComponent, ProductDetailsComponent, AddQuantityComponent],

@@ -12,14 +12,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerSalesComponent } from './customer-sales/customer-sales.component';
 
 import { DashboardModule } from '../dashboard.module';
-import { MatElementsModule } from 'src/app/mat-elements/mat-elements.module';
+import { MatElementsModule } from '../../mat-elements/mat-elements.module';
 
 @NgModule({
   declarations: [CustomersListComponent,
-    
+
      AddCustomerComponent, CustomerDetailsComponent, ConfirmDeleteCustomerComponent, CustomerSalesComponent],
   entryComponents:[AddCustomerComponent,
-   
+
     CustomerDetailsComponent],
   imports: [
     CommonModule,

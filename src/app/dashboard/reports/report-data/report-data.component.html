@@ -1,0 +1,198 @@
+<div class="container text-center">
+    <div style="margin-top: 15px" *ngIf="!showRanges" class="col-md-8">
+        <button (click)="setAllTime()" style=" height: 30px;margin-right: 5px" class=" btn">Tout</button>
+        <button (click)="setToday()" style=" height: 30px;margin-right: 5px" class=" btn">Aujourd'hui</button>
+        <button (click)="setYesterday()" style=" height: 30px; margin-right: 5px" class=" btn">Hier</button>
+        <button (click)="setThisWeek()" style=" height: 30px; margin-right: 5px" class=" btn">Cette semaine</button>
+        <button (click)="setThisMonth()" style=" height: 30px; margin-right: 5px" class=" btn">Ce mois</button>
+        <button (click)="setThisYear()" style=" height: 30px; margin-right: 5px" class=" btn">Cette annee</button>
+        <button (click)="onShowRanges()" style=" height: 30px; margin-right: 0px" class="btnRed btn">Intervalle</button>
+
+      </div>
+      <div  *ngIf="showRanges" class="col-md-7 row">
+        <div class="col-md-4">
+            <button (click)="onShowRanges()" style=" height: 30px; margin-top: 15px" class="btnRed btn bn-block">Triage</button>
+
+        </div>
+        <div class="col-md-4" >
+          <mat-form-field color="primary">
+              <input [max]="maxDate" (dateInput)="onDate1($event)" matInput [matDatepicker]="picker" placeholder="Choisissez une date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+      </div>
+       <div class="col-md-4" >
+          <mat-form-field color="primary">
+              <input [min]="minDate" [disabled]="!date1" (dateInput)="onDate2($event)" matInput [matDatepicker]="picker2" placeholder="Jusqu'au">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+      </div>
+</div>
+<div style="padding-left:40px;padding-right:40px; top:0">
+    <div class="row">
+
+        <!-- Icon Cards-->
+          <div class="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
+              <div class="inforide">
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideone">
+                    </div>
+                  <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                      <h6 style="margin-top: 20px">Ventes Totales</h6>
+                      <h2>{{stats.toPay}} {{currency}}</h2>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
+              <div class="inforide">
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridetwo">
+                    </div>
+                  <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                      <h6 style="margin-top: 20px">Montant recu</h6>
+                      <h2>{{stats.paid}} {{currency}}</h2>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
+              <div class="inforide">
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridethree">
+                    </div>
+                  <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                      <h6 style="margin-top: 20px">Montant A credit</h6>
+                      <h2>{{stats.balance}} {{currency}}</h2>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="col-lg-3 col-md-3 col-sm-6 col-12 mb-2 mt-4">
+              <div class="inforide">
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridefour">
+                  </div>
+                  <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                      <h6 style="margin-top: 20px">Clients redevables </h6>
+                      <h2>{{stats.customersDebtors}} </h2>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+      </div>
+
+      <div class="row">
+
+          <!-- Icon Cards-->
+            <div class="col-lg-12 col-md-12 col-sm-6 col-12 mb-2 mt-4">
+                <div class="inforide">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridenine">
+                      </div>
+                    <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                        <h6 style="margin-top: 20px">Tous les clients</h6>
+                        <h2>{{stats.customers}}</h2>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <!-- Icon Cards-->
+              <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-2 mt-4">
+                  <div class="inforide">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridenine">
+                        </div>
+                      <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                          <h6 style="margin-top: 20px">Tous les produits</h6>
+                          <h2>{{stats.products}}</h2>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-2 mt-4">
+                  <div class="inforide">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideten">
+                        </div>
+                      <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                          <h6 style="margin-top: 20px">Produits epuises</h6>
+                          <h2>{{stats.stockOutProducts}}</h2>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+
+
+          </div>
+
+
+          <div class="row">
+
+              <!-- Icon Cards-->
+                <div class="col-lg-12 col-md-12 col-sm-6 col-12 mb-2 mt-4">
+                    <div class="inforide">
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridenine">
+                          </div>
+                        <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                            <h6 style="margin-top: 20px">Depenses</h6>
+                            <h2>{{stats.expenses}}</h2>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <!-- Icon Cards-->
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-2 mt-4">
+                      <div class="inforide">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridenine">
+                            </div>
+                          <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                              <h6 style="margin-top: 20px">Resultat Brut</h6>
+                              <h2>{{stats.toPay-stats.expenses}} {{currency}}</h2>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-2 mt-4">
+                      <div class="inforide">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideten">
+                            </div>
+                          <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                              <h6 style="margin-top: 20px">Resultat Net</h6>
+                              <h2>{{stats.paid-stats.expenses}} {{currency}}</h2>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+
+
+              </div>
+
+
+
+
+
+</div>

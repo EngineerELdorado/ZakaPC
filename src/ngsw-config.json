@@ -11,19 +11,7 @@
       "maxSize": 10,
       "maxAge": "1d"
     }
-  },
-  // {
-  //   "name": "api-freshness",
-  //   "urls": [
-  //     "/api/fresh-todo-list"
-  //   ],
-  //   "cacheConfig": {
-  //     "strategy": "freshness",
-  //     "maxSize": 100,
-  //     "maxAge": "3d",
-  //     "timeout": "10s"
-  //   }
-  // }
+  }
 ],
   "assetGroups": [
     {

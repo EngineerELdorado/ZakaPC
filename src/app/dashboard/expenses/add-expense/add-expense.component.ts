@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ExpenseService } from '../expense.service';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 
 @Component({
   selector: 'app-add-expense',
@@ -22,7 +22,8 @@ export class AddExpenseComponent implements OnInit {
       name: new FormControl('', Validators.required),
       description: new FormControl(''),
       amount: new FormControl('', Validators.required),
-      offlineIdentifier: new FormControl('', Validators.required)
+      offlineIdentifier: new FormControl('', Validators.required),
+      creationDate: new FormControl('', Validators.required)
     });
 
     this.generateOfflineIdentifier(200);
@@ -41,6 +42,9 @@ export class AddExpenseComponent implements OnInit {
     })
 }
   submit(form:FormGroup){
+    this.myForm.patchValue({
+      creationDate: new Date().getTime()
+    })
     this.global.showLoading("Operation en cours... veillez patienter")
     this.expenseService.addExpense(form.value, this.branchId,this.userId).subscribe(res=>{
       this.global.stopLoading();

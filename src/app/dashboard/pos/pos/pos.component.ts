@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
+import { ProductService } from '../../../services/product.service';
 import { Item } from '../item';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import { PayBillComponent } from '../pay-bill/pay-bill.component';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
 import { ConfirmPrintInvoiceComponent } from '../confirm-print-invoice/confirm-print-invoice.component';
 @Component({
   selector: 'app-pos',

@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
+
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { SaleService } from 'src/app/services/sale.service';
 import { DatePipe } from '@angular/common';
+import { GlobalVariablesService } from '../../../global-variables.service';
+import { SaleService } from '../../../services/sale.service';
 
 @Component({
   selector: 'app-sale-details',
@@ -59,7 +59,7 @@ export class SaleDetailsComponent implements OnInit {
     })
   }
 
-  
-  
+
+
 
 }

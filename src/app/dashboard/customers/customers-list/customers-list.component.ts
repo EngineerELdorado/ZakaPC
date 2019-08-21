@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { GlobalVariablesService } from 'src/app/global-variables.service';
-import { CustomersService } from 'src/app/services/customers.service';
+import { GlobalVariablesService } from '../../../global-variables.service';
+import { CustomersService } from '../../../services/customers.service';
 import { ActivatedRoute } from '@angular/router';
-import { ExcelService } from 'src/app/excel.service';
+import { ExcelService } from '../../../excel.service';
 import { MatDialog, MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { CustomerDetailsComponent } from '../customer-details/customer-details.component';
@@ -42,7 +42,7 @@ export class CustomersListComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
-    
+
     this.branchId= localStorage.getItem("zakaBranchId");
     this.currency=localStorage.getItem("zakaBranchCurrency");
     this.route.params.subscribe(params => {
@@ -55,18 +55,18 @@ export class CustomersListComponent implements OnInit {
           this.onPageRefresh();
         }
       })
-      
-    
-    
-   
-    
+
+
+
+
+
   }
 
   onStatusChanged(e){
 
   }
 
-  
+
 
   filter(filter){
     this.customersService.filterCustomers(localStorage.getItem("zakaBranchId"),0,5, filter).subscribe(res=>{
@@ -74,14 +74,14 @@ export class CustomersListComponent implements OnInit {
       console.log(this.customers);
       this.totalElements = res.body.data.totalElements;
       this.data = new MatTableDataSource(this.customers);
-      
+
     });
   }
 
   public getPagedData(){
 
     this.customersService.getCustomers(this.branchId, 0,this.size,this.status).subscribe(res=>{
-      
+
       console.log(res.body.data.totalElements)
       this.customers = res.body.data.content;
       this.totalElements=res.body.data.totalElements;
@@ -113,7 +113,7 @@ export class CustomersListComponent implements OnInit {
 
 
   exportAsXLSX():void {
-    
+
     this.excelService.exportAsExcelFile(this.customers, 'Rapport Des Clients '+"("+this.status+")");
  }
 
@@ -128,7 +128,7 @@ export class CustomersListComponent implements OnInit {
   this.customersService.postExcel(formData).subscribe(res=>{
     this.global.stopLoading();
     if(res.body.responseCode="00"){
-     
+
       this.global.showSuccessMessage("LA LISTE A ETE IMPORTEE AVEC SUCCESS");
       this.global.updatedCanReload(true);
     }else{
@@ -142,11 +142,11 @@ export class CustomersListComponent implements OnInit {
 }
 
 openDialog(){
-    
+
   this.dialog.open(AddCustomerComponent, {
     height: '400px',
     width: '900px',
-  });  
+  });
 }
 
 openEditDialog(e){

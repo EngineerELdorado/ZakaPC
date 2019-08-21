@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from '../../auth.service';
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   myForm:FormGroup;
   @BlockUI() blockUI: NgBlockUI;
   constructor(private authService: AuthService,
@@ -53,16 +53,16 @@ export class LoginComponent implements OnInit {
         console.log(err)
         alert(err)
       },()=>{
-  
+
       });
     }else{
 alert("Veillez remplir tous les champs")
     }
-    
+
   }
 
   isValid(){
-    
+
     if(this.myForm.value.phone==="" || this.myForm.value.pin===""){
 
       return false;
