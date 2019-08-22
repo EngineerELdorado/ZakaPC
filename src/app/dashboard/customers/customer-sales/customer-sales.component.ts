@@ -25,9 +25,9 @@ export class CustomerSalesComponent implements OnInit {
   customer;
   currency;
   status="all";
-  @ViewChild('dataTable') table;
-  @ViewChild(MatSort)matSort:MatSort;
-  @ViewChild(MatPaginator)paginator:MatPaginator;
+  @ViewChild('dataTable', {static: false}) table;
+  @ViewChild(MatSort, {static: false})matSort:MatSort;
+  @ViewChild(MatPaginator, {static: false})paginator:MatPaginator;
   constructor(private activatedRoute: ActivatedRoute,
     private customerService:CustomersService,
     private global:GlobalVariablesService,

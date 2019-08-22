@@ -24,9 +24,9 @@ export class ProductListComponent implements OnInit {
   size=5;
   status;
   pageSize;
-  @ViewChild('dataTable') table;
-  @ViewChild(MatSort)matSort:MatSort;
-  @ViewChild(MatPaginator)paginator:MatPaginator;
+  @ViewChild('dataTable', {static: false}) table;
+  @ViewChild(MatSort, {static: false})matSort:MatSort;
+  @ViewChild(MatPaginator, {static: false})paginator:MatPaginator;
   @BlockUI() blockUI: NgBlockUI;
   data: MatTableDataSource<any>;
   color = 'primary';
@@ -35,7 +35,7 @@ export class ProductListComponent implements OnInit {
   bufferValue = 75;
   totalPages;
   totalElements;
-  
+
   displayedColumns: string []=["index","name","purchaseCost","price","quantity","actions"]
   constructor(private productService: ProductService,
     private global:GlobalVariablesService,
@@ -56,8 +56,8 @@ export class ProductListComponent implements OnInit {
           this.onPageRefresh();
         }
       })
-      
-    
+
+
   }
 
   getProductsByName(name){
@@ -76,27 +76,27 @@ export class ProductListComponent implements OnInit {
 
     this.productService.getProductsByBranch(this.branchId,filter).subscribe(res=>{
       this.products = res.body.data;
-      
+
       this.data = new MatTableDataSource(this.products);
       this.noData=false;
       this.data.sort = this.matSort;
       this.data.paginator=this.paginator;
-      
+
     });
   }
 
   getPagedProducts(){
     this.productService.getPagedProductsByBranch(this.branchId,this.page,this.size,this.status).subscribe(res=>{
       this.products = res.body.data.content;
-      
+
       console.log(res.body.data);
       this.data = new MatTableDataSource(this.products);
       this.data.sort = this.matSort;
       this.totalElements=res.body.data.totalElements;
       this.pageSize=res.body.data.size;
       this.data.paginator=this.paginator;
-      
-      
+
+
     });
   }
 
@@ -108,8 +108,8 @@ export class ProductListComponent implements OnInit {
       console.log(res.body.data);
       this.data = new MatTableDataSource(this.products);
       this.size = e.pageSize
-      
-    });  
+
+    });
   }
 
   onStatusChanged(e){
@@ -119,8 +119,8 @@ export class ProductListComponent implements OnInit {
       this.totalElements=res.body.data.totalElements;
       console.log(res.body.data);
       this.data = new MatTableDataSource(this.products);
-      
-    });  
+
+    });
   }
   onPageRefresh(){
     this.productService.getPagedProductsByBranch(this.branchId,0,5,this.status).subscribe(res=>{
@@ -128,39 +128,39 @@ export class ProductListComponent implements OnInit {
       this.totalElements=res.body.data.totalElements;
       console.log(res.body.data);
       this.data = new MatTableDataSource(this.products);
-      
+
     });
   }
 
   openDialog(){
-    
+
       this.dialog.open(AddProductComponent, {
         height: '400px',
         width: '900px',
-      });  
+      });
   }
 
   openEditDialog(id){
-    
+
     this.dialog.open(ProductDetailsComponent, {
       height: '400px',
       width: '900px',
       data: {id: id}
-    });  
+    });
 }
 
 openAddQuantityDialog(product){
-    
+
   this.dialog.open(AddQuantityComponent, {
     height: '300px',
     width: '500px',
     data: product
-  });  
+  });
 }
 
   choseFile(e){
     console.log(e)
-  
+
     const formData = new FormData();
     formData.append('file', e);
     formData.append('branchId',this.branchId);
@@ -169,7 +169,7 @@ openAddQuantityDialog(product){
     this.productService.postExcel(formData).subscribe(res=>{
       this.blockUI.stop();
       if(res.body.responseCode="00"){
-       
+
         this.global.showSuccessMessage("LA LISTE A ETE IMPORTEE AVEC SUCCESS");
         this.getProducts("id");
       }else{
@@ -183,7 +183,7 @@ openAddQuantityDialog(product){
   }
 
   exportAsXLSX():void {
-    
+
     this.excelService.exportAsExcelFile(this.products, 'Rapport des Produits '+"("+this.status+")");
  }
 }

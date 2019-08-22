@@ -21,9 +21,9 @@ export class ExpensesListComponent implements OnInit {
   size;
   page;
   branchId;
-  @ViewChild('dataTable') table;
-  @ViewChild(MatSort)matSort:MatSort;
-  @ViewChild(MatPaginator)paginator:MatPaginator;
+  @ViewChild('dataTable', {static: false}) table;
+  @ViewChild(MatSort, {static: false})matSort:MatSort;
+  @ViewChild(MatPaginator, {static: false})paginator:MatPaginator;
   constructor(private expensesService:ExpenseService,
     private excelService:ExcelService,
     private dialog:MatDialog,
@@ -47,7 +47,7 @@ export class ExpensesListComponent implements OnInit {
       height: '200px',
       width: '500px',
       data: e
-    }); 
+    });
   }
   public getData(){
     this.expensesService.findExpensesByBranch(this.branchId, this.page,this.size).subscribe(res=>{
@@ -77,7 +77,7 @@ export class ExpensesListComponent implements OnInit {
 
 
   exportAsXLSX():void {
-    
+
     this.excelService.exportAsExcelFile(this.expenses, 'Rapport Des Depenses ');
  }
 
@@ -92,7 +92,7 @@ export class ExpensesListComponent implements OnInit {
   this.expensesService.postExcel(formData).subscribe(res=>{
     this.global.stopLoading();
     if(res.body.responseCode="00"){
-     
+
       this.global.showSuccessMessage("LA LISTE A ETE IMPORTEE AVEC SUCCESS");
       this.global.updatedCanReload(true);
     }else{
@@ -109,7 +109,7 @@ openDialog(){
   this.dialog.open(AddExpenseComponent, {
     height: '500px',
     width: '500px'
-  }); 
+  });
 }
 
 filter(e){
@@ -125,7 +125,7 @@ openEditDialog(e){
     height: '500px',
     width: '500px',
     data:e
-  }); 
+  });
 }
 
 }

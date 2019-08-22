@@ -19,9 +19,9 @@ export class EmployeeListComponent implements OnInit {
   size;
   page;
   branchId;
-  @ViewChild('dataTable') table;
-  @ViewChild(MatSort)matSort:MatSort;
-  @ViewChild(MatPaginator)paginator:MatPaginator;
+  @ViewChild('dataTable', {static: false}) table;
+  @ViewChild(MatSort, {static: false})matSort:MatSort;
+  @ViewChild(MatPaginator, {static: false})paginator:MatPaginator;
   constructor(private employeesService:EmployeesService,
     private excelService:ExcelService,
     private dialog:MatDialog,

@@ -9,8 +9,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron": "electron .",
-    "electron-build": "ng build --prod && electron .",
     "postinstall": "ng build --aot --prod"
   },
   "private": true,
@@ -69,8 +67,6 @@
     "@types/jquery": "^3.3.31",
     "@types/node": "~12.7.2",
     "codelyzer": "~5.1.0",
-    "electron": "^6.0.3",
-    "electron-packager": "^14.0.4",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.2.0",

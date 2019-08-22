@@ -24,9 +24,9 @@ export class CustomersListComponent implements OnInit {
   size=5;
   status;
   pageSize;
-  @ViewChild('dataTable') table;
-  @ViewChild(MatSort)matSort:MatSort;
-  @ViewChild(MatPaginator)paginator:MatPaginator;
+  @ViewChild('dataTable', {static: false}) table;
+  @ViewChild(MatSort, {static: false})matSort:MatSort;
+  @ViewChild(MatPaginator, {static: false})paginator:MatPaginator;
   data: MatTableDataSource<any>;
   color = 'primary';
   mode = 'indeterminate';

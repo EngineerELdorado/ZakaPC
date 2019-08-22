@@ -26,9 +26,9 @@ export class SalesListComponent implements OnInit {
   minDate;
   sales;
   maxDate;
-  @ViewChild('dataTable') table;
-  @ViewChild(MatSort)matSort:MatSort;
-  @ViewChild(MatPaginator)paginator:MatPaginator;
+  @ViewChild('dataTable', {static: false}) table;
+  @ViewChild(MatSort, {static: false})matSort:MatSort;
+  @ViewChild(MatPaginator, {static: false})paginator:MatPaginator;
   @BlockUI() blockUI: NgBlockUI;
   data: MatTableDataSource<any>;
   color = 'primary';

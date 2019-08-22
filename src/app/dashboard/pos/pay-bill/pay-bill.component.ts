@@ -31,9 +31,9 @@ export class PayBillComponent implements OnInit {
   customerPhone;
   customerOfflineIdentifier;
   customers: any[] = [];
-  @ViewChild('customerName')
+  @ViewChild('customerName', {static: false})
   customerNameRef:ElementRef
-  @ViewChild('customerNumber')
+  @ViewChild('customerNumber', {static: false})
   customerNumberRef;
   showBtn=true;
   showList:boolean=false;
