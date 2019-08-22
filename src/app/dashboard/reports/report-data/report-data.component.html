@@ -41,7 +41,7 @@
                     </div>
                   <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
                       <h6 style="margin-top: 20px">Ventes Totales</h6>
-                      <h2>{{stats.toPay}} {{currency}}</h2>
+                      <h2>{{stats.toPay|number : '1.0'}} {{currency}}</h2>
                   </div>
                 </div>
               </div>
@@ -54,7 +54,7 @@
                     </div>
                   <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
                       <h6 style="margin-top: 20px">Montant recu</h6>
-                      <h2>{{stats.paid}} {{currency}}</h2>
+                      <h2>{{stats.paid|number : '1.0'}} {{currency}}</h2>
                   </div>
                 </div>
               </div>
@@ -67,7 +67,7 @@
                     </div>
                   <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
                       <h6 style="margin-top: 20px">Montant A credit</h6>
-                      <h2>{{stats.balance}} {{currency}}</h2>
+                      <h2>{{stats.balance|number : '1.0'}} {{currency}}</h2>
                   </div>
                 </div>
               </div>
@@ -150,7 +150,7 @@
                           </div>
                         <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
                             <h6 style="margin-top: 20px">Depenses</h6>
-                            <h2>{{stats.expenses}}</h2>
+                            <h2>{{stats.expenses|number : '1.0'}}</h2>
                         </div>
                       </div>
                     </div>
@@ -167,8 +167,8 @@
                           <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridenine">
                             </div>
                           <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
-                              <h6 style="margin-top: 20px">Resultat Brut</h6>
-                              <h2>{{stats.toPay-stats.expenses}} {{currency}}</h2>
+                              <h6 style="margin-top: 20px">Ventes(dettes inclues)-Depenses</h6>
+                              <h2>{{stats.toPay-stats.expenses|number : '1.0'}} {{currency}}</h2>
                           </div>
                         </div>
                       </div>
@@ -180,8 +180,42 @@
                           <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideten">
                             </div>
                           <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
-                              <h6 style="margin-top: 20px">Resultat Net</h6>
-                              <h2>{{stats.paid-stats.expenses}} {{currency}}</h2>
+                              <h6 style="margin-top: 20px">Ventes(argent recu)-Depenses</h6>
+                              <h2>{{stats.paid-stats.expenses|number : '1.0'}} {{currency}}</h2>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+
+
+              </div>
+
+
+              <div class="row">
+
+                <!-- Icon Cards-->
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-2 mt-4">
+                      <div class="inforide">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-4 col-sm-4 col-4 ridenine">
+                            </div>
+                          <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                              <h6 style="margin-top: 20px">Ventes(dettes inclues)-Depenses-cout d'achat</h6>
+                              <h2>{{stats.toPay-stats.expenses-stats.purchaseCost|number : '1.0'}} {{currency}}</h2>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-2 mt-4">
+                      <div class="inforide">
+                        <div class="row">
+                          <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideten">
+                            </div>
+                          <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
+                              <h6 style="margin-top: 20px">Ventes(argent recu)-Depenses-cout d'achat</h6>
+                              <h2>{{stats.paid-stats.expenses-stats.purchaseCost|number : '1.0'}} {{currency}}</h2>
                           </div>
                         </div>
                       </div>
