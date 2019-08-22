@@ -41,7 +41,7 @@ export class SalesListComponent implements OnInit {
   date1;
   date2;
   showRanges:boolean=false;
-  displayedColumns: string []=["saleNumber","customerName","toPay","paid","balance","status","servedBy","actions"]
+  displayedColumns: string []=["saleNumber","customerName","toPay","paid","balance","status","servedBy","creationDate","actions"]
   constructor(private global:GlobalVariablesService,
     private saleService:SaleService,
     private route:ActivatedRoute,

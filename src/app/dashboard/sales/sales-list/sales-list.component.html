@@ -77,17 +77,17 @@
             </ng-container> -->
             <ng-container matColumnDef="toPay">
                 <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>MONTANT</mat-header-cell>
-                <mat-cell  *matCellDef="let element">{{element.toPay}} {{currency}}</mat-cell>
+                <mat-cell  *matCellDef="let element">{{element.toPay|number : '1.0'}} {{currency}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="paid">
                 <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>PAYE </mat-header-cell>
-                <mat-cell  *matCellDef="let element">{{element.paid}} {{currency}}</mat-cell>
+                <mat-cell  *matCellDef="let element">{{element.paid|number : '1.0'}} {{currency}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="balance">
                 <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>BALANCE </mat-header-cell>
-                <mat-cell  *matCellDef="let element">{{element.balance}} {{currency}}</mat-cell>
+                <mat-cell  *matCellDef="let element">{{element.balance|number : '1.0'}} {{currency}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="status">
@@ -101,6 +101,10 @@
               <ng-container matColumnDef="servedBy">
                 <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Servi Par</mat-header-cell>
                 <mat-cell  *matCellDef="let element">{{element.servedBy}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="creationDate" style="margin-left: 20px">
+                <mat-header-cell class="t-head" *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+                <mat-cell  *matCellDef="let element">{{element.creationDate|date:'dd/MM/yyyy HH:mm:ss'}}</mat-cell>
               </ng-container>
               <ng-container matColumnDef="actions">
                 <mat-header-cell class="t-head" *matHeaderCellDef>

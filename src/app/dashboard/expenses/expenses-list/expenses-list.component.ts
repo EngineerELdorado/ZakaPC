@@ -21,6 +21,7 @@ export class ExpensesListComponent implements OnInit {
   size;
   page;
   branchId;
+  currency
   @ViewChild('dataTable', {static: false}) table;
   @ViewChild(MatSort, {static: false})matSort:MatSort;
   @ViewChild(MatPaginator, {static: false})paginator:MatPaginator;
@@ -31,6 +32,7 @@ export class ExpensesListComponent implements OnInit {
   displayedColumns: string []=["index","name","amount","description","creationDate","by", "actions"]
   ngOnInit() {
     this.branchId = localStorage.getItem("zakaBranchId");
+    this.currency = localStorage.getItem("zakaBranchCurrency")
     this.page=0;
     this.size=5;
     this.getData();
