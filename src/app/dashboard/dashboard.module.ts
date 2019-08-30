@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
+
 import { InvoiceComponent } from './sales/invoice/invoice.component';
 import { AddPaymentComponent } from './sales/add-payment/add-payment.component';
 import { SaleDetailsComponent } from './sales/sale-details/sale-details.component';
@@ -22,7 +18,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    
+
     MatElementsModule,
     ReactiveFormsModule,
     FormsModule,

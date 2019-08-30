@@ -50,7 +50,7 @@ export class SalesListComponent implements OnInit {
 
   ngOnInit() {
     this.page = 0;
-    this.size=5;
+    this.size=10;
     this.branchId= localStorage.getItem("zakaBranchId");
     this.currency=localStorage.getItem("zakaBranchCurrency");
     //this.getSales();
@@ -71,7 +71,7 @@ export class SalesListComponent implements OnInit {
   }
 
   applyFilter(e){
-    this.saleService.getPagedByFilter(this.branchId, 0,10,e.target.value.toLowerCase()).subscribe(res=>{
+    this.saleService.getPagedByFilter(this.branchId, 0,this.size,e.target.value.toLowerCase()).subscribe(res=>{
       this.data = new MatTableDataSource(res.data.content);
       this.totalElements=res.data.totalElements
     })
@@ -154,7 +154,7 @@ export class SalesListComponent implements OnInit {
 
   onRefresh(){
 
-    this.saleService.getPagedByBranch(this.branchId,0,5, this.status).subscribe(res=>{
+    this.saleService.getPagedByBranch(this.branchId,0,this.size, this.status).subscribe(res=>{
       console.log(res)
       this.sales = res.data.content;
       this.data = new MatTableDataSource(res.data.content);

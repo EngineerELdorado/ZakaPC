@@ -29,7 +29,7 @@ import { CustomPreloader } from './CustomerPreloader';
   entryComponents:[],
   imports: [
     ToastrModule.forRoot(),
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     MatIconModule,
     BrowserAnimationsModule,
     AppRoutingModule,

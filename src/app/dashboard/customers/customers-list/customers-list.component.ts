@@ -21,7 +21,7 @@ export class CustomersListComponent implements OnInit {
   currency;
   noData:boolean=true;
   page=0;
-  size=5;
+  size=10;
   status;
   pageSize;
   @ViewChild('dataTable', {static: false}) table;
@@ -69,7 +69,7 @@ export class CustomersListComponent implements OnInit {
 
 
   filter(filter){
-    this.customersService.filterCustomers(localStorage.getItem("zakaBranchId"),0,5, filter).subscribe(res=>{
+    this.customersService.filterCustomers(localStorage.getItem("zakaBranchId"),0,this.size, filter).subscribe(res=>{
       this.customers = res.body.data.content;
       console.log(this.customers);
       this.totalElements = res.body.data.totalElements;
@@ -93,7 +93,7 @@ export class CustomersListComponent implements OnInit {
 
   public onPageRefresh(){
 
-    this.customersService.getCustomers(this.branchId, 0,5,this.status).subscribe(res=>{
+    this.customersService.getCustomers(this.branchId, 0,this.size,this.status).subscribe(res=>{
 
       this.customers = res.body.data.content;
       this.totalElements=res.body.data.totalElements;

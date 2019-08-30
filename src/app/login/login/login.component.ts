@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject  } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   myForm:FormGroup;
   @BlockUI() blockUI: NgBlockUI;
   constructor(private authService: AuthService,
+    @Inject(PLATFORM_ID) private platform: Object,
     private router:Router) { }
 
   ngOnInit() {
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
        // console.log(res)
         if(res.body.responseCode==="00"){
           console.log(res);
+          if (isPlatformBrowser(this.platform)) {
           localStorage.setItem("zakaLoggedIn","true")
           localStorage.setItem("zakaUserId", res.body.data.id)
           localStorage.setItem("zakaBusinessId", res.body.data.business.id)
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("zakaUsername", res.body.data.name)
           localStorage.setItem("zakaUserType", res.body.data.type)
           localStorage.setItem("zakaExpirationDate", res.body.data.branch.expirationDate)
+          }
            this.router.navigate(['/dashboard'])
         }else{
           console.log("login failed");

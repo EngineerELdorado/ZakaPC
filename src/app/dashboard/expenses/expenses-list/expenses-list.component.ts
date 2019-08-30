@@ -34,7 +34,7 @@ export class ExpensesListComponent implements OnInit {
     this.branchId = localStorage.getItem("zakaBranchId");
     this.currency = localStorage.getItem("zakaBranchCurrency")
     this.page=0;
-    this.size=5;
+    this.size=10;
     this.getData();
 
     this.global.data.subscribe(res=>{
@@ -115,7 +115,7 @@ openDialog(){
 }
 
 filter(e){
-  this.expensesService.filter(this.branchId,e, 0,5).subscribe(res=>{
+  this.expensesService.filter(this.branchId,e, 0,this.size).subscribe(res=>{
     this.expenses = res.data.content;
     this.data = new MatTableDataSource(this.expenses);
     this.totalElements=res.data.content.totalElements;

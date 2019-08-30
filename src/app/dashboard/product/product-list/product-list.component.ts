@@ -21,7 +21,7 @@ export class ProductListComponent implements OnInit {
   currency;
   noData:boolean=true;
   page=0;
-  size=5;
+  size=10;
   status;
   pageSize;
   @ViewChild('dataTable', {static: false}) table;
@@ -114,7 +114,7 @@ export class ProductListComponent implements OnInit {
 
   onStatusChanged(e){
     this.status=e;
-    this.productService.getPagedProductsByBranch(this.branchId,0,5,this.status).subscribe(res=>{
+    this.productService.getPagedProductsByBranch(this.branchId,0,this.size,this.status).subscribe(res=>{
       this.products = res.body.data.content;
       this.totalElements=res.body.data.totalElements;
       console.log(res.body.data);
@@ -123,7 +123,7 @@ export class ProductListComponent implements OnInit {
     });
   }
   onPageRefresh(){
-    this.productService.getPagedProductsByBranch(this.branchId,0,5,this.status).subscribe(res=>{
+    this.productService.getPagedProductsByBranch(this.branchId,0,this.size,this.status).subscribe(res=>{
       this.products = res.body.data.content;
       this.totalElements=res.body.data.totalElements;
       console.log(res.body.data);

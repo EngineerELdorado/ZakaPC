@@ -30,7 +30,7 @@ export class EmployeeListComponent implements OnInit {
   ngOnInit() {
     this.branchId = localStorage.getItem("zakaBranchId");
     this.page=0;
-    this.size=5;
+    this.size=10;
     this.getData();
 
     this.global.data.subscribe(res=>{
@@ -89,7 +89,7 @@ openDialog(){
 }
 
 filter(e){
-  this.employeesService.filter(this.branchId,e, 0,5).subscribe(res=>{
+  this.employeesService.filter(this.branchId,e, 0,this.size).subscribe(res=>{
     this.employees = res.body.data.content;
     this.data = new MatTableDataSource(this.employees);
     this.totalElements=res.body.data.content.totalElements;

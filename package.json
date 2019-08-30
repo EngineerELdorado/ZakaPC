@@ -9,7 +9,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --aot --prod",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node dist/server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run web:server:production --bundleDependencies all"
   },
   "private": true,
   "dependencies": {
