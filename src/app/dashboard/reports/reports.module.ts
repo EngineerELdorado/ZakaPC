@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ReportDataComponent } from './report-data/report-data.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MatElementsModule } from '../../mat-elements/mat-elements.module';
+import { BlockUIModule } from 'ng-block-ui';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes:Routes=[
   {
@@ -15,7 +18,8 @@ const routes:Routes=[
   imports: [
     CommonModule,
     MatElementsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+
   ]
 })
 export class ReportsModule { }

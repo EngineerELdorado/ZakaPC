@@ -14,6 +14,7 @@ export class ReportDataComponent implements OnInit {
   date2;
   minDate;
   maxDate;
+
   branchId=localStorage.getItem("zakaBranchId");
   currency= localStorage.getItem("zakabranchCurrency")
   stats

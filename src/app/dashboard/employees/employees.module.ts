@@ -18,7 +18,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     EmployeesRoutingModule,
     MatElementsModule,
-    BlockUIModule.forRoot(),
   ]
 })
 export class EmployeesModule { }

@@ -12,31 +12,31 @@ const routes: Routes = [
       {
           path:'pos',
           loadChildren:'./pos/pos.module#PosModule',
-          data: { preload: true}
+          // data: { preload: false, delay:0}
 
       },{
         path:'products/:status',
         loadChildren:'./product/product.module#ProductModule',
-        data: { preload: true}
+        // data: { preload: true, delay:10000}
 
     },{
       path:'sales/:status',
       loadChildren:'./sales/sales.module#SalesModule',
-      data: { preload: true}
+      data: { preload: true, delay:5000}
 
   },{
     path:'customers/:status',
     loadChildren:'./customers/customers.module#CustomersModule',
-    data: { preload: true, delay:3000}
+    // data: { preload: true, delay:10000}
 
 },{
   path:'expenses',
   loadChildren:'./expenses/expenses.module#ExpensesModule',
-  data: { preload: true, delay:3000}
+  // data: { preload: true, delay:10000}
 },{
   path:'employees',
   loadChildren:'./employees/employees.module#EmployeesModule',
-  data: { preload: true, delay:3000}
+  // data: { preload: true, delay:10000}
 },{
   path:'reports',
   loadChildren:'./reports/reports.module#ReportsModule',

@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BlockUIModule } from 'ng-block-ui';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [LoginComponent],
   imports: [
@@ -16,6 +17,8 @@ import { BlockUIModule } from 'ng-block-ui';
     ReactiveFormsModule,
     FormsModule,
     BlockUIModule.forRoot(),
+    ToastrModule.forRoot(),
+
   ]
 })
 export class LoginModule { }

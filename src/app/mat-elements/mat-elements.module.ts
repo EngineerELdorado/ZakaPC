@@ -6,6 +6,10 @@ import { MatInputModule, MatDialogModule, MatMenuModule,
    MatProgressSpinnerModule, MatCardModule, MatButtonModule,
    MatGridListModule, MatListModule, MatBottomSheetModule,
     MatFormFieldModule, MatToolbarModule, MatSidenavModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { BlockUIModule } from 'ng-block-ui';
 
 @NgModule({
   declarations: [],
@@ -32,6 +36,9 @@ import { MatInputModule, MatDialogModule, MatMenuModule,
     MatSidenavModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    ToastrModule.forRoot(),
+
+    BlockUIModule.forRoot(),
   ],
   exports:[MatInputModule,
     MatDialogModule,
@@ -60,6 +67,8 @@ import { MatInputModule, MatDialogModule, MatMenuModule,
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    ToastrModule,
+    BlockUIModule,
       ]
 })
 export class MatElementsModule { }

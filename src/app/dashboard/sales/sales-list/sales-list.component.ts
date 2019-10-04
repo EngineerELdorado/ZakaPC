@@ -59,15 +59,11 @@ export class SalesListComponent implements OnInit {
       this.getSales();
       });
 
-      console.log(this.status)
-
-
     this.global.data.subscribe(res=>{
       if(res){
         this.onRefresh();
       }
     })
-    console.log(this.data)
   }
 
   applyFilter(e){
@@ -82,20 +78,17 @@ export class SalesListComponent implements OnInit {
     this.date1 =new Date(e.target.value).getTime();
     if(this.date2){
       this.saleService.getPagedByFilterindDates(this.branchId,0,this.date1,this.date2,this.status).subscribe(res=>{
-        console.log(res)
+
         this.data = new MatTableDataSource(res.data.content);
-      console.log(res.data.totalElements)
+
       this.totalElements=res.data.totalElements
       })
     }
-    console.log(new Date(e.target.value).getTime())
   }
 
   onDate2(e){
     this.date2 =new Date(e.target.value).getTime();
     this.maxDate =e.target.value;
-    console.log(this.date1)
-    console.log(this.date2)
     if(!this.date1){
       this.global.showErrorMessage("Veillez selectionner la date de depart")
     }else{
@@ -108,24 +101,22 @@ export class SalesListComponent implements OnInit {
   getSales(){
 
     this.saleService.getPagedByBranch(this.branchId,this.page,this.size, this.status).subscribe(res=>{
-      console.log(res)
+
       this.sales=res.data.content;
       this.data = new MatTableDataSource(res.data.content);
-      console.log(res.data.totalElements)
       this.totalElements=res.data.totalElements
       this.noData=false;
       this.data.sort = this.matSort;
       this.data.paginator=this.paginator;
     },err=>{
-      console.log(err)
     })
   }
 
   getSalesByDates(){
     this.saleService.getPagedByFilterindDates(this.branchId,0,this.date1,this.date2,this.status).subscribe(res=>{
-      console.log(res)
+
       this.data = new MatTableDataSource(res.data.content);
-    console.log(res.data.totalElements)
+
     this.totalElements=res.data.totalElements
     })
   }
@@ -133,15 +124,15 @@ export class SalesListComponent implements OnInit {
   onPageChanged(e){
     if(this.date1 && this.date2){
       this.saleService.getPagedByFilterindDates(this.branchId,e.pageIndex,this.date1,this.date2,this.status).subscribe(res=>{
-        console.log(res)
+
         this.sales = res.data.content;
         this.data = new MatTableDataSource(res.data.content);
-      console.log(res.data.totalElements)
+
       this.totalElements=res.data.totalElements
       })
     }else{
       this.saleService.getPagedByBranch(this.branchId,e.pageIndex,e.pageSize, this.status).subscribe(res=>{
-        console.log(res)
+
         this.sales = res.data.content;
         this.data = new MatTableDataSource(res.data.content);
 
@@ -155,7 +146,7 @@ export class SalesListComponent implements OnInit {
   onRefresh(){
 
     this.saleService.getPagedByBranch(this.branchId,0,this.size, this.status).subscribe(res=>{
-      console.log(res)
+
       this.sales = res.data.content;
       this.data = new MatTableDataSource(res.data.content);
       this.totalElements=res.data.totalElements
@@ -166,7 +157,7 @@ export class SalesListComponent implements OnInit {
   }
 
   onStatusChanged(e){
-    console.log(e)
+
     this.status=e;
     this.onRefresh();
   }
@@ -191,7 +182,6 @@ export class SalesListComponent implements OnInit {
   }
 
   openInvoice(e){
-    console.log(e)
     this.dialog.open(InvoiceComponent, {
       height: '600px',
       width: '900px',

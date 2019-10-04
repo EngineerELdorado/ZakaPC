@@ -41,7 +41,7 @@
                     </div>
                   <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
                       <h6 style="margin-top: 20px">Ventes Totales</h6>
-                      <h2>{{stats.toPay|number : '1.0'}} {{currency}}</h2>
+                      <h2>{{stats?.toPay|number : '1.0'}} {{currency}}</h2>
                   </div>
                 </div>
               </div>
@@ -150,7 +150,7 @@
                           </div>
                         <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">
                             <h6 style="margin-top: 20px">Depenses</h6>
-                            <h2>{{stats.expenses|number : '1.0'}}</h2>
+                            <h2>{{stats.expenses|number : '1.0'}} {{currency}}</h2>
                         </div>
                       </div>
                     </div>

@@ -15,11 +15,13 @@ const routes: Routes = [
   },
   {
     path:'login',
-    loadChildren:'./login/login.module#LoginModule'
+    loadChildren:'./login/login.module#LoginModule',
+    data: { preload: true, delay:0}
   },
   {
     path:'register',
-    loadChildren:'./register/register.module#RegisterModule'
+    loadChildren:'./register/register.module#RegisterModule',
+    data: { preload: true, delay:10000}
   }
 ];
 

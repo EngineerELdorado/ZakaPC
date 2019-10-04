@@ -13,6 +13,9 @@ import { CustomerSalesComponent } from './customer-sales/customer-sales.componen
 
 import { DashboardModule } from '../dashboard.module';
 import { MatElementsModule } from '../../mat-elements/mat-elements.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [CustomersListComponent,
@@ -25,9 +28,10 @@ import { MatElementsModule } from '../../mat-elements/mat-elements.module';
     CommonModule,
     CustomersRoutingModule,
     MatElementsModule,
-        BlockUIModule.forRoot(),
+
         FormsModule,
         ReactiveFormsModule,
+
 
   ]
 })

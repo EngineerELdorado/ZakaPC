@@ -16,6 +16,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BlockUIModule } from 'ng-block-ui';
 import { ConfirmPrintInvoiceComponent } from './confirm-print-invoice/confirm-print-invoice.component';
 import { MatElementsModule } from '../../mat-elements/mat-elements.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [PosComponent, SubstringNamePipe, PayBillComponent, ConfirmPrintInvoiceComponent],
   entryComponents:[PayBillComponent,ConfirmPrintInvoiceComponent],
@@ -25,7 +27,6 @@ import { MatElementsModule } from '../../mat-elements/mat-elements.module';
     PosRoutingModule,
     MatElementsModule,
     ReactiveFormsModule,
-    BlockUIModule.forRoot()
   ]
 })
 export class PosModule { }

@@ -28,7 +28,8 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": true,
+            "aot": true
           },
           "configurations": {
             "production": {

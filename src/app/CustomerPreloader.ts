@@ -7,10 +7,8 @@ export class CustomPreloader implements PreloadingStrategy{
 	preload(route: Route, load: () => Observable<any>): Observable<any> {
 
 		if (route.data && route.data['preload']) {
-		  console.log('preload called');
 		  return load();
 	   } else {
-		  console.log('no preload');
 		  return of(null);
 		}
 	  }

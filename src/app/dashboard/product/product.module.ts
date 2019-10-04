@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddQuantityComponent } from './add-quantity/add-quantity.component';
 import { MatElementsModule } from '../../mat-elements/mat-elements.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [ProductListComponent, SubStPipe, AddProductComponent, ProductDetailsComponent, AddQuantityComponent],
@@ -18,9 +20,8 @@ import { MatElementsModule } from '../../mat-elements/mat-elements.module';
     CommonModule,
     ProductRoutingModule,
     MatElementsModule,
-        BlockUIModule.forRoot(),
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
   ]
 })
 export class ProductModule { }

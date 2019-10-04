@@ -9,16 +9,18 @@ import { BlockUIModule } from 'ng-block-ui';
 import { MatElementsModule } from '../../mat-elements/mat-elements.module';
 import { ConfirmDeleteExpenseComponent } from './confirm-delete-expense/confirm-delete-expense.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [ExpensesListComponent, AddExpenseComponent, ExpenseDetailsComponent, ConfirmDeleteExpenseComponent],
   entryComponents:[AddExpenseComponent, ExpenseDetailsComponent, ConfirmDeleteExpenseComponent],
   imports: [
     CommonModule,
-    BlockUIModule.forRoot(),
     MatElementsModule,
     ExpensesRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ]
 })
 export class ExpensesModule { }
