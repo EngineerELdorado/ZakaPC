@@ -6,6 +6,8 @@ import { CustomPreloader } from './CustomerPreloader';
 import { NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastNoAnimationModule } from 'ngx-toastr';
+import { ShoppingCartModule } from 'ng-shopping-cart';
+import { MyCartItem } from './my-cart-item';
 @NgModule({
   declarations: [AppComponent],
   entryComponents:[],
@@ -14,7 +16,15 @@ import { ToastNoAnimationModule } from 'ngx-toastr';
     AppRoutingModule,
     NoopAnimationsModule,
     ToastNoAnimationModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    ShoppingCartModule.forRoot({ // <-- Add the cart module to your root module
+      itemType: MyCartItem, // <-- Configuration is optional
+      serviceType: 'localStorage',
+      serviceOptions: {
+        storageKey: 'NgShoppingCart',
+        clearOnError: true
+      }
+    })
   ],
   providers: [CustomPreloader],
   bootstrap: [AppComponent]

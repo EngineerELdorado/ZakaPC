@@ -9,6 +9,8 @@ import { CustomerService } from '../../../services/customer.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { InvoiceComponent } from '../../sales/invoice/invoice.component';
 import { ConfirmPrintInvoiceComponent } from '../confirm-print-invoice/confirm-print-invoice.component';
+import { CartService } from 'ng-shopping-cart';
+import { MyCartItem } from 'src/app/my-cart-item';
 
 @Component({
   selector: 'app-pay-bill',
@@ -38,6 +40,7 @@ export class PayBillComponent implements OnInit {
   showBtn=true;
   showList:boolean=false;
   sale;
+  custName:string;
 
   @BlockUI() blockUI: NgBlockUI;
   constructor(private saleService: SaleService,
@@ -45,6 +48,7 @@ export class PayBillComponent implements OnInit {
     private customerService: CustomerService,
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<PayBillComponent>,
+    private cartService: CartService<MyCartItem>,
     private globalService: GlobalVariablesService) {
      }
 
@@ -54,8 +58,10 @@ export class PayBillComponent implements OnInit {
     this.branchId = localStorage.getItem("zakaBranchId");
     this.sellerId = localStorage.getItem("zakaUserId");
     this.servedBy = localStorage.getItem("zakaUsername");
-    this.currentBillAmount = localStorage.getItem("BILL_PRICE");
-    this.purchaseCost = localStorage.getItem("PURCHASE_COST");
+
+   this.currentBillAmount = this.cartService.getItems().reduce((a, b) => +a + +b.price, 0);
+   this.purchaseCost = this.cartService.getItems().reduce((a, b) => +a + +b.data, 0);
+
     this.currency = localStorage.getItem("zakaBranchCurrency");
     this.myForm = new FormGroup({
       discount : new FormControl (''),
@@ -80,13 +86,13 @@ export class PayBillComponent implements OnInit {
       balance: this.currentBillAmount,
       purchaseCost: this.purchaseCost,
       discount:0,
-      total: localStorage.getItem("BILL_PRICE")
+      total: this.currentBillAmount
     })
 
   }
 
   applyDiscount(e){
-    var s = +localStorage.getItem("BILL_PRICE") - e.target.value;
+    var s = this.currentBillAmount - e.target.value;
     this.myForm.patchValue({
       toPay: s,
       balance: s
@@ -261,16 +267,16 @@ openInvoice(e){
 }
 
 setItem(i){
-  console.log(i)
   this.customerNameRef.nativeElement.value=i.name;
   this.customerNumberRef.nativeElement.value=i.phone;
   this.customerOfflineIdentifier=i.offlineIdentifier;
   this.showBtn=false;
   this.showList=false;
-  this.customerFullName=i.name;
+
   this.myForm.patchValue({
     customerOfflineIdentifier: this.customerOfflineIdentifier
-  })
+  });
+
 }
 
 confirmPrint(){

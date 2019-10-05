@@ -6,6 +6,8 @@ import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet'
 import { PayBillComponent } from '../pay-bill/pay-bill.component';
 import { GlobalVariablesService } from '../../../global-variables.service';
 import { ConfirmPrintInvoiceComponent } from '../confirm-print-invoice/confirm-print-invoice.component';
+import { BaseCartItem, CartService } from 'ng-shopping-cart';
+import { MyCartItem } from 'src/app/my-cart-item';
 @Component({
   selector: 'app-pos',
   templateUrl: './pos.component.html',
@@ -28,6 +30,7 @@ export class PosComponent implements OnInit {
   branchId= localStorage.getItem("zakaBranchId");
   constructor(private productService: ProductService,
     private globalService: GlobalVariablesService,
+    private cartService: CartService<MyCartItem>,
     private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -36,7 +39,8 @@ export class PosComponent implements OnInit {
     this.status="all";
     this.isLast = false;
     this.getProducts();
-    this.order = JSON.parse(localStorage.getItem("ITEMS"));
+    //this.order = JSON.parse(localStorage.getItem("ITEMS"));
+    this.order = this.cartService.getItems();
 
     this.globalService.clearBillObs.subscribe(res=>{
       if(res){
@@ -87,47 +91,61 @@ export class PosComponent implements OnInit {
 
   addProduct(product)
   {
-    this.ITEMS.push({
-      id: product.id,
-      name:product.name,
-      price: product.price,
-      quantity:product.quantity,
-      offlineIdentifier:product.offlineIdentifier
-    });
+
+    const item = new MyCartItem();
+    item.setId(product.id);
+    item.setName(product.name);
+    item.setData(product.purchaseCost);
+
+    if(typeof this.cartService.getItem(product.id)!="undefined"){
+      item.setPrice(this.cartService.getItem(product.id).getPrice()+product.price);
+      item.setData(this.cartService.getItem(product.id).getData()+product.purchaseCost);
+      item.setQuantity(this.cartService.getItem(product.id).getQuantity()+1)
+    }else{
+      item.setPrice(product.price);
+      item.setQuantity(1);
+      item.setData(product.purchaseCost);
+    }
+
+    this.cartService.addItem(item);
+    this.order = this.cartService.getItems();
+
+    // this.ITEMS.push({
+    //   id: product.id,
+    //   name:product.name,
+    //   price: product.price,
+    //   quantity:product.quantity,
+    //   offlineIdentifier:product.offlineIdentifier
+    // });
 
 
-      localStorage.setItem("ITEMS", JSON.stringify(this.ITEMS));
-      this.order = JSON.parse(localStorage.getItem("ITEMS"))
-      localStorage.setItem(product.name, product.price)
-      localStorage.setItem("PURCHASE_COST", +localStorage.getItem("PURCHASE_COST")  +product.purchaseCost)
-      localStorage.setItem("BILL_PRICE", +localStorage.getItem("BILL_PRICE")  +product.price)
-      this.price = Number(localStorage.getItem("BILL_PRICE"));
+    //   localStorage.setItem("ITEMS", JSON.stringify(this.ITEMS));
+    //   this.order = JSON.parse(localStorage.getItem("ITEMS"))
+    //   localStorage.setItem(product.name, product.price)
+    //   localStorage.setItem("PURCHASE_COST", +localStorage.getItem("PURCHASE_COST")  +product.purchaseCost)
+    //   localStorage.setItem("BILL_PRICE", +localStorage.getItem("BILL_PRICE")  +product.price)
+    //   this.price = Number(localStorage.getItem("BILL_PRICE"));
   }
 
   clearBill(){
-    localStorage.setItem("BILL_PRICE","0")
-    this.price = Number(localStorage.getItem("BILL_PRICE"));
-    localStorage.removeItem("ITEMS");
-    this.order = JSON.parse(localStorage.getItem("ITEMS"))
-    this.ITEMS =[];
+    this.cartService.clear();
+    this.order = this.cartService.getItems();
+    // localStorage.setItem("BILL_PRICE","0")
+    // this.price = Number(localStorage.getItem("BILL_PRICE"));
+    // localStorage.removeItem("ITEMS");
+    // this.order = JSON.parse(localStorage.getItem("ITEMS"))
+    // this.ITEMS =[];
   }
 
   remove(o){
-    this.order = JSON.parse(localStorage.getItem("ITEMS"));
-    var removeIndex = this.order.map(function(item) { return item.id; }).indexOf(o.id);
-    this.order.splice(removeIndex, 1);
-    this.ITEMS.splice(removeIndex,1);
-    localStorage.setItem("ITEMS", JSON.stringify(this.ITEMS));
-    var s = +localStorage.getItem("BILL_PRICE") - o.price;
-    localStorage.setItem("BILL_PRICE", s.toString())
-    this.price = Number(localStorage.getItem("BILL_PRICE"));
+    this.cartService.removeItem(o.id);
+    this.order = this.cartService.getItems();
 
-    var z = +localStorage.getItem("PURCHASE_COST") - o.purchaseCost;
-    localStorage.setItem("PURCHASE_COST", z.toString())
   }
 
   openBill(){
-    if(this.price>0){
+    console.log(this.cartService.getItems())
+    if(this.cartService.getItems().length>0){
       this.dialog.open(PayBillComponent, {
         height: '400px',
         width: '900px',

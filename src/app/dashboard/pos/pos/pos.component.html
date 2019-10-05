@@ -40,10 +40,11 @@
       <ul style="margin-right:45px; margin-top:10px" class="list-group">
 
         <li *ngFor="let o of order"  class=" row list-group-item d-flex justify-content-between align-items-center ">
-            <span style="color: #3D3780" class="col-md-3   ">{{o.name|lowercase}}</span>
-            <span style="color: #3D3780"  style="margin-right: 10px" class="col-md-3  ">{{o.price}} {{currency}}</span>
+            <span style="color: #3D3780" class="col-md-8">{{o.name|lowercase}} X {{o.quantity}}</span>
+            <span style="color: #3D3780" class="col-md-3">{{o.price}} {{currency}}</span>
             <!-- <span class="col-md-1 badge badge-primary badge-pill">X 1</span> -->
-            <button (click)="remove(o)" class="col-md-4 btn btn-sm btn-danger">enlever</button>
+            <mat-icon style="color: #e53935" (click)="remove(o)" aria-hidden="false" aria-label="Enlever" class="col-md-1">delete_forever</mat-icon>
+
           </li>
 
         </ul>

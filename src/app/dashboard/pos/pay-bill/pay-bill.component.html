@@ -113,7 +113,7 @@
           <label for="">Lier un client a la facture </label>
         </div>
          <div class="form-group">
-             <input [matAutocomplete]="auto" (keyup)="onNameTyped($event)" #customerName class="form-control" placeholder="Nom du client">
+             <input [(ngModel)]="custName" [matAutocomplete]="auto" (keyup)="onNameTyped($event)" #customerName class="form-control" placeholder="Nom du client">
 
              <mat-autocomplete #auto="matAutocomplete" >
               <mat-option *ngFor="let i of customers">

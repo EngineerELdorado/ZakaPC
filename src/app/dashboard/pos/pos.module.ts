@@ -18,6 +18,7 @@ import { ConfirmPrintInvoiceComponent } from './confirm-print-invoice/confirm-pr
 import { MatElementsModule } from '../../mat-elements/mat-elements.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ShoppingCartModule} from 'ng-shopping-cart'; // <-- Import the module class
 @NgModule({
   declarations: [PosComponent, SubstringNamePipe, PayBillComponent, ConfirmPrintInvoiceComponent],
   entryComponents:[PayBillComponent,ConfirmPrintInvoiceComponent],
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PosRoutingModule,
     MatElementsModule,
     ReactiveFormsModule,
+    ShoppingCartModule
   ]
 })
 export class PosModule { }
