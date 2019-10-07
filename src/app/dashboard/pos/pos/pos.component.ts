@@ -40,6 +40,11 @@ export class PosComponent implements OnInit {
     this.isLast = false;
     this.getProducts();
     //this.order = JSON.parse(localStorage.getItem("ITEMS"));
+    this.globalService.shouldReload.subscribe(res=>{
+      if(res){
+        this.order =this.cartService.getItems();
+      }
+    })
     this.order = this.cartService.getItems();
 
     this.globalService.clearBillObs.subscribe(res=>{
@@ -91,20 +96,25 @@ export class PosComponent implements OnInit {
 
   addProduct(product)
   {
-
     const item = new MyCartItem();
     item.setId(product.id);
     item.setName(product.name);
     item.setData(product.purchaseCost);
-
     if(typeof this.cartService.getItem(product.id)!="undefined"){
       item.setPrice(this.cartService.getItem(product.id).getPrice()+product.price);
-      item.setData(this.cartService.getItem(product.id).getData()+product.purchaseCost);
-      item.setQuantity(this.cartService.getItem(product.id).getQuantity()+1)
+      item.setQuantity(this.cartService.getItem(product.id).getQuantity()+1);
+      item.setData({
+        offlineIdentifier: product.offlineIdentifier,
+        cost: this.cartService.getItem(product.id).data.cost+product.purchaseCost,
+      });
     }else{
+
       item.setPrice(product.price);
       item.setQuantity(1);
-      item.setData(product.purchaseCost);
+      item.setData({
+        offlineIdentifier: product.offlineIdentifier,
+        cost: product.purchaseCost
+      });
     }
 
     this.cartService.addItem(item);

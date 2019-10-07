@@ -10,6 +10,7 @@ export class GlobalVariablesService {
   public BACKEND_URL ="https://torapos-master.herokuapp.com/api";
    //public BACKEND_URL ="https://torapos.herokuapp.com/api";
    private canReload = new BehaviorSubject<boolean>(false);
+  shouldReload = this.canReload.asObservable();
    data = this.canReload.asObservable();
    @BlockUI() blockUI: NgBlockUI;
   private clearBill = new BehaviorSubject<boolean>(false);

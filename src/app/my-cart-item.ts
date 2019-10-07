@@ -1,10 +1,14 @@
 import { BaseCartItem } from 'ng-shopping-cart';
+import { Item } from './dashboard/pos/item';
 
 export class MyCartItem extends BaseCartItem {
 
   public id:number;
   public name:string;
-  public data:any;
+  public data:{
+    cost:number,
+    offlineIdentifier:string;
+  };
   public price:number;
   public quantity:number;
 
@@ -23,8 +27,12 @@ export class MyCartItem extends BaseCartItem {
     return this.name;
   }
 
-  public setData(data){
-    this.data=data;
+  public setData(data:Item){
+    this.data.cost=data.cost;
+    this.data.offlineIdentifier=data.offlineIdentifier;
+
+    console.log("DATA OBJECT")
+    console.log(this.data)
   }
   public getCost(){
     return this.data;

@@ -60,7 +60,7 @@ export class PayBillComponent implements OnInit {
     this.servedBy = localStorage.getItem("zakaUsername");
 
    this.currentBillAmount = this.cartService.getItems().reduce((a, b) => +a + +b.price, 0);
-   this.purchaseCost = this.cartService.getItems().reduce((a, b) => +a + +b.data, 0);
+   this.purchaseCost = this.cartService.getItems().reduce((a, b) => +a + +b.data.cost, 0);
 
     this.currency = localStorage.getItem("zakaBranchCurrency");
     this.myForm = new FormGroup({
@@ -157,6 +157,8 @@ submit(form:FormGroup){
       this.sale = res.body.data;
       this.confirmPrint();
       this.dialogRef.close();
+
+
       //this.toastr.success('Vente enregistree', 'Success!');
       this.globalService.showSuccessMessage("VENTE ENREGISTREE AVEC SUCCESS.");
       this.globalService.updatedCanReload(true)
@@ -164,18 +166,22 @@ submit(form:FormGroup){
         console.log(this.order[i]);
         let item = {
           'name':this.order[i].name,
-          'quantity':1,
+          'quantity':this.order[i].quantity,
           'price':this.order[i].price,
-          'productOfflineIdentifier':this.order[i].offlineIdentifier,
+          'productOfflineIdentifier':this.order[i].data.offlineIdentifier,
           'saleOfflineIdentifier':this.saleOfflineIdentifier,
           'offlineIdentifier':this.generateOfflineIdentifier(100)
         }
-        console.log(item);
+        //console.log(item);
         this.saleService.postSaleItem(item, this.branchId).subscribe(res=>{
-             console.log(res)
+          console.log(res)
+        },err=>{
+          console.log(err)
+          alert("ERROR")
         });
       }
-
+      this.cartService.clear();
+      this.globalService.updatedCanReload(true);
       this.blockUI.stop();
       localStorage.setItem("BILL_PRICE","0");
       localStorage.setItem("PURCHASE_COST","0");
@@ -196,7 +202,7 @@ submit(form:FormGroup){
 }
 
 getProducts(){
-  this.order = JSON.parse(localStorage.getItem("ITEMS"));
+  this.order = this.cartService.getItems();
 }
 
 
