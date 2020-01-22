@@ -37,19 +37,19 @@ export class EmployeeDetailsComponent implements OnInit {
 
   submit(form:FormGroup){
     if(form.value.phone.startsWith("+")){
-      this.global.showLoading("Operation en cours... veillez patienter")
+      this.global.showLoading("Operation en cours... veillez patienter");
       this.employeeService.addEmployee(form.value, this.branchId,this.userId).subscribe(res=>{
         this.global.stopLoading();
         if(res.body.responseCode==="00"){
           this.global.updatedCanReload(true);
-          form.reset()
+          form.reset();
           this.global.showSuccessMessage("COMPTE MIS A JOUR")
         }else{
           this.global.showErrorMessage(res.body.responseMessage)
         }
       },err=>{
-        console.log(err)
-        this.global.showSuccessMessage("ERREUR")
+        console.log(err);
+        this.global.showSuccessMessage("ERREUR");
         this.global.stopLoading();
       })
     }else{

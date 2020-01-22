@@ -12,54 +12,54 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  myForm:FormGroup;
+  myForm: FormGroup;
   userId;
   branchId;
-  product:any;
+  product: any;
   modifiedBy;
   modifiedOn;
-  modificationNote:string;
+  modificationNote: string;
   modificationDate;
   @BlockUI() blockUI: NgBlockUI;
   constructor(private productService: ProductService,
-    private toastr:ToastrService,
-    public dialogRef: MatDialogRef<ProductDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,private gloabal:GlobalVariablesService) { }
+              private toastr: ToastrService,
+              public dialogRef: MatDialogRef<ProductDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data, private gloabal: GlobalVariablesService) { }
 
   ngOnInit() {
-    
-    console.log(this.data)
+
+    console.log(this.data);
     this.getproduct();
-this.branchId = localStorage.getItem("zakaBranchId");
- this.userId = localStorage.getItem("zakaUserId");
+    this.branchId = localStorage.getItem('zakaBranchId');
+    this.userId = localStorage.getItem( 'zakaUserId');
     this.myForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      barcode:new FormControl(''),
-      purchaseCost:new FormControl('',Validators.required),
-      price:new FormControl('',Validators.required),
-      quantity:new FormControl(''),
-      location:new FormControl(''),
-      offlineIdentifier:new FormControl(''),
-      imagepath:new FormControl(''),
-      createdBy:new FormControl(''),
-      modifiedBy:new FormControl(''),
-      creationDate:new FormControl(''),
-      modificationDate:new FormControl(''),
+      barcode: new FormControl(''),
+      purchaseCost: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
+      quantity: new FormControl(''),
+      location: new FormControl(''),
+      offlineIdentifier: new FormControl(''),
+      imagepath: new FormControl(''),
+      createdBy: new FormControl(''),
+      modifiedBy: new FormControl(''),
+      creationDate: new FormControl(''),
+      modificationDate: new FormControl(''),
 
     });
 
-    
+
   }
 
-  public getproduct(){
-    this.productService.findOne(this.data.id).subscribe(res=>{
-      this.product= res.body.data;
-      this.modifiedBy=this.product.modifiedBy;
-      this.modifiedOn=this.product.updatedOn;
-      this.modificationNote=this.product.modificationNote;
+  public getproduct() {
+    this.productService.findOne(this.data.id).subscribe(res=> {
+      this.product = res.body.data;
+      this.modifiedBy = this.product.modifiedBy;
+      this.modifiedOn = this.product.updatedOn;
+      this.modificationNote = this.product.modificationNote;
       this.modificationDate = this.product.modificationDate;
-      console.log("DATA")
-      console.log(res.body.data)
+      console.log("DATA");
+      console.log(res.body.data);
       this.myForm.patchValue({
         name: this.product.name,
         barcode:this.product.barcode,
@@ -72,10 +72,10 @@ this.branchId = localStorage.getItem("zakaBranchId");
         modifiedBy:localStorage.getItem("zakaUsername")
       })
     })
-  } 
+  }
 
   submit(data:FormGroup){
-    console.log(data.value)
+    console.log(data.value);
     this.gloabal.showLoading("Operation en cours... veillez patienter.");
     this.productService.create(data.value, this.userId, this.branchId).subscribe(res=>{
       this.blockUI.stop();
@@ -93,7 +93,7 @@ this.branchId = localStorage.getItem("zakaBranchId");
     })
   }
 
-   
+
 
 
 }

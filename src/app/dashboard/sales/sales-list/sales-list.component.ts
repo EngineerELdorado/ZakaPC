@@ -41,7 +41,7 @@ export class SalesListComponent implements OnInit {
   date1;
   date2;
   showRanges:boolean=false;
-  displayedColumns: string []=["saleNumber","customerName","toPay","paid","balance","status","servedBy","creationDate","actions"]
+  displayedColumns: string []=["saleNumber","customerName","toPay","paid","balance","status","servedBy","creationDate","actions"];
   constructor(private global:GlobalVariablesService,
     private saleService:SaleService,
     private route:ActivatedRoute,
@@ -104,7 +104,7 @@ export class SalesListComponent implements OnInit {
 
       this.sales=res.data.content;
       this.data = new MatTableDataSource(res.data.content);
-      this.totalElements=res.data.totalElements
+      this.totalElements=res.data.totalElements;
       this.noData=false;
       this.data.sort = this.matSort;
       this.data.paginator=this.paginator;
@@ -208,7 +208,7 @@ export class SalesListComponent implements OnInit {
 
  setAllTime(){
 
-  let date1 = new Date(0).getTime()
+  let date1 = new Date(0).getTime();
   let date2 = new Date().getTime();
   this.date1 = date1;
   this.date2 = date2;
@@ -216,24 +216,24 @@ export class SalesListComponent implements OnInit {
 }
 setToday(){
 
-  let date1 = new Date().setHours(0,0,0,0)
-  let date2 = new Date().getTime()
+  let date1 = new Date().setHours(0,0,0,0);
+  let date2 = new Date().getTime();
   this.date1 = date1;
   this.date2 = date2;
   this.getSalesByDates()
 }
 
 setYesterday(){
-  let date1 = new Date().setHours(-24,0,0,0)
-  let date2 = new Date().setHours(0,0,0,0)
+  let date1 = new Date().setHours(-24,0,0,0);
+  let date2 = new Date().setHours(0,0,0,0);
   this.date1 = date1;
   this.date2 = date2;
   this.getSalesByDates()
 }
 
 setThisWeek(){
-  let date1 = this.getMonday(new Date()).getTime()
-  let date2 = new Date().getTime()
+  let date1 = this.getMonday(new Date()).getTime();
+  let date2 = new Date().getTime();
   this.date1 = date1;
   this.date2 = date2;
   this.getSalesByDates()
@@ -242,7 +242,7 @@ setThisWeek(){
 setThisMonth(){
   var date = new Date();
   let date1 = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
-  let date2 = new Date().getTime()
+  let date2 = new Date().getTime();
 
   this.date1 = date1;
   this.date2 = date2;
@@ -252,7 +252,7 @@ setThisMonth(){
 setThisYear(){
 
   let date1 = new Date(new Date().getFullYear(), 0, 1).getTime();
-  let date2 = new Date().getTime()
+  let date2 = new Date().getTime();
   this.date1 = date1;
   this.date2 = date2;
   this.getSales()

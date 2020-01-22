@@ -14,6 +14,7 @@ import { MyCartItem } from 'src/app/my-cart-item';
   styleUrls: ['./pos.component.css']
 })
 export class PosComponent implements OnInit {
+
     ITEMS: Item[] = [
 
   ];
@@ -28,10 +29,15 @@ export class PosComponent implements OnInit {
   price:number =Number(localStorage.getItem("BILL_PRICE"));
   currency=localStorage.getItem("zakaBranchCurrency");
   branchId= localStorage.getItem("zakaBranchId");
+  currentBillAmount;
   constructor(private productService: ProductService,
     private globalService: GlobalVariablesService,
     private cartService: CartService<MyCartItem>,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog) {
+
+
+
+     }
 
   ngOnInit() {
     this.page=0;
@@ -40,11 +46,12 @@ export class PosComponent implements OnInit {
     this.isLast = false;
     this.getProducts();
     //this.order = JSON.parse(localStorage.getItem("ITEMS"));
+    this.currentBillAmount= this.cartService.getItems().reduce((a, b) => +a + +b.price, 0);
     this.globalService.shouldReload.subscribe(res=>{
       if(res){
         this.order =this.cartService.getItems();
       }
-    })
+    });
     this.order = this.cartService.getItems();
 
     this.globalService.clearBillObs.subscribe(res=>{
@@ -59,9 +66,6 @@ export class PosComponent implements OnInit {
       }
     })
   }
-
-
-
 
   getProducts(){
     this.productService.getPagedProductsByBranch(this.branchId,this.page,this.size,this.status).subscribe(res=>{
@@ -119,7 +123,7 @@ export class PosComponent implements OnInit {
 
     this.cartService.addItem(item);
     this.order = this.cartService.getItems();
-
+    this.currentBillAmount= this.cartService.getItems().reduce((a, b) => +a + +b.price, 0);
     // this.ITEMS.push({
     //   id: product.id,
     //   name:product.name,
@@ -140,21 +144,17 @@ export class PosComponent implements OnInit {
   clearBill(){
     this.cartService.clear();
     this.order = this.cartService.getItems();
-    // localStorage.setItem("BILL_PRICE","0")
-    // this.price = Number(localStorage.getItem("BILL_PRICE"));
-    // localStorage.removeItem("ITEMS");
-    // this.order = JSON.parse(localStorage.getItem("ITEMS"))
-    // this.ITEMS =[];
+    this.currentBillAmount =0;
   }
 
   remove(o){
     this.cartService.removeItem(o.id);
     this.order = this.cartService.getItems();
-
+    this.currentBillAmount= this.cartService.getItems().reduce((a, b) => +a + +b.price, 0);
   }
 
   openBill(){
-    console.log(this.cartService.getItems())
+    console.log(this.cartService.getItems());
     if(this.cartService.getItems().length>0){
       this.dialog.open(PayBillComponent, {
         height: '400px',

@@ -40,7 +40,7 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   submit(form){
-    this.gloabal.showLoading("Operation en cours... veillez patienter")
+    this.gloabal.showLoading("Operation en cours... veillez patienter");
     this.customerService.postCustomer(form.value, this.branchId, this.userId).subscribe(res=>{
 
       this.gloabal.stopLoading();

@@ -21,7 +21,7 @@ export class ExpensesListComponent implements OnInit {
   size;
   page;
   branchId;
-  currency
+  currency;
   @ViewChild('dataTable', {static: false}) table;
   @ViewChild(MatSort, {static: false})matSort:MatSort;
   @ViewChild(MatPaginator, {static: false})paginator:MatPaginator;
@@ -29,10 +29,10 @@ export class ExpensesListComponent implements OnInit {
     private excelService:ExcelService,
     private dialog:MatDialog,
     private global:GlobalVariablesService) { }
-  displayedColumns: string []=["index","name","amount","description","creationDate","by", "actions"]
+  displayedColumns: string []=["index","name","amount","description","creationDate","by", "actions"];
   ngOnInit() {
     this.branchId = localStorage.getItem("zakaBranchId");
-    this.currency = localStorage.getItem("zakaBranchCurrency")
+    this.currency = localStorage.getItem("zakaBranchCurrency");
     this.page=0;
     this.size=10;
     this.getData();
@@ -84,13 +84,13 @@ export class ExpensesListComponent implements OnInit {
  }
 
  choseFile(e){
-  console.log(e)
+  console.log(e);
 
   const formData = new FormData();
   formData.append('file', e);
   formData.append('branchId',this.branchId);
   formData.append('createdBy', localStorage.getItem("zakaUserId"));
-  this.global.showLoading("Operation en cours... veillez patienter")
+  this.global.showLoading("Operation en cours... veillez patienter");
   this.expensesService.postExcel(formData).subscribe(res=>{
     this.global.stopLoading();
     if(res.body.responseCode="00"){

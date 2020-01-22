@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
       address: new FormControl('', Validators.required),
       phone: new FormControl('', Validators.required),
       pin: new FormControl('', Validators.required),
-      
+
     })
   }
 
@@ -37,23 +37,23 @@ export class RegisterComponent implements OnInit {
          // console.log(res)
           if(res.body.responseCode==="00"){
             console.log("login successful");
-            localStorage.setItem("zakaLoggedIn","true")
-            localStorage.setItem("zakaUserId", res.body.data.id)
-            localStorage.setItem("zakaBusinessId", res.body.data.business.id)
-            localStorage.setItem("zakaBranchId", res.body.data.branch.id)
-            localStorage.setItem("zakaUsername", res.body.data.name)
-            localStorage.setItem("zakaUserType", res.body.data.type)
-            localStorage.setItem("zakaBranchCurrency", res.body.data.branch.currency)
+            localStorage.setItem("zakaLoggedIn","true");
+            localStorage.setItem("zakaUserId", res.body.data.id);
+            localStorage.setItem("zakaBusinessId", res.body.data.business.id);
+            localStorage.setItem("zakaBranchId", res.body.data.branch.id);
+            localStorage.setItem("zakaUsername", res.body.data.name);
+            localStorage.setItem("zakaUserType", res.body.data.type);
+            localStorage.setItem("zakaBranchCurrency", res.body.data.branch.currency);
              this.router.navigate(['/dashboard/pos'])
           }else{
-            alert(res.body.responseMessage)
+            alert(res.body.responseMessage);
             console.log(res.body.responseMessage)
           }
         },err=>{
           this.blockUI.stop(); // Stop blocking
           console.log(err)
         },()=>{
-    
+
         });
       }else{
         this.blockUI.stop();

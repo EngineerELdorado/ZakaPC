@@ -22,7 +22,7 @@ export class AddProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
-    console.log(this.data)
+    console.log(this.data);
 this.branchId = localStorage.getItem("zakaBranchId");
  this.userId = localStorage.getItem("zakaUserId");
     this.myForm = new FormGroup({
@@ -41,7 +41,7 @@ this.branchId = localStorage.getItem("zakaBranchId");
 
     });
 
-    
+
   }
 
 
@@ -51,7 +51,7 @@ this.branchId = localStorage.getItem("zakaBranchId");
     this.productService.create(form.value, this.userId, this.branchId).subscribe(res=>{
       this.blockUI.stop();
       if(res.body.responseCode==="00"){
-        this.global.showSuccessMessage("PRODUIT ENREGISTRE")
+        this.global.showSuccessMessage("PRODUIT ENREGISTRE");
         form.reset();
         this.global.updatedCanReload(true)
       }else{
@@ -68,9 +68,9 @@ this.branchId = localStorage.getItem("zakaBranchId");
       createdBy: localStorage.getItem("zakaUsername"),
       creationDate:Date.now()
     })
-  } 
+  }
 
-  
+
   generateOfflineIdentifier(length) {
     var offlineIdentifier           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

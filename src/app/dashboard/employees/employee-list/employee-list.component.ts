@@ -26,7 +26,7 @@ export class EmployeeListComponent implements OnInit {
     private excelService:ExcelService,
     private dialog:MatDialog,
     private global:GlobalVariablesService) { }
-  displayedColumns: string []=["index","name","phone","type", "actions"]
+  displayedColumns: string []=["index","name","phone","type", "actions"];
   ngOnInit() {
     this.branchId = localStorage.getItem("zakaBranchId");
     this.page=0;
@@ -49,7 +49,7 @@ export class EmployeeListComponent implements OnInit {
   }
   public getData(){
     this.employeesService.findEmployees(this.branchId, this.page,this.size).subscribe(res=>{
-      this.employees = res.body.data.content
+      this.employees = res.body.data.content;
       this.data = new MatTableDataSource(this.employees);
       this.totalElements=res.body.data.content.totalElements;
       this.data.sort = this.matSort;

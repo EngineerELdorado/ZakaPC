@@ -29,12 +29,12 @@ export class AddCustomerComponent implements OnInit {
 
   submit(form:FormGroup){
     this.setInitialValues();
-    this.global.showLoading("Operation en cours... veillez patienter")
+    this.global.showLoading("Operation en cours... veillez patienter");
     this.customerService.postCustomer(form.value, this.branchId,this.userId).subscribe(res=>{
       this.global.stopLoading();
       if(res.body.responseCode==="00"){
         this.global.updatedCanReload(true);
-        form.reset()
+        form.reset();
         this.global.showSuccessMessage("CLIENT AJOUTE")
       }
     },err=>{

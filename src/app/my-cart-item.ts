@@ -30,8 +30,6 @@ export class MyCartItem extends BaseCartItem {
   public setData(data:Item){
     this.data.cost=data.cost;
     this.data.offlineIdentifier=data.offlineIdentifier;
-
-    console.log("DATA OBJECT")
     console.log(this.data)
   }
   public getCost(){

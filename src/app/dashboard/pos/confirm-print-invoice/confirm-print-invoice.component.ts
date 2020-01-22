@@ -14,13 +14,13 @@ export class ConfirmPrintInvoiceComponent implements OnInit {
   constructor(private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data,
     public dialogRef: MatDialogRef<PayBillComponent>,) { }
- 
+
   ngOnInit() {
   }
 
 
   invoice(){
-    this.close()
+    this.close();
     this.dialog.open(InvoiceComponent, {
       height: '600px',
       width: '900px',

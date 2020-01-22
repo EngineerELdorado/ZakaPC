@@ -32,15 +32,15 @@ export class AddPaymentComponent implements OnInit {
       this.saleNumber = this.data.saleNumber;
       this.customerName = this.data.customerName;
       this.balance = this.data.balance;
-      this.currency = localStorage.getItem("zakabranchCurrency")
+      this.currency = localStorage.getItem("zakabranchCurrency");
       this.myForm= new FormGroup({
         amount: new FormControl('', Validators.required)
       })
     }
 
     submit(form:FormGroup){
-      console.log(form.value)
-      this.global.showLoading("Operation en cours... veillez patienter")
+      console.log(form.value);
+      this.global.showLoading("Operation en cours... veillez patienter");
       this.balance = +this.data.balance-+form.value.amount;
       this.paid=Number(this.data.paid)+Number(form.value.amount);
       if(this.balance===0){
@@ -67,13 +67,13 @@ export class AddPaymentComponent implements OnInit {
         servedBy:this.data.servedBy,
         createdBy:this.data.servedBy
 
-      }
-      console.log(this.data)
-      console.log(sale)
+      };
+      console.log(this.data);
+      console.log(sale);
       this.saleServe.postSale(sale,this.branchId,this.userId).subscribe(res=>{
         this.global.stopLoading();
         if(res.body.responseCode==="00"){
-          console.log(res)
+          console.log(res);
           this.dialogRef.close();
           this.global.showSuccessMessage("FACTURE MISE MIS A JOUR");
           this.dialogRef.close();

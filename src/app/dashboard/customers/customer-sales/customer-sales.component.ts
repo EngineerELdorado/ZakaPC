@@ -33,10 +33,10 @@ export class CustomerSalesComponent implements OnInit {
     private global:GlobalVariablesService,
     private dialog:MatDialog,
               private saleService:SaleService) { }
-              displayedColumns: string []=["saleNumber","toPay","paid","balance","status","servedBy","actions"]
+              displayedColumns: string []=["saleNumber","toPay","paid","balance","status","servedBy","actions"];
 
   ngOnInit() {
-    this.currency = localStorage.getItem("zakaBranchCurrency")
+    this.currency = localStorage.getItem("zakaBranchCurrency");
     this.activatedRoute.params.subscribe(params => {
       let id = params['status'];
        console.log(id);
@@ -50,18 +50,18 @@ export class CustomerSalesComponent implements OnInit {
           this.saleService.getByCustomerAndStatus(id, 0,5,this.status).subscribe(res=>{
             this.sales = res.data.content;
             this.data= new MatTableDataSource(this.sales);
-            this.totalElements=res.data.totalElement
+            this.totalElements=res.data.totalElement;
          this.data.sort = this.matSort;
          this.data.paginator=this.paginator;
          })
          }
 
-       })
+       });
 
        this.saleService.getByCustomerAndStatus(id, 0,5,this.status).subscribe(res=>{
          this.sales = res.data.content;
          this.data= new MatTableDataSource(this.sales);
-         this.totalElements=res.data.totalElements
+         this.totalElements=res.data.totalElements;
       this.data.sort = this.matSort;
       this.data.paginator=this.paginator;
        })
@@ -96,7 +96,7 @@ export class CustomerSalesComponent implements OnInit {
   }
 
   openInvoice(e){
-    console.log(e)
+    console.log(e);
     this.dialog.open(InvoiceComponent, {
       height: '600px',
       width: '900px',

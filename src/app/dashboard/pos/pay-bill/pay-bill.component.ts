@@ -34,7 +34,7 @@ export class PayBillComponent implements OnInit {
   customerOfflineIdentifier;
   customers: any[] = [];
   @ViewChild('customerName', {static: false})
-  customerNameRef:ElementRef
+  customerNameRef:ElementRef;
   @ViewChild('customerNumber', {static: false})
   customerNumberRef;
   showBtn=true;
@@ -96,7 +96,7 @@ export class PayBillComponent implements OnInit {
     this.myForm.patchValue({
       toPay: s,
       balance: s
-    })
+    });
     this.currentBillAmount = s;
   }
 
@@ -144,7 +144,7 @@ export class PayBillComponent implements OnInit {
 submit(form:FormGroup){
   this.myForm.patchValue({
     creationDate: Date.now()
-  })
+  });
   this.globalService.showLoading('Operation en cours... veillez patienter');
   let branchId = localStorage.getItem("zakaBranchId");
   let userId = localStorage.getItem("zakaUserId");
@@ -161,7 +161,7 @@ submit(form:FormGroup){
 
       //this.toastr.success('Vente enregistree', 'Success!');
       this.globalService.showSuccessMessage("VENTE ENREGISTREE AVEC SUCCESS.");
-      this.globalService.updatedCanReload(true)
+      this.globalService.updatedCanReload(true);
       for(var i =0; i<this.order.length; i++){
         console.log(this.order[i]);
         let item = {
@@ -171,12 +171,12 @@ submit(form:FormGroup){
           'productOfflineIdentifier':this.order[i].data.offlineIdentifier,
           'saleOfflineIdentifier':this.saleOfflineIdentifier,
           'offlineIdentifier':this.generateOfflineIdentifier(100)
-        }
+        };
         //console.log(item);
         this.saleService.postSaleItem(item, this.branchId).subscribe(res=>{
           console.log(res)
         },err=>{
-          console.log(err)
+          console.log(err);
           alert("ERROR")
         });
       }
@@ -207,7 +207,7 @@ getProducts(){
 
 
 saveCustomer(){
-  console.log(this.customerNameRef)
+  console.log(this.customerNameRef);
 
   this.customerFullName = this.customerNameRef.nativeElement.value;
   this.customerPhone = this.customerNumberRef.nativeElement.value;
@@ -225,7 +225,7 @@ saveCustomer(){
       name: this.customerFullName,
       phone: this.customerPhone,
       offlineIdentifier:this.customerOfflineIdentifier,
-    }
+    };
 
     this.customerService.postCustomer(customer, this.branchId, this.sellerId).subscribe(res=>{
         if(res.body.responseCode==="00"){
@@ -240,7 +240,7 @@ saveCustomer(){
     },err=>{
       this.blockUI.stop();
       console.log(err)
-    })
+    });
 
     this.myForm.patchValue({
       customerOfflineIdentifier:this.customerOfflineIdentifier
@@ -264,7 +264,7 @@ onNameTyped(e){
 }
 
 openInvoice(e){
-  console.log(e)
+  console.log(e);
   this.dialog.open(InvoiceComponent, {
     height: '600px',
     width: '900px',

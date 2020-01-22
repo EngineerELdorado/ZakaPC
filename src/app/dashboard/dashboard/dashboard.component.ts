@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.connected = window.navigator.onLine;
     this.expirationDate = localStorage.getItem("zakaExpirationDate");
-    this.businessName = localStorage.getItem("zakaBusinessName")+" "+localStorage.getItem("zakaBranchName")
+    this.businessName = localStorage.getItem("zakaBusinessName")+" "+localStorage.getItem("zakaBranchName");
 
 
     if(localStorage.getItem("zakaLoggedIn")==="true"){

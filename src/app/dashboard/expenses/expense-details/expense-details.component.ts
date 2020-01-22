@@ -28,7 +28,7 @@ export class ExpenseDetailsComponent implements OnInit {
       amount: new FormControl('', Validators.required),
       offlineIdentifier: new FormControl('', Validators.required)
     });
-console.log(this.data)
+console.log(this.data);
     this.myForm.patchValue({
       name: this.data.name,
       description: this.data.description,
@@ -37,22 +37,22 @@ console.log(this.data)
     })
   }
 
-  
+
   submit(form:FormGroup){
-    this.global.showLoading("Operation en cours... veillez patienter")
+    this.global.showLoading("Operation en cours... veillez patienter");
     this.expenseService.addExpense(form.value, this.branchId,this.userId).subscribe(res=>{
       this.global.stopLoading();
       if(res.body.responseCode==="00"){
         this.global.updatedCanReload(true);
-        form.reset()
+        form.reset();
         this.global.showSuccessMessage("DEPENSE MISE A JOUR");
         this.dialogRef.close();
       }else{
         this.global.showErrorMessage(res.body.responseMessage)
       }
     },err=>{
-      console.log(err)
-      this.global.showSuccessMessage("ERREUR")
+      console.log(err);
+      this.global.showSuccessMessage("ERREUR");
       this.global.stopLoading();
     })
   }

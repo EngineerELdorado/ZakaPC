@@ -34,7 +34,7 @@ export class CustomersListComponent implements OnInit {
   bufferValue = 75;
   totalPages;
   totalElements;
-  displayedColumns: string []=["index","name","phone","createdBy","creationDate", "actions"]
+  displayedColumns: string []=["index","name","phone","createdBy","creationDate", "actions"];
   constructor(private customersService: CustomersService,
     private global:GlobalVariablesService,
     private route: ActivatedRoute,
@@ -82,7 +82,7 @@ export class CustomersListComponent implements OnInit {
 
     this.customersService.getCustomers(this.branchId, 0,this.size,this.status).subscribe(res=>{
 
-      console.log(res.body.data.totalElements)
+      console.log(res.body.data.totalElements);
       this.customers = res.body.data.content;
       this.totalElements=res.body.data.totalElements;
       this.data = new MatTableDataSource(this.customers);
@@ -118,13 +118,13 @@ export class CustomersListComponent implements OnInit {
  }
 
  choseFile(e){
-  console.log(e)
+  console.log(e);
 
   const formData = new FormData();
   formData.append('file', e);
   formData.append('branchId',this.branchId);
   formData.append('createdBy', localStorage.getItem("zakaUserId"));
-  this.global.showLoading("Operation en cours... veillez patienter")
+  this.global.showLoading("Operation en cours... veillez patienter");
   this.customersService.postExcel(formData).subscribe(res=>{
     this.global.stopLoading();
     if(res.body.responseCode="00"){

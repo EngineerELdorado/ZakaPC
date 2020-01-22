@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./add-quantity.component.css']
 })
 export class AddQuantityComponent implements OnInit {
-   
+
   myForm:FormGroup;
   name;
   constructor(private global: GlobalVariablesService,
@@ -20,7 +20,7 @@ export class AddQuantityComponent implements OnInit {
      private productService: ProductService) { }
 
   ngOnInit() {
-    this.name = this.data.name
+    this.name = this.data.name;
     this.myForm= new FormGroup({
       quantity: new FormControl('', Validators.required)
     })
@@ -30,7 +30,7 @@ export class AddQuantityComponent implements OnInit {
 
     this.productService.addQuantity(this.data.id, form.value.quantity).subscribe(res=>{
       if(res.body.responseCode==="00"){
-        console.log(res)
+        console.log(res);
         this.global.showSuccessMessage("STOCK MIS A JOUR");
         this.dialogRef.close();
         this.global.updatedCanReload(true)

@@ -1,22 +1,22 @@
 <div class="container" >
-  
+
     <div class="card">
   <div style="background-color: #3D3780; color:white" class="card-header">
-  Facture no: 
-  <strong>{{sale?.saleNumber}} </strong> 
+  Facture no:
+  <strong>{{sale?.saleNumber}} </strong>
   <label for="" style="margin-left: 60px">{{sale.creationDate|date:'dd/MM/yyyy, h:mm a'}}</label>
   <div  id="contentToHide" style="float: right">
       <!-- <button (click)="sendMail()"  mat-icon-button aria-label="Example icon-button with a heart icon">
           <mat-icon>email</mat-icon>
-        </button>
+        </button> -->
       <button (click)="savePdf()"  mat-icon-button aria-label="Example icon-button with a heart icon">
           <mat-icon>save_alt</mat-icon>
-        </button> -->
-        <button (click)="savePdf()" mat-icon-button aria-label="Example icon-button with a heart icon">
+        </button>
+        <button (click)="requestUsb()" mat-icon-button aria-label="Example icon-button with a heart icon">
             <mat-icon>print</mat-icon>
           </button>
   </div>
-   
+
   </div>
   <div class="card-body">
   <div class="row mb-4">
@@ -27,9 +27,9 @@
           </div>
           <div>{{sale.createdBy.phone}}</div>
           <div>Addresse: Goma</div>
-          
+
           </div>
-  
+
   <div class="col-sm-6">
   <h6 class="mb-3">Client:</h6>
   <div>
@@ -38,19 +38,19 @@
   <div *ngIf="sale.customer!=null">
       <div>{{sale.customer.phone}}</div>
   </div>
-  <span class=""> Paiement:  
+  <span class=""> Paiement:
     <label  *ngIf="sale.status=='credit'" for="" style="color: red; font-weight: bold; font-size:18px">{{sale?.status}}</label>
     <label  *ngIf="sale.status=='incomplet'" for="" style="color: orange; font-weight: bold;font-size:18px">{{sale?.status}}</label>
     <label  *ngIf="sale.status=='complet'" for="" style="color: green; font-weight: bold;font-size:18px">{{sale?.status}}</label>
-    
+
   </span>
-  
+
   </div>
-  
-  
-  
+
+
+
   </div>
-  
+
   <div class="table-responsive-sm">
   <table class="table table-striped">
   <thead style="background-color: #3D3780; color:white">
@@ -58,7 +58,7 @@
   <th class="center">#</th>
   <th>Item</th>
   <th>Description</th>
-  
+
     <th class="center">Qty</th>
   <th class="right">Total</th>
   </tr>
@@ -68,20 +68,20 @@
   <td class="center">{{i+1}}</td>
   <td class="left strong">{{item.name|lowercase}}</td>
   <td class="left"></td>
-  
-  
+
+
     <td class="center">{{item.quantity}}</td>
   <td class="right">{{item.price}} {{currency}}</td>
   </tr>
-  
+
   </tbody>
   </table>
   </div>
   <div class="row">
   <div class="col-lg-4 col-sm-5">
-  
+
   </div>
-  
+
   <div class="col-lg-4 col-sm-5 ml-auto">
   <table class="table table-clear">
   <tbody>
@@ -103,7 +103,7 @@
       </td>
       <td class="right">{{sale.discount}} {{currency}}</td>
       </tr>-->
-  <tr> 
+  <tr>
   <td class="left">
   <strong>Payé</strong>
   </td>
@@ -122,11 +122,11 @@
       </tr>
   </tbody>
   </table>
-  
+
   </div>
-  
+
   </div>
-  
+
   </div>
   </div>
   <div class="text-center">
@@ -141,15 +141,15 @@
 
 
   <div  style="padding: 20px; margin-top:50000px" class="container" id="contentToConvert">
-  
+
       <div  class="card">
     <div style="background-color: #3D3780; color:white" class="card-header">
-    Facture no: 
-    <strong>{{sale?.saleNumber}}  </strong> 
+    Facture no:
+    <strong>{{sale?.saleNumber}}  </strong>
     <div class="saleDate"  style="float: right">
         {{sale.creationDate|date:'dd/MM/yyyy, h:mm a'}}
     </div>
-     
+
     </div>
     <div class="card-body">
     <div class="row mb-4">
@@ -160,9 +160,9 @@
             </div>
             <div>{{sale.createdBy.phone}}</div>
             <div>Addresse: Goma</div>
-            
+
             </div>
-    
+
     <div class="col-sm-6">
     <h6 class="mb-3">Client:</h6>
     <div>
@@ -171,19 +171,19 @@
     <div *ngIf="sale.customer!=null">
         <div>{{sale.customer.phone}}</div>
     </div>
-    <span class=""> Paiement:  
+    <span class=""> Paiement:
       <label  *ngIf="sale.status=='credit'" for="" class="status" style="color: red; font-weight: bold; font-size:18px">{{sale?.status}}</label>
       <label  *ngIf="sale.status=='incomplet'" for="" style="color: orange; font-weight: bold;font-size:18px">{{sale?.status}}</label>
       <label  *ngIf="sale.status=='complet'" for="" style="color: green; font-weight: bold;font-size:18px">{{sale?.status}}</label>
-      
+
     </span>
-    
+
     </div>
-    
-    
-    
+
+
+
     </div>
-    
+
     <div class="table-responsive-sm">
     <table class="table table-striped">
     <thead class="card-header" style="background-color: #3D3780; color:white">
@@ -191,7 +191,7 @@
     <th class="center">#</th>
     <th>Item</th>
     <th>Description</th>
-    
+
       <th class="center">Qty</th>
     <th class="right">Total</th>
     </tr>
@@ -201,20 +201,20 @@
             <td class="center">{{i+1}}</td>
             <td class="left strong">{{item.name|lowercase}}</td>
             <td class="left"></td>
-            
-            
+
+
               <td class="center">{{item.quantity}}</td>
             <td class="right">{{item.price}} {{currency}}</td>
             </tr>
-    
+
     </tbody>
     </table>
     </div>
     <div class="row">
     <div class="col-lg-4 col-sm-5">
-    
+
     </div>
-    
+
     <div class="col-lg-4 col-sm-5 ml-auto">
     <table class="table table-clear">
     <tbody>
@@ -236,7 +236,7 @@
         </td>
         <td class="right">{{sale.discount}} {{currency}}</td>
         </tr>-->
-    <tr> 
+    <tr>
     <td class="left">
     <strong>Payé</strong>
     </td>
@@ -244,7 +244,7 @@
     {{sale.paid}} {{currency}}
     </td>
     </tr>
-  
+
     <tr>
         <td class="left">
         <strong>Balance</strong>
@@ -255,11 +255,11 @@
         </tr>
     </tbody>
     </table>
-    
+
     </div>
-    
+
     </div>
-    
+
     </div>
     <div class="text-center">
         <label for="" class="font-20" style="font-weight: bold; font-size:20px">Powered By</label><br>
@@ -268,6 +268,6 @@
         <label for="" class="font-40" style="font-weight: bold; font-size:40px; color: #3D3780">ToraPos</label><br>
       </div>
     </div>
-    
-    
+
+
     </div>

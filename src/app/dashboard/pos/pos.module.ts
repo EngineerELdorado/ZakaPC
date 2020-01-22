@@ -19,12 +19,14 @@ import { MatElementsModule } from '../../mat-elements/mat-elements.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ShoppingCartModule} from 'ng-shopping-cart'; // <-- Import the module class
+import { ThermalPrintModule } from 'ng-thermal-print';
 @NgModule({
   declarations: [PosComponent, SubstringNamePipe, PayBillComponent, ConfirmPrintInvoiceComponent],
   entryComponents:[PayBillComponent,ConfirmPrintInvoiceComponent],
   imports: [
     CommonModule,
     FormsModule,
+    ThermalPrintModule,
     PosRoutingModule,
     MatElementsModule,
     ReactiveFormsModule,

@@ -16,8 +16,8 @@ export class ReportDataComponent implements OnInit {
   maxDate;
 
   branchId=localStorage.getItem("zakaBranchId");
-  currency= localStorage.getItem("zakabranchCurrency")
-  stats
+  currency= localStorage.getItem("zakabranchCurrency");
+  stats;
   constructor(private global:GlobalVariablesService,
     private reportService: ReportService) { }
 
@@ -26,10 +26,10 @@ export class ReportDataComponent implements OnInit {
   }
 
   getDataByDates(){
-    this.global.showLoading("Loading....")
+    this.global.showLoading("Loading....");
        this.reportService.getStats(this.branchId, this.date1,
         this.date2).subscribe(res=>{
-          this.global.stopLoading()
+          this.global.stopLoading();
           this.stats = res.data
         },err=>{
           this.global.stopLoading();
@@ -40,7 +40,7 @@ export class ReportDataComponent implements OnInit {
 
   setAllTime(){
 
-    let date1 = new Date(0).getTime()
+    let date1 = new Date(0).getTime();
     let date2 = new Date().getTime();
     this.date1 = date1;
     this.date2 = date2;
@@ -48,24 +48,24 @@ export class ReportDataComponent implements OnInit {
   }
   setToday(){
 
-    let date1 = new Date().setHours(0,0,0,0)
-    let date2 = new Date().getTime()
+    let date1 = new Date().setHours(0,0,0,0);
+    let date2 = new Date().getTime();
     this.date1 = date1;
     this.date2 = date2;
     this.getDataByDates()
   }
 
   setYesterday(){
-    let date1 = new Date().setHours(-24,0,0,0)
-    let date2 = new Date().setHours(0,0,0,0)
+    let date1 = new Date().setHours(-24,0,0,0);
+    let date2 = new Date().setHours(0,0,0,0);
     this.date1 = date1;
     this.date2 = date2;
     this.getDataByDates()
   }
 
   setThisWeek(){
-    let date1 = this.getMonday(new Date()).getTime()
-    let date2 = new Date().getTime()
+    let date1 = this.getMonday(new Date()).getTime();
+    let date2 = new Date().getTime();
     this.date1 = date1;
     this.date2 = date2;
     this.getDataByDates()
@@ -74,7 +74,7 @@ export class ReportDataComponent implements OnInit {
   setThisMonth(){
     var date = new Date();
     let date1 = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
-    let date2 = new Date().getTime()
+    let date2 = new Date().getTime();
 
     this.date1 = date1;
     this.date2 = date2;
@@ -84,7 +84,7 @@ export class ReportDataComponent implements OnInit {
   setThisYear(){
 
     let date1 = new Date(new Date().getFullYear(), 0, 1).getTime();
-    let date2 = new Date().getTime()
+    let date2 = new Date().getTime();
     this.date1 = date1;
     this.date2 = date2;
     this.getDataByDates()
@@ -136,8 +136,8 @@ export class ReportDataComponent implements OnInit {
   onDate2(e){
     this.date2 =new Date(e.target.value).getTime();
     this.maxDate =e.target.value;
-    console.log(this.date1)
-    console.log(this.date2)
+    console.log(this.date1);
+    console.log(this.date2);
     if(!this.date1){
       alert("Veillez selectionner la date de depart")
 

@@ -44,20 +44,20 @@ export class AddExpenseComponent implements OnInit {
   submit(form:FormGroup){
     this.myForm.patchValue({
       creationDate: new Date().getTime()
-    })
-    this.global.showLoading("Operation en cours... veillez patienter")
+    });
+    this.global.showLoading("Operation en cours... veillez patienter");
     this.expenseService.addExpense(form.value, this.branchId,this.userId).subscribe(res=>{
       this.global.stopLoading();
       if(res.body.responseCode==="00"){
         this.global.updatedCanReload(true);
-        form.reset()
+        form.reset();
         this.global.showSuccessMessage("DEPENSE AJOUTEE")
       }else{
         this.global.showErrorMessage(res.body.responseMessage)
       }
     },err=>{
-      console.log(err)
-      this.global.showSuccessMessage("ERREUR")
+      console.log(err);
+      this.global.showSuccessMessage("ERREUR");
       this.global.stopLoading();
     })
   }

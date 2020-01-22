@@ -36,7 +36,7 @@ export class ProductListComponent implements OnInit {
   totalPages;
   totalElements;
 
-  displayedColumns: string []=["index","name","purchaseCost","price","quantity","actions"]
+  displayedColumns: string []=["index","name","purchaseCost","price","quantity","actions"];
   constructor(private productService: ProductService,
     private global:GlobalVariablesService,
     private route: ActivatedRoute,
@@ -64,7 +64,7 @@ export class ProductListComponent implements OnInit {
 
     this.productService.getProductsByName(localStorage.getItem("zakaBranchId"), name).subscribe(res=>{
       this.products = res.body.data;
-      console.log(this.products)
+      console.log(this.products);
       this.data = new MatTableDataSource(this.products);
       this.data.sort = this.matSort;
       this.data.paginator=this.paginator;
@@ -101,7 +101,7 @@ export class ProductListComponent implements OnInit {
   }
 
   onPageChanged(e){
-    console.log(e)
+    console.log(e);
     this.productService.getPagedProductsByBranch(this.branchId,e.pageIndex,e.pageSize,this.status).subscribe(res=>{
       this.products = res.body.data.content;
       this.totalElements=res.body.data.totalElements;
@@ -159,13 +159,13 @@ openAddQuantityDialog(product){
 }
 
   choseFile(e){
-    console.log(e)
+    console.log(e);
 
     const formData = new FormData();
     formData.append('file', e);
     formData.append('branchId',this.branchId);
     formData.append('createdBy', localStorage.getItem("zakaUsername"));
-    this.blockUI.start("Operation en cours... veillez patienter")
+    this.blockUI.start("Operation en cours... veillez patienter");
     this.productService.postExcel(formData).subscribe(res=>{
       this.blockUI.stop();
       if(res.body.responseCode="00"){
