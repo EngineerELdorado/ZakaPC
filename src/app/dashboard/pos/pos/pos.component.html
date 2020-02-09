@@ -4,7 +4,8 @@
 
     <div style="margin-left: 15px" class="row container">
       <mat-card  class="card col-md-2 item text-center" *ngFor="let product of products"
-                 (click)="addProduct(product)">
+                 (click)="addProduct(product)"
+      >
             {{product.name|substringName}}
             <div class="text-center">
               <br>
